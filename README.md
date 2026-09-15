@@ -1,5 +1,8 @@
 # Work On Time — Client Pitch Demo
 
+**Live:** https://furniture-demo-indol.vercel.app
+**Repo:** https://github.com/Padha06/work-on-time
+
 Single-page, scroll-driven pitch site for a furniture-building / repair / aluminum-door business.
 Built per `AI Build Spec` (10 sections, design tokens, placeholder rules).
 
