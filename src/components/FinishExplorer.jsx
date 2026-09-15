@@ -29,21 +29,21 @@ export default function FinishExplorer() {
           <p className="mt-3 text-graphite">Live 3D — the same interaction pattern as the Spline “Lamm Genya” configurator, rebuilt in React Three Fiber so it works offline on a mid-range phone.</p>
         </div>
 
-        <div className="mt-8 grid gap-5 lg:grid-cols-2">
-          <div className="reveal h-[340px] overflow-hidden rounded-2xl border border-charcoal/10 bg-[#f4f2ed] sm:h-[440px]">
+        <div className="mt-8 grid items-start gap-5 lg:grid-cols-[1.05fr_1fr]">
+          <div className="reveal sticky top-[72px] z-10 h-[300px] self-start overflow-hidden rounded-2xl border border-charcoal/10 bg-[#f4f2ed] shadow-sm sm:h-[360px] lg:top-24 lg:h-[440px]">
             <Suspense fallback={<div className="grid h-full place-items-center text-graphite">Loading 3D…</div>}>
               <DoorConfigurator frame={frame} glass={glass} openAmount={opening} />
             </Suspense>
           </div>
 
-          <div className="reveal rounded-2xl border border-charcoal/10 bg-white p-6 shadow-sm">
-            <div className="flex items-center justify-between">
-              <h3 className="font-display text-2xl font-semibold text-charcoal">{frame.name} · {glass.name}</h3>
+          <div className="reveal rounded-2xl border border-charcoal/10 bg-white p-5 shadow-sm">
+            <div className="flex items-center justify-between gap-2">
+              <h3 className="font-display text-xl font-semibold text-charcoal">{frame.name} · {glass.name}</h3>
               <SampleTag label="Live demo" />
             </div>
             <p className="mt-1 text-sm text-graphite">Powder-coated aluminum, tempered glass. Final shade confirmed from physical shade card before order.</p>
 
-            <p className="mt-5 text-[12px] font-bold uppercase tracking-[0.18em] text-graphite">Aluminum finish</p>
+            <p className="mt-4 text-[12px] font-bold uppercase tracking-[0.18em] text-graphite">Aluminum finish</p>
             <div className="mt-2 flex flex-wrap gap-2.5" role="radiogroup" aria-label="Aluminum finish">
               {FINISHES.map((f) => (
                 <button
@@ -52,7 +52,7 @@ export default function FinishExplorer() {
                   aria-checked={frame.id === f.id}
                   onClick={() => setFrame(f)}
                   title={f.name}
-                  className={`h-12 w-12 rounded-full border-2 transition ${frame.id === f.id ? "scale-110 border-accent" : "border-charcoal/15 hover:scale-105"}`}
+                  className={`h-10 w-10 rounded-full border-2 transition ${frame.id === f.id ? "scale-110 border-accent" : "border-charcoal/15 hover:scale-105"}`}
                   style={{ background: f.hex }}
                 />
               ))}
@@ -65,7 +65,7 @@ export default function FinishExplorer() {
               ))}
             </div>
 
-            <p className="mt-5 text-[12px] font-bold uppercase tracking-[0.18em] text-graphite">Glass tint</p>
+            <p className="mt-4 text-[12px] font-bold uppercase tracking-[0.18em] text-graphite">Glass tint</p>
             <div className="mt-2 flex flex-wrap gap-2.5" role="radiogroup" aria-label="Glass tint">
               {GLASS.map((g) => (
                 <button
@@ -74,13 +74,13 @@ export default function FinishExplorer() {
                   aria-checked={glass.id === g.id}
                   onClick={() => setGlass(g)}
                   title={g.name}
-                  className={`h-12 w-12 rounded-full border-2 transition ${glass.id === g.id ? "scale-110 border-accent" : "border-charcoal/15 hover:scale-105"}`}
+                  className={`h-10 w-10 rounded-full border-2 transition ${glass.id === g.id ? "scale-110 border-accent" : "border-charcoal/15 hover:scale-105"}`}
                   style={{ background: g.css }}
                 />
               ))}
             </div>
 
-            <p className="mt-5 text-[12px] font-bold uppercase tracking-[0.18em] text-graphite">Try the slide — open / close</p>
+            <p className="mt-4 text-[12px] font-bold uppercase tracking-[0.18em] text-graphite">Try the slide — open / close</p>
             <div className="mt-2 flex items-center gap-3">
               <button
                 onClick={() => setOpening(0)}
@@ -112,7 +112,7 @@ export default function FinishExplorer() {
               href={waLink(`${frame.name} aluminum with ${glass.name} glass`)}
               target="_blank"
               rel="noreferrer"
-              className="mt-6 block rounded-full bg-charcoal px-6 py-3 text-center text-[15px] font-semibold text-white transition hover:bg-graphite"
+              className="mt-5 block rounded-full bg-charcoal px-6 py-3 text-center text-[15px] font-semibold text-white transition hover:bg-graphite"
             >
               Ask price for this combination →
             </a>

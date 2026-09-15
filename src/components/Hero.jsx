@@ -21,6 +21,9 @@ export default function Hero({ splineReady, onSplineReady }) {
   const sectionRef = useRef(null);
   const progressRef = useRef(0); // starts fully closed
   const [reduced, setReduced] = useState(false);
+  const [compact, setCompact] = useState(
+    () => typeof window !== "undefined" && window.matchMedia("(max-width: 768px)").matches
+  );
   const [splineFailed, setSplineFailed] = useState(false);
   const useSpline = Boolean(SPLINE_URL) && !splineFailed;
 
@@ -34,12 +37,20 @@ export default function Hero({ splineReady, onSplineReady }) {
   }, []);
 
   useEffect(() => {
+    const mq = window.matchMedia("(max-width: 768px)");
+    const onCompact = (e) => setCompact(e.matches);
+    mq.addEventListener?.("change", onCompact);
+    return () => mq.removeEventListener?.("change", onCompact);
+  }, []);
+
+  useEffect(() => {
     if (reduced || useSpline) return;
+    const pinEnd = compact ? "+=100%" : "+=130%";
     const ctx = gsap.context(() => {
       ScrollTrigger.create({
         trigger: sectionRef.current,
         start: "top top",
-        end: "+=130%",
+        end: pinEnd,
         pin: true,
         scrub: 1,
         anticipatePin: 1,
@@ -55,12 +66,12 @@ export default function Hero({ splineReady, onSplineReady }) {
           opacity: 0,
           y: -70,
           ease: "none",
-          scrollTrigger: { trigger: sectionRef.current, start: "top top", end: "+=90%", scrub: true },
+          scrollTrigger: { trigger: sectionRef.current, start: "top top", end: compact ? "+=70%" : "+=90%", scrub: true },
         }
       );
     });
     return () => ctx.revert();
-  }, [reduced, useSpline]);
+  }, [reduced, useSpline, compact]);
 
   return (
     <section ref={sectionRef} id="top" className="hero-grain relative flex min-h-[100svh] items-stretch overflow-hidden bg-charcoal text-cream">
@@ -81,7 +92,7 @@ export default function Hero({ splineReady, onSplineReady }) {
           />
         ) : (
           <Suspense fallback={<div className="grid h-full place-items-center text-cream/60">Loading 3D…</div>}>
-            <SlidingDoorScene progressRef={progressRef} frameColor="#C9CDD2" glassOpacity={0.3} glassColor="#cfe3e8" />
+            <SlidingDoorScene progressRef={progressRef} frameColor="#C9CDD2" glassOpacity={0.3} glassColor="#cfe3e8" compact={compact} />
           </Suspense>
         )}
       </div>

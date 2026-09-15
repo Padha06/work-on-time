@@ -71,21 +71,21 @@ function Panel({ side, frameColor, glassOpacity, glassColor }) {
   );
 }
 
-function DoorRig({ progress, frameColor = "#C9CDD2", glassOpacity = 0.3, glassColor = "#cfe3e8" }) {
+function DoorRig({ progress, frameColor = "#C9CDD2", glassOpacity = 0.3, glassColor = "#cfe3e8", travel = TRAVEL, rigScale = 1 }) {
   const left = useRef();
   const right = useRef();
-  const target = useRef(0.35);
+  const target = useRef(0);
 
   useFrame((state, dt) => {
     // progress: 0 = closed (panels meet at centre), 1 = open (panels slid apart).
-    target.current += ((progress?.current ?? 0.35) - target.current) * Math.min(1, dt * 3.5);
+    target.current += ((progress?.current ?? 0) - target.current) * Math.min(1, dt * 3.5);
     const t = Math.min(1, Math.max(0, target.current));
-    if (left.current) left.current.position.x = -CLOSED_X - t * TRAVEL;
-    if (right.current) right.current.position.x = CLOSED_X + t * TRAVEL;
+    if (left.current) left.current.position.x = -CLOSED_X - t * travel;
+    if (right.current) right.current.position.x = CLOSED_X + t * travel;
   });
 
   return (
-    <group position={[0, 0.15, 0]}>
+    <group position={[0, 0.15, 0]} scale={rigScale}>
       {/* head track + sill */}
       <mesh position={[0, 1.58, 0]}>
         <boxGeometry args={[4.4, 0.12, 0.24]} />
@@ -141,21 +141,29 @@ export default function SlidingDoorScene({
   frameColor,
   glassOpacity,
   glassColor,
-  dpr = [1, 1.75],
+  compact = false,
+  dpr,
 }) {
   return (
     <Canvas
-      shadows
-      dpr={dpr}
-      camera={{ position: [0, 0.6, 5.2], fov: 38 }}
-      gl={{ antialias: true, powerPreference: "high-performance" }}
+      shadows={!compact}
+      dpr={dpr ?? (compact ? [1, 1.25] : [1, 1.75])}
+      camera={{ position: compact ? [0, 0.55, 6.4] : [0, 0.6, 5.2], fov: compact ? 44 : 38 }}
+      gl={{ antialias: !compact, powerPreference: "high-performance" }}
     >
       <ambientLight intensity={0.75} />
       <directionalLight position={[3.5, 5, 4]} intensity={1.6} castShadow shadow-mapSize={[1024, 1024]} />
       <directionalLight position={[-4, 2.5, 3]} intensity={0.45} color="#cdd7ff" />
       <spotLight position={[0, 4, 2.5]} angle={0.6} penumbra={0.8} intensity={0.7} color="#ffd9b8" />
       <Room>
-        <DoorRig progress={progressRef} frameColor={frameColor} glassOpacity={glassOpacity} glassColor={glassColor} />
+        <DoorRig
+          progress={progressRef}
+          frameColor={frameColor}
+          glassOpacity={glassOpacity}
+          glassColor={glassColor}
+          travel={compact ? 0.95 : TRAVEL}
+          rigScale={compact ? 0.85 : 1}
+        />
       </Room>
       <Environment preset="city" />
     </Canvas>
