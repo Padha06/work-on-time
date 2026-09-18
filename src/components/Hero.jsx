@@ -117,7 +117,7 @@ export default function Hero({ splineReady, onSplineReady }) {
           <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-[12px] font-semibold uppercase tracking-[0.16em] text-aluminum">
             Furniture · Repair · Aluminum doors
           </p>
-          <h1 className="font-display text-4xl font-semibold leading-[1.02] tracking-tight sm:text-6xl md:text-7xl">
+          <h1 className="font-display font-semibold leading-[1.02] tracking-tight text-[clamp(2.25rem,8vw,4.5rem)]">
             Built like furniture.
             <br />
             <span className="text-aluminum">Sealed like engineering.</span>

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { BEFORE_AFTER } from "../data/content.js";
+import { useSwipe } from "../lib/useSwipe.js";
 
 /** Draggable before/after divider — touch + mouse + keyboard. Spec 5.4. */
 function Compare({ item }) {
@@ -98,6 +99,11 @@ function Compare({ item }) {
 export default function BeforeAfter() {
   const [i, setI] = useState(0);
   const item = BEFORE_AFTER[i];
+  const prev = () => setI((v) => (v - 1 + BEFORE_AFTER.length) % BEFORE_AFTER.length);
+  const next = () => setI((v) => (v + 1) % BEFORE_AFTER.length);
+  // Swipe the caption/nav row to flip items (dragging the photo itself
+  // still moves the divider — gestures don't fight).
+  const swipe = useSwipe({ onLeft: next, onRight: prev });
 
   // Preload every before/after pair up front (small local files) so
   // switching items is instant and both sides are always cached together.
@@ -122,12 +128,12 @@ export default function BeforeAfter() {
         </div>
         <div className="reveal mt-8">
           <Compare key={item.id} item={item} />
-          <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
+          <div className="mt-4 flex flex-wrap items-center justify-between gap-3" {...swipe}>
             <p className="text-[15px] font-medium text-cream/90">{item.title}</p>
             <div className="flex gap-2">
-              <button onClick={() => setI((i - 1 + BEFORE_AFTER.length) % BEFORE_AFTER.length)} className="inline-flex min-h-[44px] items-center rounded-full border border-white/20 px-4 py-2 text-sm font-semibold hover:bg-white/10" aria-label="Previous repair">← Prev</button>
+              <button onClick={prev} className="inline-flex min-h-[44px] items-center rounded-full border border-white/20 px-4 py-2 text-sm font-semibold hover:bg-white/10" aria-label="Previous repair">← Prev</button>
               <span className="px-2 py-2 text-sm text-cream/60">{i + 1} / {BEFORE_AFTER.length}</span>
-              <button onClick={() => setI((i + 1) % BEFORE_AFTER.length)} className="inline-flex min-h-[44px] items-center rounded-full border border-white/20 px-4 py-2 text-sm font-semibold hover:bg-white/10" aria-label="Next repair">Next →</button>
+              <button onClick={next} className="inline-flex min-h-[44px] items-center rounded-full border border-white/20 px-4 py-2 text-sm font-semibold hover:bg-white/10" aria-label="Next repair">Next →</button>
             </div>
           </div>
           <div className="mt-4 flex gap-2 overflow-x-auto pb-1">

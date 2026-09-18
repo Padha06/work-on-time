@@ -23,7 +23,7 @@ export default function AboutPage() {
         <div className="mx-auto max-w-content px-4 sm:px-6">
           <div className="reveal max-w-3xl">
             <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-accent">About Us</p>
-            <h1 className="font-display mt-2 text-4xl sm:text-5xl font-semibold tracking-tight text-charcoal md:text-6xl">
+            <h1 className="font-display mt-2 font-semibold tracking-tight text-charcoal text-[clamp(2rem,7vw,3.75rem)]">
               One team, from first measurement to final walkthrough.
             </h1>
             <p className="mt-4 max-w-xl text-graphite">
@@ -34,6 +34,8 @@ export default function AboutPage() {
           <div className="reveal mt-10 overflow-hidden rounded-3xl border border-charcoal/10 shadow-xl">
             <img
               src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=1600&auto=format&fit=crop"
+              srcSet="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=800&auto=format&fit=crop 800w, https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=1200&auto=format&fit=crop 1200w, https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=1600&auto=format&fit=crop 1600w"
+              sizes="100vw"
               alt="Finished interior with custom furniture by Work On Time"
               className="h-72 w-full object-cover md:h-96"
               loading="lazy"

@@ -24,7 +24,7 @@ export default function ServicesPage() {
         <div className="mx-auto grid max-w-content items-center gap-10 px-4 sm:px-6 lg:grid-cols-[1.05fr_0.95fr]">
           <div className="reveal max-w-2xl">
             <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-accent">Our Services</p>
-            <h1 className="font-display mt-2 text-4xl sm:text-5xl font-semibold tracking-tight md:text-6xl">
+            <h1 className="font-display mt-2 font-semibold tracking-tight text-[clamp(2rem,7vw,3.75rem)]">
               Four services.<br />
               <span className="text-aluminum">One phone number.</span>
             </h1>
@@ -58,10 +58,22 @@ export default function ServicesPage() {
           </div>
           <div className="reveal relative hidden lg:block">
             <div className="overflow-hidden rounded-3xl border border-white/10 shadow-xl">
-              <img src={SERVICES[0].img} alt="Custom-built living room furniture" className="h-72 w-full object-cover" />
+              <img
+                src={SERVICES[0].img}
+                srcSet={`${SERVICES[0].img.replace("w=900", "w=640")} 640w, ${SERVICES[0].img} 900w, ${SERVICES[0].img.replace("w=900", "w=1280")} 1280w`}
+                sizes="45vw"
+                alt="Custom-built living room furniture"
+                className="h-72 w-full object-cover"
+              />
             </div>
             <div className="absolute -bottom-8 -left-8 w-56 overflow-hidden rounded-2xl border border-white/10 shadow-xl">
-              <img src={SERVICES[2].img} alt="Installed aluminum door" className="h-40 w-full object-cover" />
+              <img
+                src={SERVICES[2].img}
+                srcSet={`${SERVICES[2].img.replace("w=900", "w=480")} 480w, ${SERVICES[2].img} 900w`}
+                sizes="20vw"
+                alt="Installed aluminum door"
+                className="h-40 w-full object-cover"
+              />
             </div>
             <div className="absolute -top-5 -right-3 rounded-2xl bg-accent px-5 py-3 shadow-xl">
               <p className="font-display text-2xl font-semibold leading-none text-white">850+</p>

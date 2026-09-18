@@ -12,7 +12,7 @@ export default function WorkPage() {
         <div className="mx-auto grid max-w-content items-center gap-10 px-4 sm:px-6 lg:grid-cols-[1.05fr_0.95fr]">
           <div className="reveal max-w-2xl">
             <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-accent">Our Work</p>
-            <h1 className="font-display mt-2 text-4xl sm:text-5xl font-semibold tracking-tight md:text-6xl">
+            <h1 className="font-display mt-2 font-semibold tracking-tight text-[clamp(2rem,7vw,3.75rem)]">
               Don't take our word.<br />
               <span className="text-aluminum">Take the photos.</span>
             </h1>
@@ -29,7 +29,13 @@ export default function WorkPage() {
             </div>
           </div>
           <div className="reveal overflow-hidden rounded-3xl border border-white/10 shadow-xl">
-            <img src={PORTFOLIO[0].img} alt={PORTFOLIO[0].title} className="h-72 w-full object-cover lg:h-80" />
+            <img
+              src={PORTFOLIO[0].img}
+              srcSet={`${PORTFOLIO[0].img.replace("w=800", "w=480")} 480w, ${PORTFOLIO[0].img} 800w, ${PORTFOLIO[0].img.replace("w=800", "w=1200")} 1200w`}
+              sizes="(max-width: 1024px) 100vw, 45vw"
+              alt={PORTFOLIO[0].title}
+              className="h-72 w-full object-cover lg:h-80"
+            />
             <div className="flex items-center justify-between bg-white/5 px-5 py-3 backdrop-blur">
               <p className="text-sm font-semibold text-cream">{PORTFOLIO[0].title}</p>
               <span className="rounded-full bg-white/10 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-aluminum">{PORTFOLIO[0].cat}</span>
