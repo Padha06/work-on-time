@@ -193,3 +193,51 @@ create policy "public_upload_request_images" on storage.objects
 drop policy if exists "public_read_request_images" on storage.objects;
 create policy "public_read_request_images" on storage.objects
   for select using (bucket_id = 'request-images');
+
+-- ============================================================
+-- PORTFOLIO (admin manage-portfolio page)
+-- Table was missing from earlier schema versions: uploads failed
+-- with "Bucket not found" / table errors. Idempotent: safe to re-run.
+-- ============================================================
+
+create table if not exists portfolio_items (
+  id         uuid primary key default gen_random_uuid(),
+  title      text not null,
+  category   text not null,
+  media_url  text not null,
+  media_type text not null default 'image'
+             check (media_type in ('image','video')),
+  created_at timestamptz not null default now()
+);
+
+alter table portfolio_items enable row level security;
+
+drop policy if exists "public_read_portfolio" on portfolio_items;
+create policy "public_read_portfolio" on portfolio_items
+  for select using (true);
+
+drop policy if exists "admin_all_portfolio" on portfolio_items;
+create policy "admin_all_portfolio" on portfolio_items
+  for all using (auth.uid() in (select id from admin_users));
+
+insert into storage.buckets (id, name, public)
+  values ('portfolio', 'portfolio', true)
+  on conflict (id) do update set public = true;
+
+drop policy if exists "public_read_portfolio" on storage.objects;
+create policy "public_read_portfolio" on storage.objects
+  for select using (bucket_id = 'portfolio');
+
+drop policy if exists "admin_upload_portfolio" on storage.objects;
+create policy "admin_upload_portfolio" on storage.objects
+  for insert with check (
+    bucket_id = 'portfolio'
+    and auth.uid() in (select id from admin_users)
+  );
+
+drop policy if exists "admin_delete_portfolio" on storage.objects;
+create policy "admin_delete_portfolio" on storage.objects
+  for delete using (
+    bucket_id = 'portfolio'
+    and auth.uid() in (select id from admin_users)
+  );
