@@ -1,23 +1,39 @@
 import { useEffect } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
+
+// Pages
+import HomePage from "./pages/HomePage.jsx";
+import ServicesPage from "./pages/ServicesPage.jsx";
+import MarketplacePage from "./pages/MarketplacePage.jsx";
+import RequestDetailPage from "./pages/RequestDetailPage.jsx";
+import PostRequestPage from "./pages/PostRequestPage.jsx";
+import HowItWorksPage from "./pages/HowItWorksPage.jsx";
+import WorkPage from "./pages/WorkPage.jsx";
+import AboutPage from "./pages/AboutPage.jsx";
+import ContactPage from "./pages/ContactPage.jsx";
+
+// Admin pages
+import AdminLogin from "./pages/admin/AdminLogin.jsx";
+import AdminLayout from "./pages/admin/AdminLayout.jsx";
+import AdminOverview from "./pages/admin/AdminOverview.jsx";
+import AdminRequests from "./pages/admin/AdminRequests.jsx";
+import AdminClaims from "./pages/admin/AdminClaims.jsx";
+import AdminPortfolio from "./pages/admin/AdminPortfolio.jsx";
+import AdminAnalytics from "./pages/admin/AdminAnalytics.jsx";
+import AdminSettings from "./pages/admin/AdminSettings.jsx";
+import AdminRoute from "./components/admin/AdminRoute.jsx";
+
+// Shared layout
 import Navbar from "./components/Navbar.jsx";
-import Hero from "./components/Hero.jsx";
-import TrustStrip from "./components/TrustStrip.jsx";
-import Services from "./components/Services.jsx";
-import BeforeAfter from "./components/BeforeAfter.jsx";
-import FinishExplorer from "./components/FinishExplorer.jsx";
-import CaseStudy from "./components/CaseStudy.jsx";
-import Process from "./components/Process.jsx";
-import Portfolio from "./components/Portfolio.jsx";
-import Testimonials from "./components/Testimonials.jsx";
-import Contact from "./components/Contact.jsx";
 import Footer from "./components/Footer.jsx";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function App() {
+/** Shared layout wrapper — provides Lenis smooth scroll + GSAP reveals */
+function Layout({ children }) {
   useEffect(() => {
     window.gsap = gsap;
     window.ScrollTrigger = ScrollTrigger;
@@ -27,14 +43,11 @@ export default function App() {
     if (!reduced) {
       lenis = new Lenis({ lerp: 0.1, smoothWheel: true });
       lenis.on("scroll", ScrollTrigger.update);
-      const raf = (t) => {
-        lenis.raf(t);
-        requestAnimationFrame(raf);
-      };
+      const raf = (t) => { lenis.raf(t); requestAnimationFrame(raf); };
       requestAnimationFrame(raf);
     }
 
-    // Anchor navigation through Lenis (or native fallback)
+    // Smooth anchor scroll (hash links)
     const onClick = (e) => {
       const a = e.target.closest?.('a[href^="#"]');
       if (!a) return;
@@ -46,35 +59,16 @@ export default function App() {
     };
     document.addEventListener("click", onClick);
 
-    // Staggered reveals
+    // Staggered reveal animations
     const ctx = gsap.context(() => {
+      ScrollTrigger.refresh();
       gsap.utils.toArray(".reveal").forEach((el) => {
+        gsap.set(el, { opacity: 0, y: 30 });
         gsap.to(el, {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          ease: "power3.out",
+          opacity: 1, y: 0, duration: 0.8, ease: "power3.out",
           scrollTrigger: { trigger: el, start: "top 88%", once: true },
         });
       });
-      // Pinned case study (desktop only, skip on reduced motion)
-      if (!reduced && window.innerWidth > 900) {
-        gsap.fromTo(
-          "#case-pin",
-          { scale: 0.985 },
-          {
-            scale: 1,
-            ease: "none",
-            scrollTrigger: { trigger: "#case", start: "top 70%", end: "center 45%", scrub: 1 },
-          }
-        );
-      }
-      // Hero copy entrance after first door motion
-      gsap.fromTo(
-        "[data-hero-copy]",
-        { opacity: 0, y: 34 },
-        { opacity: 1, y: 0, duration: 1, delay: 0.5, ease: "power3.out" }
-      );
     });
 
     return () => {
@@ -87,23 +81,42 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-cream font-ui text-charcoal">
-      <a href="#services" className="sr-only focus:not-sr-only focus:absolute focus:left-3 focus:top-3 focus:z-[70] focus:rounded-full focus:bg-white focus:px-4 focus:py-2">
+      <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:left-3 focus:top-3 focus:z-[70] focus:rounded-full focus:bg-white focus:px-4 focus:py-2">
         Skip to content
       </a>
       <Navbar />
-      <main>
-        <Hero />
-        <TrustStrip />
-        <Services />
-        <BeforeAfter />
-        <FinishExplorer />
-        <CaseStudy />
-        <Process />
-        <Portfolio />
-        <Testimonials />
-        <Contact />
-      </main>
+      <main id="main-content">{children}</main>
       <Footer />
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        {/* Admin routes — separate layout, no public navbar */}
+        <Route path="/admin/login" element={<AdminLogin />} />
+        <Route path="/admin" element={<AdminRoute><AdminLayout /></AdminRoute>}>
+          <Route index element={<AdminOverview />} />
+          <Route path="requests" element={<AdminRequests />} />
+          <Route path="claims" element={<AdminClaims />} />
+          <Route path="portfolio" element={<AdminPortfolio />} />
+          <Route path="analytics" element={<AdminAnalytics />} />
+          <Route path="settings" element={<AdminSettings />} />
+        </Route>
+
+        {/* Public routes — shared layout */}
+        <Route path="/" element={<Layout><HomePage /></Layout>} />
+        <Route path="/services" element={<Layout><ServicesPage /></Layout>} />
+        <Route path="/marketplace" element={<Layout><MarketplacePage /></Layout>} />
+        <Route path="/marketplace/request/:id" element={<Layout><RequestDetailPage /></Layout>} />
+        <Route path="/post-request" element={<Layout><PostRequestPage /></Layout>} />
+        <Route path="/how-it-works" element={<Layout><HowItWorksPage /></Layout>} />
+        <Route path="/work" element={<Layout><WorkPage /></Layout>} />
+        <Route path="/about" element={<Layout><AboutPage /></Layout>} />
+        <Route path="/contact" element={<Layout><ContactPage /></Layout>} />
+      </Routes>
+    </BrowserRouter>
   );
 }

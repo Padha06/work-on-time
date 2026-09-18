@@ -1,13 +1,31 @@
-// Central content for the pitch demo.
-// Anything the client hasn't supplied is flagged with sample: true
-// and rendered with a [Sample — to be replaced] tag per spec Section 8.
+// Central content for the Work On Time marketplace.
+// Anything the client hasn't supplied is flagged with sample: true.
 
-export const WHATSAPP_NUMBER = "[TODO: client to provide WhatsApp number]";
-export const WHATSAPP_NUMBER_LINK = "15551234567"; // placeholder digits, clearly marked in UI
+// WhatsApp number — set VITE_WHATSAPP_NUMBER in your .env file (format: 254XXXXXXXXX)
+export const WHATSAPP_NUMBER_LINK =
+  import.meta.env.VITE_WHATSAPP_NUMBER || "15551234567";
+export const WHATSAPP_NUMBER = `+${WHATSAPP_NUMBER_LINK}`;
+
 export const waLink = (service = "your services") =>
   `https://wa.me/${WHATSAPP_NUMBER_LINK}?text=${encodeURIComponent(
-    `Hi, I saw your new site and I'm interested in ${service}. Please send me a quote.`
+    `Hi, I saw the Work On Time website and I'm interested in ${service}. Please send me a quote.`
   )}`;
+
+/** Build prefilled WhatsApp message for a marketplace claim */
+export const buildClaimMessage = (provider, request) => {
+  const shortId = request.id?.slice(0, 8).toUpperCase() ?? "N/A";
+  return [
+    `Hello, my name is ${provider.name}. I am interested in your ${request.service_type} request #${shortId}.`,
+    ``,
+    `I have ${provider.experience || "several"} years of experience and specialize in ${provider.background}.`,
+    ``,
+    `I would be happy to discuss the work, pricing and availability.`,
+    ``,
+    `Work On Time Request: ${request.title}`,
+    `Location: ${request.location}`,
+    `Urgency: ${(request.urgency || "").toUpperCase()}`,
+  ].join("\n");
+};
 
 const u = (id, w = 1200) =>
   `https://images.unsplash.com/${id}?q=80&w=${w}&auto=format&fit=crop`;

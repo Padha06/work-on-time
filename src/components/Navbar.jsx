@@ -1,22 +1,27 @@
 import { useState } from "react";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { waLink } from "../data/content.js";
 
 const LINKS = [
-  ["Services", "#services"],
-  ["Repairs", "#before-after"],
-  ["Finishes", "#finishes"],
-  ["Work", "#work"],
-  ["Process", "#process"],
-  ["Reviews", "#reviews"],
-  ["Contact", "#contact"],
+  ["Services", "/services"],
+  ["Marketplace", "/marketplace"],
+  ["How It Works", "/how-it-works"],
+  ["Work", "/work"],
+  ["About", "/about"],
+  ["Contact", "/contact"],
 ];
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const close = () => setOpen(false);
+
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-charcoal/85 text-cream backdrop-blur-md">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-charcoal/90 text-cream backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-content items-center justify-between px-4 sm:px-6">
-        <a href="#top" className="flex items-center gap-2.5">
+        {/* Logo */}
+        <Link to="/" className="flex items-center gap-2.5" onClick={close}>
           <span className="grid h-9 w-9 place-items-center rounded-lg bg-aluminum/15">
             <svg width="22" height="22" viewBox="0 0 32 32" aria-hidden="true">
               <rect x="6" y="4" width="8" height="24" rx="1.5" fill="#C7CBCF" />
@@ -25,26 +30,44 @@ export default function Navbar() {
           </span>
           <span className="leading-tight">
             <span className="block font-display text-[17px] font-semibold tracking-tight">Work On Time</span>
-            <span className="block text-[11px] uppercase tracking-[0.18em] text-aluminum/80">Furniture · Aluminum Doors</span>
+            <span className="block text-[11px] uppercase tracking-[0.18em] text-aluminum/80">Furniture · Marketplace</span>
           </span>
-        </a>
+        </Link>
+
+        {/* Desktop nav */}
         <nav className="hidden items-center gap-5 text-sm font-medium lg:flex" aria-label="Primary">
-          {LINKS.map(([label, href]) => (
-            <a key={href} href={href} className="text-cream/80 transition hover:text-white">
+          {LINKS.map(([label, to]) => (
+            <NavLink
+              key={to}
+              to={to}
+              className={({ isActive }) =>
+                `transition hover:text-white ${isActive ? "text-white" : "text-cream/75"}`
+              }
+            >
               {label}
-            </a>
+            </NavLink>
           ))}
         </nav>
+
+        {/* Desktop CTAs */}
         <div className="hidden items-center gap-2 lg:flex">
+          <Link
+            to="/post-request"
+            className="rounded-full bg-accent px-4 py-2 text-sm font-semibold text-white transition hover:brightness-110"
+          >
+            Post a Request
+          </Link>
           <a
-            href={waLink("custom furniture")}
+            href={waLink("your services")}
             target="_blank"
             rel="noreferrer"
-            className="rounded-full bg-accent px-4 py-2 text-sm font-semibold text-white transition hover:brightness-110"
+            className="rounded-full border border-white/25 bg-white/5 px-4 py-2 text-sm font-semibold transition hover:bg-white/15"
           >
             WhatsApp us
           </a>
         </div>
+
+        {/* Mobile hamburger */}
         <button
           className="grid h-10 w-10 place-items-center rounded-lg border border-white/15 lg:hidden"
           onClick={() => setOpen((v) => !v)}
@@ -54,24 +77,38 @@ export default function Navbar() {
           <span className="text-xl leading-none">{open ? "×" : "☰"}</span>
         </button>
       </div>
+
+      {/* Mobile menu */}
       {open && (
         <nav className="border-t border-white/10 px-4 py-3 lg:hidden" aria-label="Mobile">
           <div className="grid gap-1">
-            {LINKS.map(([label, href]) => (
-              <a
-                key={href}
-                href={href}
-                onClick={() => setOpen(false)}
-                className="rounded-lg px-3 py-2.5 text-[15px] font-medium text-cream/90 hover:bg-white/10"
+            {LINKS.map(([label, to]) => (
+              <NavLink
+                key={to}
+                to={to}
+                onClick={close}
+                className={({ isActive }) =>
+                  `rounded-lg px-3 py-2.5 text-[15px] font-medium transition hover:bg-white/10 ${
+                    isActive ? "text-white bg-white/10" : "text-cream/90"
+                  }`
+                }
               >
                 {label}
-              </a>
+              </NavLink>
             ))}
+            <Link
+              to="/post-request"
+              onClick={close}
+              className="mt-1 rounded-lg bg-accent px-3 py-2.5 text-center text-[15px] font-semibold text-white"
+            >
+              Post a Request
+            </Link>
             <a
-              href={waLink("custom furniture")}
+              href={waLink("your services")}
               target="_blank"
               rel="noreferrer"
-              className="mt-1 rounded-lg bg-accent px-3 py-2.5 text-center text-[15px] font-semibold text-white"
+              onClick={close}
+              className="mt-1 rounded-lg border border-white/25 px-3 py-2.5 text-center text-[15px] font-semibold"
             >
               WhatsApp us
             </a>
