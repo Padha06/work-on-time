@@ -60,7 +60,7 @@ export default function ClaimModal({ request, onClose }) {
             >
               Open WhatsApp →
             </button>
-            <button onClick={onClose} className="mt-3 text-sm text-graphite/60 hover:text-graphite">
+            <button onClick={onClose} className="mt-3 inline-flex min-h-[44px] items-center px-4 text-sm text-graphite/60 hover:text-graphite">
               Close
             </button>
           </div>
@@ -69,12 +69,12 @@ export default function ClaimModal({ request, onClose }) {
             {/* Header */}
             <div className="border-b border-charcoal/10 bg-charcoal p-6 text-cream">
               <div className="flex items-start justify-between gap-3">
-                <div>
+                <div className="min-w-0">
                   <p className="text-[12px] font-bold uppercase tracking-widest text-aluminum">Claim Work</p>
-                  <h2 className="font-display mt-1 text-xl font-semibold leading-snug">{request.title}</h2>
+                  <h2 className="font-display mt-1 text-xl font-semibold leading-snug break-words">{request.title}</h2>
                   <p className="mt-1 text-sm text-cream/60">{request.location} · {request.service_type}</p>
                 </div>
-                <button onClick={onClose} className="rounded-full border border-white/20 p-2 text-cream/60 hover:text-white" aria-label="Close">✕</button>
+                <button onClick={onClose} className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-white/20 text-cream/60 hover:text-white" aria-label="Close">✕</button>
               </div>
             </div>
 
@@ -86,28 +86,28 @@ export default function ClaimModal({ request, onClose }) {
               <div className="grid gap-1.5">
                 <label className="text-[13px] font-bold text-charcoal">Your Name *</label>
                 <input required value={form.name} onChange={set("name")} placeholder="Full name"
-                  className="rounded-xl border border-charcoal/15 px-4 py-3 text-[15px] outline-none focus:border-accent" />
+                  className="rounded-xl border border-charcoal/15 px-4 py-3 text-base outline-none focus:border-accent" />
               </div>
               <div className="grid gap-1.5">
                 <label className="text-[13px] font-bold text-charcoal">WhatsApp Number *</label>
                 <input required value={form.whatsapp} onChange={set("whatsapp")} placeholder="+254 7XX XXX XXX" inputMode="tel"
-                  className="rounded-xl border border-charcoal/15 px-4 py-3 text-[15px] outline-none focus:border-accent" />
+                  className="rounded-xl border border-charcoal/15 px-4 py-3 text-base outline-none focus:border-accent" />
               </div>
               <div className="grid gap-1.5">
                 <label className="text-[13px] font-bold text-charcoal">Years of Experience</label>
                 <input value={form.experience} onChange={set("experience")} placeholder="e.g. 5" inputMode="numeric"
-                  className="rounded-xl border border-charcoal/15 px-4 py-3 text-[15px] outline-none focus:border-accent" />
+                  className="rounded-xl border border-charcoal/15 px-4 py-3 text-base outline-none focus:border-accent" />
               </div>
               <div className="grid gap-1.5">
                 <label className="text-[13px] font-bold text-charcoal">Portfolio Link <span className="font-normal text-graphite/50">(optional)</span></label>
                 <input value={form.portfolio} onChange={set("portfolio")} placeholder="https://…"
-                  className="rounded-xl border border-charcoal/15 px-4 py-3 text-[15px] outline-none focus:border-accent" />
+                  className="rounded-xl border border-charcoal/15 px-4 py-3 text-base outline-none focus:border-accent" />
               </div>
               <div className="grid gap-1.5">
                 <label className="text-[13px] font-bold text-charcoal">Brief Background / Qualifications *</label>
                 <textarea required rows={3} value={form.background} onChange={set("background")}
                   placeholder="Describe your skills and relevant experience for this job…"
-                  className="rounded-xl border border-charcoal/15 px-4 py-3 text-[15px] outline-none focus:border-accent resize-none" />
+                  className="rounded-xl border border-charcoal/15 px-4 py-3 text-base outline-none focus:border-accent resize-none" />
               </div>
               <button
                 type="submit"

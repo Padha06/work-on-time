@@ -49,7 +49,7 @@ export default function MarketplaceFilters({ onResults, onLoading }) {
           placeholder="Search requests…"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="w-full rounded-2xl border border-charcoal/15 bg-white py-4 pl-10 pr-4 text-[15px] outline-none focus:border-accent shadow-sm"
+          className="w-full rounded-2xl border border-charcoal/15 bg-white py-4 pl-10 pr-4 text-base outline-none focus:border-accent shadow-sm"
         />
       </div>
 
@@ -60,7 +60,7 @@ export default function MarketplaceFilters({ onResults, onLoading }) {
           <select
             value={serviceType}
             onChange={(e) => setServiceType(e.target.value)}
-            className="w-full rounded-xl border border-charcoal/15 bg-white px-4 py-3 text-[14px] outline-none focus:border-accent"
+            className="w-full rounded-xl border border-charcoal/15 bg-white px-4 py-3 text-base outline-none focus:border-accent"
           >
             {SERVICE_TYPES.map((t) => <option key={t}>{t}</option>)}
           </select>
@@ -70,7 +70,7 @@ export default function MarketplaceFilters({ onResults, onLoading }) {
           <select
             value={urgency}
             onChange={(e) => setUrgency(e.target.value)}
-            className="w-full rounded-xl border border-charcoal/15 bg-white px-4 py-3 text-[14px] outline-none focus:border-accent capitalize"
+            className="w-full rounded-xl border border-charcoal/15 bg-white px-4 py-3 text-base outline-none focus:border-accent capitalize"
           >
             {URGENCIES.map((u) => <option key={u} value={u} className="capitalize">{u === "All" ? "All" : u.charAt(0).toUpperCase() + u.slice(1)}</option>)}
           </select>

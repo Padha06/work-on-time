@@ -28,7 +28,7 @@ export default function RequestDetailPage() {
 
   if (loading) {
     return (
-      <div className="pt-16 min-h-screen bg-cream">
+      <div className="pt-16 min-h-[100dvh] bg-cream">
         <div className="mx-auto max-w-content px-4 sm:px-6 py-20">
           <div className="animate-pulse space-y-4 max-w-2xl">
             <div className="h-4 w-24 rounded bg-charcoal/10" />
@@ -43,7 +43,7 @@ export default function RequestDetailPage() {
 
   if (error || !request) {
     return (
-      <div className="pt-16 min-h-screen bg-cream">
+      <div className="pt-16 min-h-[100dvh] bg-cream">
         <div className="mx-auto max-w-content px-4 sm:px-6 py-20 text-center">
           <div className="text-5xl mb-4">🔍</div>
           <h2 className="font-display text-2xl font-semibold text-charcoal">{error || "Request not found"}</h2>
@@ -58,7 +58,7 @@ export default function RequestDetailPage() {
   const canClaim = ["open"].includes(request.status);
 
   return (
-    <div className="pt-16 min-h-screen bg-cream">
+    <div className="pt-16 min-h-[100dvh] bg-cream">
       {/* Back link */}
       <div className="mx-auto max-w-content px-4 sm:px-6 pt-8">
         <Link to="/marketplace" className="text-sm font-semibold text-accent hover:underline">← Back to Marketplace</Link>

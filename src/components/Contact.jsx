@@ -48,15 +48,15 @@ export default function Contact() {
             <div className="grid gap-4">
               <div className="grid gap-1.5">
                 <label htmlFor="q-name" className="text-[13px] font-bold">Name</label>
-                <input id="q-name" required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Your name" className="rounded-xl border border-charcoal/15 px-4 py-3 text-[15px] outline-none focus:border-accent" />
+                <input id="q-name" required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Your name" className="rounded-xl border border-charcoal/15 px-4 py-3 text-base outline-none focus:border-accent" />
               </div>
               <div className="grid gap-1.5">
                 <label htmlFor="q-phone" className="text-[13px] font-bold">Phone / WhatsApp</label>
-                <input id="q-phone" required inputMode="tel" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} placeholder="+91 …" className="rounded-xl border border-charcoal/15 px-4 py-3 text-[15px] outline-none focus:border-accent" />
+                <input id="q-phone" required inputMode="tel" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} placeholder="+91 …" className="rounded-xl border border-charcoal/15 px-4 py-3 text-base outline-none focus:border-accent" />
               </div>
               <div className="grid gap-1.5">
                 <label htmlFor="q-service" className="text-[13px] font-bold">Service needed</label>
-                <select id="q-service" value={form.service} onChange={(e) => setForm({ ...form, service: e.target.value })} className="rounded-xl border border-charcoal/15 bg-white px-4 py-3 text-[15px] outline-none focus:border-accent">
+                <select id="q-service" value={form.service} onChange={(e) => setForm({ ...form, service: e.target.value })} className="rounded-xl border border-charcoal/15 bg-white px-4 py-3 text-base outline-none focus:border-accent">
                   <option>Custom Furniture Building</option>
                   <option>Furniture Repair &amp; Restoration</option>
                   <option>Aluminum Doors</option>
@@ -65,7 +65,7 @@ export default function Contact() {
               </div>
               <div className="grid gap-1.5">
                 <label htmlFor="q-msg" className="text-[13px] font-bold">Message</label>
-                <textarea id="q-msg" rows={4} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} placeholder="Room size, photos you can share on WhatsApp, timeline…" className="rounded-xl border border-charcoal/15 px-4 py-3 text-[15px] outline-none focus:border-accent" />
+                <textarea id="q-msg" rows={4} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} placeholder="Room size, photos you can share on WhatsApp, timeline…" className="rounded-xl border border-charcoal/15 px-4 py-3 text-base outline-none focus:border-accent" />
               </div>
               <button type="submit" className="rounded-full bg-accent px-6 py-3.5 text-[15px] font-bold text-white transition hover:brightness-110">Request callback →</button>
               <p className="text-center text-[12px] text-graphite/60">Demo form — no data leaves your browser.</p>

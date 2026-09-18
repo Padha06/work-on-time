@@ -23,7 +23,7 @@ export default function RequestCard({ request }) {
       <div className="flex-1 p-5">
         {/* Header */}
         <div className="flex items-start justify-between gap-2">
-          <h3 className="font-display text-[17px] font-semibold leading-snug text-charcoal group-hover:text-accent transition-colors">
+          <h3 className="min-w-0 font-display text-[17px] font-semibold leading-snug text-charcoal group-hover:text-accent transition-colors break-words">
             {request.title}
           </h3>
           <StatusBadge status={request.status} className="shrink-0" />

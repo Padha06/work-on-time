@@ -28,7 +28,7 @@ export default function Navbar() {
               <rect x="18" y="4" width="8" height="24" rx="1.5" fill="#A9764E" />
             </svg>
           </span>
-          <span className="leading-tight">
+          <span className="leading-tight min-w-0">
             <span className="block font-display text-[17px] font-semibold tracking-tight">Work On Time</span>
             <span className="block text-[11px] uppercase tracking-[0.18em] text-aluminum/80">Furniture · Marketplace</span>
           </span>

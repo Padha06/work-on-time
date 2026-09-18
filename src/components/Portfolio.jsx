@@ -95,7 +95,7 @@ export default function Portfolio() {
       {light && (
         <div className="fixed inset-0 z-50 grid place-items-center bg-black/90 p-4" onClick={() => setLight(null)} role="dialog" aria-label="Lightbox">
           <div className="relative w-full max-w-4xl" onClick={(e) => e.stopPropagation()}>
-            <div className="mb-4 flex items-center justify-between text-white">
+            <div className="mb-4 flex items-center justify-between gap-3 text-white">
               <h3 className="font-display text-2xl font-semibold">{light.title}</h3>
               <button onClick={() => setLight(null)} className="grid h-11 w-11 place-items-center rounded-full bg-white/10 hover:bg-white/20 transition" aria-label="Close">✕</button>
             </div>

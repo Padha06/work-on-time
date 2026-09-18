@@ -47,7 +47,7 @@ export default function AdminLogin() {
   };
 
   return (
-    <div className="min-h-screen bg-charcoal grid place-items-center p-4">
+    <div className="min-h-[100dvh] bg-charcoal grid place-items-center p-4">
       <div className="w-full max-w-sm">
         {/* Logo */}
         <div className="mb-8 flex items-center gap-3">
@@ -79,7 +79,7 @@ export default function AdminLogin() {
                   <input
                     type="email" required value={email} onChange={(e) => setEmail(e.target.value)}
                     placeholder="admin@workontime.in"
-                    className="rounded-xl border border-charcoal/15 px-4 py-3 text-[15px] outline-none focus:border-accent"
+                    className="rounded-xl border border-charcoal/15 px-4 py-3 text-base outline-none focus:border-accent"
                   />
                 </div>
                 
@@ -93,7 +93,7 @@ export default function AdminLogin() {
                   <input
                     type="password" required value={password} onChange={(e) => setPassword(e.target.value)}
                     placeholder="••••••••"
-                    className="rounded-xl border border-charcoal/15 px-4 py-3 text-[15px] outline-none focus:border-accent"
+                    className="rounded-xl border border-charcoal/15 px-4 py-3 text-base outline-none focus:border-accent"
                   />
                 </div>
                 
@@ -131,7 +131,7 @@ export default function AdminLogin() {
                       <input
                         type="email" required value={email} onChange={(e) => setEmail(e.target.value)}
                     placeholder="admin@workontime.in"
-                        className="rounded-xl border border-charcoal/15 px-4 py-3 text-[15px] outline-none focus:border-accent"
+                        className="rounded-xl border border-charcoal/15 px-4 py-3 text-base outline-none focus:border-accent"
                       />
                     </div>
                     

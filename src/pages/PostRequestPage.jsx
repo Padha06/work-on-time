@@ -88,7 +88,7 @@ export default function PostRequestPage() {
 
   if (done) {
     return (
-      <div className="pt-16 min-h-screen bg-cream">
+      <div className="pt-16 min-h-[100dvh] bg-cream">
         <div className="mx-auto max-w-content px-4 sm:px-6 py-20 text-center">
           <div className="mx-auto max-w-md">
             <div className="mx-auto grid h-20 w-20 place-items-center rounded-full bg-green-100 text-4xl">✓</div>
@@ -114,12 +114,12 @@ export default function PostRequestPage() {
   }
 
   const inputClass = (field) =>
-    `w-full rounded-xl border px-4 py-3 text-[15px] outline-none transition focus:border-accent ${
+    `w-full rounded-xl border px-4 py-3 text-base outline-none transition focus:border-accent ${
       errors[field] ? "border-red-400 bg-red-50" : "border-charcoal/15 bg-white"
     }`;
 
   return (
-    <div className="pt-16 min-h-screen bg-cream">
+    <div className="pt-16 min-h-[100dvh] bg-cream">
       {/* Header */}
       <section className="bg-charcoal py-16 text-cream">
         <div className="mx-auto max-w-content px-4 sm:px-6">
@@ -146,7 +146,7 @@ export default function PostRequestPage() {
             <div className="grid gap-1.5">
               <label className="text-[13px] font-bold text-charcoal">Service Type *</label>
               <select value={form.serviceType} onChange={set("serviceType")}
-                className="w-full rounded-xl border border-charcoal/15 bg-white px-4 py-3 text-[15px] outline-none focus:border-accent">
+                className="w-full rounded-xl border border-charcoal/15 bg-white px-4 py-3 text-base outline-none focus:border-accent">
                 {SERVICE_TYPES.map((t) => <option key={t}>{t}</option>)}
               </select>
             </div>
@@ -235,7 +235,7 @@ export default function PostRequestPage() {
                 Budget <span className="font-normal text-graphite/50">(optional)</span>
               </label>
               <input value={form.budget} onChange={set("budget")} placeholder="e.g. ₹8,000 flexible"
-                className="w-full rounded-xl border border-charcoal/15 bg-white px-4 py-3 text-[15px] outline-none focus:border-accent" />
+                className="w-full rounded-xl border border-charcoal/15 bg-white px-4 py-3 text-base outline-none focus:border-accent" />
             </div>
 
             <button type="submit" disabled={loading}

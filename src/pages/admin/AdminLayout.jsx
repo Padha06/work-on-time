@@ -19,7 +19,7 @@ export default function AdminLayout() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F4F4F2] flex">
+    <div className="min-h-[100dvh] bg-[#F4F4F2] flex">
       {/* Sidebar */}
       <aside className="hidden lg:flex w-64 shrink-0 flex-col bg-charcoal text-cream">
         {/* Logo */}

@@ -36,7 +36,7 @@ export default function AdminRoute({ children }) {
 
   if (state.loading) {
     return (
-      <div className="min-h-screen bg-charcoal grid place-items-center">
+      <div className="min-h-[100dvh] bg-charcoal grid place-items-center">
         <div className="text-cream/60 animate-pulse">Checking authentication…</div>
       </div>
     );
@@ -52,7 +52,7 @@ export default function AdminRoute({ children }) {
       navigate("/admin/login", { replace: true });
     };
     return (
-      <div className="min-h-screen bg-charcoal grid place-items-center p-4">
+      <div className="min-h-[100dvh] bg-charcoal grid place-items-center p-4">
         <div className="w-full max-w-md rounded-3xl bg-white p-8 text-center shadow-2xl">
           <div className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-red-100 text-2xl">⛔</div>
           <h2 className="font-display mt-4 text-2xl font-semibold text-charcoal">Access restricted</h2>
