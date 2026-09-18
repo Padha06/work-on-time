@@ -88,6 +88,16 @@ export default function RequestDetailPage() {
               </div>
             </div>
 
+            {/* Mobile: primary action right under the header (desktop keeps the sidebar CTA) */}
+            {canClaim && (
+              <button
+                onClick={() => setClaiming(true)}
+                className="mt-4 flex min-h-[48px] w-full items-center justify-center rounded-full bg-accent text-[15px] font-bold text-white shadow-lg transition hover:brightness-110 lg:hidden"
+              >
+                Claim This Work →
+              </button>
+            )}
+
             {/* Description */}
             <div className="rounded-3xl bg-white border border-charcoal/8 p-8 shadow-sm">
               <h2 className="font-display text-xl font-semibold text-charcoal mb-4">Job Description</h2>

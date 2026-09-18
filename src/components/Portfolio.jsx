@@ -21,6 +21,18 @@ export default function Portfolio() {
   }, []);
 
   const items = dbItems.filter((p) => tab === "All" || p.category === tab);
+
+  // Lightbox overlay UX: Esc closes, background scroll locks while open.
+  useEffect(() => {
+    if (!light) return;
+    const onKey = (e) => { if (e.key === "Escape") setLight(null); };
+    document.addEventListener("keydown", onKey);
+    document.body.classList.add("lightbox-open");
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.classList.remove("lightbox-open");
+    };
+  }, [light]);
   
   // Only show tabs that actually have items (plus All)
   const activeCategories = ["All", ...new Set(dbItems.map(i => i.category))];

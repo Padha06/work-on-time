@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { submitClaim } from "../../lib/marketplace.js";
 import { WHATSAPP_NUMBER_LINK, buildClaimMessage } from "../../data/content.js";
 
@@ -9,6 +9,17 @@ export default function ClaimModal({ request, onClose }) {
   const [error, setError] = useState("");
 
   const set = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }));
+
+  // Overlay UX: Esc closes, background scroll locks while open.
+  useEffect(() => {
+    const onKey = (e) => { if (e.key === "Escape") onClose(); };
+    document.addEventListener("keydown", onKey);
+    document.body.classList.add("lightbox-open");
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.classList.remove("lightbox-open");
+    };
+  }, [onClose]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

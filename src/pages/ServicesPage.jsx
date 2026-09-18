@@ -1,6 +1,7 @@
 import Services from "../components/Services.jsx";
 import BeforeAfter from "../components/BeforeAfter.jsx";
 import FinishExplorer from "../components/FinishExplorer.jsx";
+import MobileActionBar from "../components/MobileActionBar.jsx";
 import { Link } from "react-router-dom";
 import { waLink, SERVICES } from "../data/content.js";
 
@@ -145,6 +146,13 @@ export default function ServicesPage() {
           </div>
         </div>
       </section>
+
+      {/* Mobile sticky quote action */}
+      <MobileActionBar
+        href={waLink("your services")}
+        label="WhatsApp us your project →"
+        note="First estimate within a day"
+      />
     </div>
   );
 }
