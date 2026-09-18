@@ -146,3 +146,50 @@ create index if not exists idx_sr_service_type  on service_requests(service_type
 create index if not exists idx_sr_created_at    on service_requests(created_at desc);
 create index if not exists idx_claims_req_id    on claims(request_id);
 create index if not exists idx_images_req_id    on request_images(request_id);
+
+-- ============================================================
+-- RLS FIX MIGRATION (run this block alone any time posting or
+-- claiming fails with "violates row-level security policy").
+-- Safe to re-run: every statement is idempotent.
+-- ============================================================
+
+-- Anonymous posting/claiming must exist even if the top half of
+-- this file was only partially applied earlier.
+drop policy if exists "public_insert_pending" on service_requests;
+create policy "public_insert_pending" on service_requests
+  for insert with check (status = 'pending');
+
+drop policy if exists "public_read_open" on service_requests;
+create policy "public_read_open" on service_requests
+  for select using (status in ('open','in_progress','completed'));
+
+drop policy if exists "public_insert_images" on request_images;
+create policy "public_insert_images" on request_images
+  for insert with check (true);
+
+drop policy if exists "public_read_images" on request_images;
+create policy "public_read_images" on request_images
+  for select using (
+    request_id in (
+      select id from service_requests
+      where status in ('open','in_progress','completed')
+    )
+  );
+
+drop policy if exists "public_insert_claim" on claims;
+create policy "public_insert_claim" on claims
+  for insert with check (true);
+
+-- Photo uploads need a public bucket + storage policies
+-- (the app uploads to the "request-images" bucket).
+insert into storage.buckets (id, name, public)
+  values ('request-images', 'request-images', true)
+  on conflict (id) do update set public = true;
+
+drop policy if exists "public_upload_request_images" on storage.objects;
+create policy "public_upload_request_images" on storage.objects
+  for insert with check (bucket_id = 'request-images');
+
+drop policy if exists "public_read_request_images" on storage.objects;
+create policy "public_read_request_images" on storage.objects
+  for select using (bucket_id = 'request-images');

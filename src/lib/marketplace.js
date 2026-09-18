@@ -33,9 +33,14 @@ export async function getRequestById(id) {
 
 /** Submit a new service request */
 export async function submitRequest(formData, imageFiles = []) {
-  const { data, error } = await supabase
+  // Client-generated id: avoids INSERT+SELECT (RETURNING), which would
+  // evaluate SELECT policies on the new 'pending' row and fail RLS for
+  // anonymous users. INSERT policy (status='pending') still applies.
+  const requestId = crypto.randomUUID();
+  const { error } = await supabase
     .from("service_requests")
     .insert({
+      id: requestId,
       title: `${formData.serviceType} — ${formData.location}`,
       service_type: formData.serviceType,
       location: formData.location,
@@ -45,12 +50,9 @@ export async function submitRequest(formData, imageFiles = []) {
       whatsapp_number: formData.whatsapp,
       budget: formData.budget || null,
       status: "pending",
-    })
-    .select("id")
-    .single();
+    });
 
   if (error) throw error;
-  const requestId = data.id;
 
   // Upload images to Supabase Storage
   for (const file of imageFiles) {
@@ -72,9 +74,12 @@ export async function submitRequest(formData, imageFiles = []) {
 
 /** Submit a provider claim */
 export async function submitClaim(requestId, claimData) {
-  const { data, error } = await supabase
+  // Same RLS reasoning as submitRequest: client-side id, no RETURNING.
+  const claimId = crypto.randomUUID();
+  const { error } = await supabase
     .from("claims")
     .insert({
+      id: claimId,
       request_id: requestId,
       provider_name: claimData.name,
       whatsapp_number: claimData.whatsapp,
@@ -82,12 +87,10 @@ export async function submitClaim(requestId, claimData) {
       portfolio_url: claimData.portfolio || null,
       background: claimData.background,
       status: "pending",
-    })
-    .select("id")
-    .single();
+    });
 
   if (error) throw error;
-  return data.id;
+  return claimId;
 }
 
 // ─── WhatsApp ──────────────────────────────────────────────────────────────
