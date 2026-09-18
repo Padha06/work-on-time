@@ -8,12 +8,9 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
-dist
-dist-ssr
 *.local
-.env
-.env.*
-!.env.example
+# .env files are typically ignored, but user requested to commit it for Vercel
+!.env
 
 
 # Editor directories and files
