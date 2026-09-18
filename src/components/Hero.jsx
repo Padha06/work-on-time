@@ -1,6 +1,8 @@
 import { Suspense, lazy, useEffect, useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useNetworkStatus } from "react-adaptive-hooks/network";
+import { useSaveData } from "react-adaptive-hooks/save-data";
 import SampleTag from "./SampleTag.jsx";
 import { waLink } from "../data/content.js";
 
@@ -25,7 +27,13 @@ export default function Hero({ splineReady, onSplineReady }) {
     () => typeof window !== "undefined" && window.matchMedia("(max-width: 768px)").matches
   );
   const [splineFailed, setSplineFailed] = useState(false);
-  const useSpline = Boolean(SPLINE_URL) && !splineFailed;
+  // Adaptive loading: slow connections / data-saver get a static hero
+  // image instead of the ~1MB 3D scene + remote HDR environment.
+  const { effectiveConnectionType } = useNetworkStatus("4g");
+  const { saveData } = useSaveData();
+  const slowConnection =
+    saveData === true || ["slow-2g", "2g", "3g"].includes(effectiveConnectionType);
+  const useSpline = Boolean(SPLINE_URL) && !splineFailed && !slowConnection;
 
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -49,7 +57,7 @@ export default function Hero({ splineReady, onSplineReady }) {
   // and restores the section first. With useEffect the cleanup runs too late
   // and React crashes with "removeChild ... not a child of this node".
   useLayoutEffect(() => {
-    if (reduced || useSpline) return;
+    if (reduced || useSpline || slowConnection) return;
     const pinEnd = compact ? "+=100%" : "+=130%";
     const ctx = gsap.context(() => {
       ScrollTrigger.create({
@@ -76,7 +84,7 @@ export default function Hero({ splineReady, onSplineReady }) {
       );
     });
     return () => ctx.revert();
-  }, [reduced, useSpline, compact]);
+  }, [reduced, useSpline, slowConnection, compact]);
 
   return (
     <section ref={sectionRef} id="top" className="hero-grain relative flex min-h-[100svh] items-stretch overflow-hidden bg-charcoal text-cream">
@@ -89,10 +97,10 @@ export default function Hero({ splineReady, onSplineReady }) {
               onError={() => setSplineFailed(true)}
             />
           </Suspense>
-        ) : reduced ? (
+        ) : reduced || slowConnection ? (
           <img
             src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1600&auto=format&fit=crop"
-            alt="Sliding aluminum door, static hero image for reduced motion"
+            alt="Sliding aluminum door, static hero image for reduced motion or slow connections"
             className="h-full w-full object-cover opacity-70"
           />
         ) : (
@@ -131,7 +139,7 @@ export default function Hero({ splineReady, onSplineReady }) {
               WhatsApp photos →
             </a>
           </div>
-          {!reduced && !useSpline && (
+          {!reduced && !useSpline && !slowConnection && (
             <p className="mt-6 inline-flex items-center gap-2 text-[12px] font-bold uppercase tracking-[0.22em] text-cream/60">
               <span className="inline-block animate-[drift_2.2s_ease-in-out_infinite]">↓</span> Scroll — the door opens as you go
             </p>
