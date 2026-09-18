@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { adminGetAllRequests, approveRequest, rejectRequest, updateRequestStatus } from "../../lib/marketplace.js";
+import { adminGetAllRequests, approveRequest, rejectRequest, updateRequestStatus, deleteRequest } from "../../lib/marketplace.js";
 import { adminGetAllClaims } from "../../lib/marketplace.js";
 import { supabase } from "../../lib/supabase.js";
 import StatusBadge from "../../components/marketplace/StatusBadge.jsx";
@@ -58,6 +58,37 @@ export default function AdminRequests() {
   const paginated = requests.slice(page * PER_PAGE, (page + 1) * PER_PAGE);
   const totalPages = Math.ceil(requests.length / PER_PAGE);
 
+  // Export current list as Excel-compatible CSV (BOM keeps ₹ readable).
+  const exportCsv = () => {
+    const headers = ["id","title","service_type","location","description","urgency","contact_name","whatsapp_number","budget","status","claim_count","created_at","approved_at","completed_at"];
+    const esc = (v) => `"${String(v ?? "").replace(/"/g, '""')}"`;
+    const csv = "\uFEFF" + [headers.join(","), ...requests.map((r) => headers.map((h) => esc(r[h])).join(","))].join("\r\n");
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = `workontime-requests-${new Date().toISOString().slice(0, 10)}.csv`;
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 5000);
+  };
+
+  // Permanently delete ALL completed requests (rows cascade; photos removed).
+  const clearCompleted = async () => {
+    const { data } = await supabase.from("service_requests").select("id").eq("status", "completed");
+    const ids = (data || []).map((r) => r.id);
+    if (ids.length === 0) {
+      window.alert("No completed requests to delete.");
+      return;
+    }
+    if (!window.confirm(`Export a copy first if you need one.\n\nPermanently delete ${ids.length} completed request(s)? Photos and claims go too.`)) return;
+    setActioning(true);
+    for (const id of ids) {
+      await deleteRequest(id).catch(() => {});
+    }
+    setSelected(null);
+    await load();
+    setActioning(false);
+  };
+
   return (
     <div>
       <h1 className="font-display text-3xl font-semibold text-charcoal mb-6">Requests</h1>
@@ -75,6 +106,15 @@ export default function AdminRequests() {
           {SERVICE_TYPES.map((s) => <option key={s}>{s}</option>)}
         </select>
         <span className="self-center text-sm text-graphite/60">{requests.length} result{requests.length !== 1 ? "s" : ""}</span>
+        <span className="flex-1" />
+        <button onClick={exportCsv}
+          className="rounded-full border border-charcoal/15 px-4 py-2 text-sm font-semibold text-charcoal transition hover:bg-charcoal hover:text-white">
+          Export Excel (CSV)
+        </button>
+        <button onClick={clearCompleted} disabled={actioning}
+          className="rounded-full border border-red-300 px-4 py-2 text-sm font-semibold text-red-600 transition hover:bg-red-50 disabled:opacity-40">
+          Clear completed
+        </button>
       </div>
 
       {/* Table */}
@@ -124,6 +164,14 @@ export default function AdminRequests() {
                         {r.status === "open" && (
                           <button onClick={() => action(updateRequestStatus, r.id, "in_progress")}
                             className="rounded-full bg-blue-600 px-2.5 py-1 text-[11px] font-semibold text-white hover:bg-blue-700">Start</button>
+                        )}
+                        {r.status === "completed" && (
+                          <button onClick={async () => {
+                            if (!window.confirm(`Delete "${r.title}" permanently? Export first if you need a copy.`)) return;
+                            await action(deleteRequest, r.id);
+                            setSelected((s) => (s?.id === r.id ? null : s));
+                          }}
+                            className="rounded-full border border-red-300 px-2.5 py-1 text-[11px] font-semibold text-red-600 hover:bg-red-50">Delete</button>
                         )}
                       </div>
                     </td>

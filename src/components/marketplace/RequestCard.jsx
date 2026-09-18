@@ -57,13 +57,13 @@ export default function RequestCard({ request }) {
         </div>
       </div>
 
-      {/* CTA */}
+      {/* CTA — claim only when open, otherwise view-only */}
       <div className="border-t border-charcoal/8 px-5 py-3">
         <Link
           to={`/marketplace/request/${request.id}`}
           className="flex min-h-[44px] w-full items-center justify-center rounded-full bg-charcoal py-2.5 text-center text-[13px] font-semibold text-white transition hover:bg-accent"
         >
-          Claim This Work →
+          {request.status === "open" ? "Claim This Work →" : "View Details →"}
         </Link>
       </div>
     </article>

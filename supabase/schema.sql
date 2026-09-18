@@ -194,6 +194,13 @@ drop policy if exists "public_read_request_images" on storage.objects;
 create policy "public_read_request_images" on storage.objects
   for select using (bucket_id = 'request-images');
 
+drop policy if exists "admin_delete_request_images" on storage.objects;
+create policy "admin_delete_request_images" on storage.objects
+  for delete using (
+    bucket_id = 'request-images'
+    and auth.uid() in (select id from admin_users)
+  );
+
 -- ============================================================
 -- PORTFOLIO (admin manage-portfolio page)
 -- Table was missing from earlier schema versions: uploads failed

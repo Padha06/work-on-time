@@ -4,12 +4,13 @@ const WA_NUMBER = import.meta.env.VITE_WHATSAPP_NUMBER || "15551234567";
 
 // ─── Requests ──────────────────────────────────────────────────────────────
 
-/** Fetch all publicly visible requests with optional filters */
+/** Fetch all publicly visible requests with optional filters.
+    Only open + in_progress show on the marketplace; completed is hidden. */
 export async function getOpenRequests({ serviceType, urgency, search } = {}) {
   let q = supabase
     .from("service_requests")
     .select("id, title, service_type, location, urgency, description, budget, status, claim_count, created_at")
-    .in("status", ["open", "in_progress", "completed"])
+    .in("status", ["open", "in_progress"])
     .order("created_at", { ascending: false });
 
   if (serviceType && serviceType !== "All") q = q.eq("service_type", serviceType);
@@ -189,6 +190,23 @@ export async function approveRequest(id) {
 /** Reject a pending request */
 export async function rejectRequest(id) {
   const { error } = await supabase.from("service_requests").update({ status: "rejected" }).eq("id", id);
+  if (error) throw error;
+}
+
+/** Delete a request + its claims/images rows (cascade) and stored photos.
+    Used by admin to clear completed work and free space. */
+export async function deleteRequest(id) {
+  const { data: imgs } = await supabase
+    .from("request_images")
+    .select("image_url")
+    .eq("request_id", id);
+  const paths = (imgs || [])
+    .map((r) => String(r.image_url).split("/request-images/")[1])
+    .filter(Boolean);
+  if (paths.length) {
+    await supabase.storage.from("request-images").remove(paths);
+  }
+  const { error } = await supabase.from("service_requests").delete().eq("id", id);
   if (error) throw error;
 }
 
