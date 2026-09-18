@@ -18,6 +18,14 @@ const PROVIDER_STEPS = [
   { n: "06", title: "Get assigned & complete the job", text: "Once selected, the request is assigned to you. Do the work and earn a completed status." },
 ];
 
+const FAQS = [
+  { q: "Do I need an account to post or claim?", a: "No. Both sides work with just a name and a WhatsApp number. Posting takes about 2 minutes, claiming about 1." },
+  { q: "How fast is my request approved?", a: "An admin reviews every request within 24 hours. You'll see it go live on the marketplace as OPEN once approved." },
+  { q: "How do providers contact me?", a: "Each interested provider sends you a prefilled WhatsApp message introducing themselves — your number is only shared through claims, never published." },
+  { q: "What does it cost to use the marketplace?", a: "Posting a request is free. You agree the price directly with your chosen provider on WhatsApp — no platform cut in this demo build." },
+  { q: "What if something goes wrong with a job?", a: "Talk to the provider first — most issues are scope misunderstandings. For anything unresolved, reach Work On Time on WhatsApp and we'll mediate." },
+];
+
 function StepList({ steps, color }) {
   return (
     <div className="space-y-4">
@@ -37,6 +45,7 @@ function StepList({ steps, color }) {
 export default function HowItWorksPage() {
   return (
     <div className="pt-16">
+      {/* Header — audience picker */}
       <section className="bg-charcoal py-20 text-cream">
         <div className="mx-auto max-w-content px-4 sm:px-6">
           <div className="reveal max-w-2xl">
@@ -46,8 +55,20 @@ export default function HowItWorksPage() {
               <span className="text-aluminum">No account needed.</span>
             </h1>
             <p className="mt-4 text-cream/70">
-              The Work On Time marketplace works for both people who need a job done and skilled providers who want work.
+              One flow for people who need a job done, one for skilled providers who want work. Pick your side:
             </p>
+          </div>
+          <div className="reveal mt-8 grid gap-4 sm:grid-cols-2">
+            <a href="#seekers" className="group rounded-2xl border border-white/10 bg-white/5 p-6 transition hover:bg-white/10">
+              <p className="text-[12px] font-bold uppercase tracking-widest text-accent">I need work done</p>
+              <p className="font-display mt-2 text-2xl font-semibold">Post a request, compare providers ↓</p>
+              <p className="mt-2 text-sm text-cream/60 transition group-hover:text-cream/80">6 steps · about 2 minutes to start</p>
+            </a>
+            <a href="#providers" className="group rounded-2xl border border-white/10 bg-white/5 p-6 transition hover:bg-white/10">
+              <p className="text-[12px] font-bold uppercase tracking-widest text-aluminum">I'm a provider</p>
+              <p className="font-display mt-2 text-2xl font-semibold">Browse work, claim it, earn ↓</p>
+              <p className="mt-2 text-sm text-cream/60 transition group-hover:text-cream/80">6 steps · about 1 minute to claim</p>
+            </a>
           </div>
         </div>
       </section>
@@ -56,7 +77,7 @@ export default function HowItWorksPage() {
         <div className="mx-auto max-w-content px-4 sm:px-6">
           <div className="reveal grid gap-12 lg:grid-cols-2">
             {/* Seekers */}
-            <div className="rounded-3xl bg-white border border-charcoal/8 p-8 shadow-sm">
+            <div id="seekers" className="rounded-3xl bg-white border border-charcoal/8 p-8 shadow-sm scroll-mt-24">
               <div className="mb-6">
                 <span className="rounded-full bg-accent/10 px-3 py-1 text-[12px] font-bold uppercase tracking-widest text-accent">
                   For People Who Need Work Done
@@ -77,7 +98,7 @@ export default function HowItWorksPage() {
             </div>
 
             {/* Providers */}
-            <div className="rounded-3xl bg-charcoal text-cream p-8 shadow-sm">
+            <div id="providers" className="rounded-3xl bg-charcoal text-cream p-8 shadow-sm scroll-mt-24">
               <div className="mb-6">
                 <span className="rounded-full bg-white/10 px-3 py-1 text-[12px] font-bold uppercase tracking-widest text-aluminum">
                   For Service Providers
@@ -140,6 +161,31 @@ export default function HowItWorksPage() {
                 </div>
               )
             )}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="section-pad bg-cream">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6">
+          <div className="reveal max-w-2xl">
+            <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-accent">Questions</p>
+            <h2 className="font-display mt-2 text-4xl font-semibold tracking-tight text-charcoal md:text-5xl">
+              Asked all the time.
+            </h2>
+          </div>
+          <div className="mt-8 grid gap-3">
+            {FAQS.map((f) => (
+              <details key={f.q} className="reveal group rounded-2xl border border-charcoal/10 bg-white px-5 py-4 shadow-sm">
+                <summary className="cursor-pointer list-none font-bold text-charcoal marker:hidden [&::-webkit-details-marker]:hidden">
+                  <span className="flex items-center justify-between gap-4">
+                    {f.q}
+                    <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-charcoal/5 text-lg leading-none transition group-open:rotate-45">+</span>
+                  </span>
+                </summary>
+                <p className="mt-2 text-sm leading-relaxed text-graphite">{f.a}</p>
+              </details>
+            ))}
           </div>
         </div>
       </section>
