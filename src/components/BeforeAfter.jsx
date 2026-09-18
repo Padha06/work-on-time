@@ -1,15 +1,19 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { BEFORE_AFTER } from "../data/content.js";
 
 /** Draggable before/after divider — touch + mouse + keyboard. Spec 5.4. */
 function Compare({ item }) {
   const [pos, setPos] = useState(50);
+  const [loaded, setLoaded] = useState(0);
   const box = useRef(null);
+  const dragging = useRef(false);
+  const ready = loaded >= 2;
 
   const setFromClientX = (clientX) => {
     const r = box.current?.getBoundingClientRect();
-    if (!r) return;
-    setPos(Math.min(96, Math.max(4, ((clientX - r.left) / r.width) * 100)));
+    if (!r || r.width === 0) return;
+    // Full travel: 0–100 so the divider reaches both edges.
+    setPos(Math.min(100, Math.max(0, ((clientX - r.left) / r.width) * 100)));
   };
 
   // Real photo pair when supplied (item.beforeImg), otherwise the same photo
@@ -17,33 +21,55 @@ function Compare({ item }) {
   const beforeSrc = item.beforeImg || item.img;
   const beforeStyle = item.beforeImg ? undefined : { filter: item.beforeFilter };
 
+  const onLoad = () => setLoaded((n) => n + 1);
+
   return (
     <div
       ref={box}
       className="relative h-[320px] select-none overflow-hidden rounded-2xl bg-charcoal sm:h-[440px]"
+      style={{ touchAction: "pan-y" }}
       onPointerDown={(e) => {
+        dragging.current = true;
         e.currentTarget.setPointerCapture?.(e.pointerId);
         setFromClientX(e.clientX);
-        const move = (ev) => setFromClientX(ev.clientX);
-        const up = () => {
-          window.removeEventListener("pointermove", move);
-          window.removeEventListener("pointerup", up);
-        };
-        window.addEventListener("pointermove", move);
-        window.addEventListener("pointerup", up);
       }}
-      onTouchMove={(e) => setFromClientX(e.touches[0].clientX)}
+      onPointerMove={(e) => {
+        if (dragging.current) setFromClientX(e.clientX);
+      }}
+      onPointerUp={() => { dragging.current = false; }}
+      onPointerCancel={() => { dragging.current = false; }}
     >
+      {/* Loading shimmer — covers both images until BOTH are decoded,
+          so before/after always appear together, never one-first. */}
+      {!ready && (
+        <div className="absolute inset-0 animate-pulse bg-white/5" aria-hidden="true">
+          <div className="grid h-full place-items-center text-sm font-semibold text-cream/40">
+            Loading photos…
+          </div>
+        </div>
+      )}
       {/* AFTER (full) */}
-      <img src={item.img} alt={`${item.title} — after`} loading="lazy" draggable={false} className="absolute inset-0 h-full w-full object-cover" />
+      <img
+        src={item.img}
+        alt={`${item.title} — after`}
+        loading="eager"
+        fetchPriority="high"
+        decoding="async"
+        draggable={false}
+        onLoad={onLoad}
+        className={`absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-300 ${ready ? "opacity-100" : "opacity-0"}`}
+      />
       {/* BEFORE (clipped left side) */}
       <div className="absolute inset-0" style={{ clipPath: `inset(0 ${100 - pos}% 0 0)` }}>
         <img
           src={beforeSrc}
           alt={`${item.title} — before`}
-          loading="lazy"
+          loading="eager"
+          fetchPriority="high"
+          decoding="async"
           draggable={false}
-          className="h-full w-full object-cover"
+          onLoad={onLoad}
+          className={`h-full w-full object-cover object-center transition-opacity duration-300 ${ready ? "opacity-100" : "opacity-0"}`}
           style={beforeStyle}
         />
         {!item.beforeImg && <div className="absolute inset-0 bg-charcoal/20" />}
@@ -71,6 +97,18 @@ function Compare({ item }) {
 export default function BeforeAfter() {
   const [i, setI] = useState(0);
   const item = BEFORE_AFTER[i];
+
+  // Preload every before/after pair up front (small local files) so
+  // switching items is instant and both sides are always cached together.
+  useEffect(() => {
+    BEFORE_AFTER.forEach((b) => {
+      [b.img, b.beforeImg].forEach((src) => {
+        if (!src) return;
+        const im = new Image();
+        im.src = src;
+      });
+    });
+  }, []);
   return (
     <section id="before-after" className="section-pad bg-charcoal text-cream">
       <div className="mx-auto max-w-content px-4 sm:px-6">
