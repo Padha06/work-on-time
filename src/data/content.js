@@ -10,6 +10,10 @@ export const WHATSAPP_NUMBER = `+${WHATSAPP_NUMBER_LINK}`;
 export const ADDRESS =
   "Last Auto Stand, Palpara, Pirpukhur Road, Bansdroni, Kolkata 700070";
 
+// Directions link (no API key needed) — address click opens maps.
+export const MAPS_URL =
+  "https://www.google.com/maps/search/?api=1&query=Last+Auto+Stand+Palpara+Pirpukhur+Road+Bansdroni+Kolkata+700070";
+
 export const waLink = (service = "your services") =>
   `https://wa.me/${WHATSAPP_NUMBER_LINK}?text=${encodeURIComponent(
     `Hi, I saw the Work On Time website and I'm interested in ${service}. Please send me a quote.`

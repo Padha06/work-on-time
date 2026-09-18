@@ -109,7 +109,7 @@ export default function Hero({ splineReady, onSplineReady }) {
           />
         ) : (
           <Suspense fallback={<div className="grid h-full place-items-center text-cream/60">Loading 3D…</div>}>
-            <SlidingDoorScene progressRef={progressRef} frameColor="#C9CDD2" glassOpacity={0.3} glassColor="#cfe3e8" compact={compact} />
+            <SlidingDoorScene progressRef={progressRef} frameColor="#C9CDD2" glassOpacity={0.3} glassColor="#cfe3e8" compact={compact} idleMotion={compact} />
           </Suspense>
         )}
       </div>

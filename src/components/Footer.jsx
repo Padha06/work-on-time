@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ADDRESS } from "../data/content.js";
+import { ADDRESS, MAPS_URL } from "../data/content.js";
 
 export default function Footer() {
   const toTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
@@ -13,7 +13,7 @@ export default function Footer() {
             Custom furniture, honest repairs &amp; sliding aluminum doors — measured, built and installed
             by one team in Bansdroni, Kolkata.
           </p>
-          <p className="mt-2 max-w-md text-[12px] leading-relaxed text-cream/40">{ADDRESS}</p>
+          <a href={MAPS_URL} target="_blank" rel="noreferrer" className="mt-2 block max-w-md text-[12px] leading-relaxed text-cream/40 hover:text-cream hover:underline">{ADDRESS} ↗</a>
         </div>
         <nav className="flex flex-wrap gap-x-5 gap-y-2 text-sm" aria-label="Footer">
           <Link to="/services" className="inline-block py-2 hover:text-cream">Services</Link>

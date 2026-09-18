@@ -71,14 +71,18 @@ function Panel({ side, frameColor, glassOpacity, glassColor }) {
   );
 }
 
-function DoorRig({ progress, frameColor = "#C9CDD2", glassOpacity = 0.3, glassColor = "#cfe3e8", travel = TRAVEL, rigScale = 1 }) {
+function DoorRig({ progress, frameColor = "#C9CDD2", glassOpacity = 0.3, glassColor = "#cfe3e8", travel = TRAVEL, rigScale = 1, idle = false }) {
   const left = useRef();
   const right = useRef();
   const target = useRef(0);
 
   useFrame((state, dt) => {
-    // progress: 0 = closed (panels meet at centre), 1 = open (panels slid apart).
-    target.current += ((progress?.current ?? 0) - target.current) * Math.min(1, dt * 3.5);
+    // Idle mode (mobile, no scroll pin): gentle open/close breathing loop
+    // so the door still feels alive without trapping scroll.
+    const src = idle
+      ? (Math.sin(state.clock.elapsedTime * 0.55) * 0.5 + 0.5) * 0.85
+      : (progress?.current ?? 0);
+    target.current += (src - target.current) * Math.min(1, dt * 3.5);
     const t = Math.min(1, Math.max(0, target.current));
     if (left.current) left.current.position.x = -CLOSED_X - t * travel;
     if (right.current) right.current.position.x = CLOSED_X + t * travel;
@@ -145,6 +149,7 @@ export default function SlidingDoorScene({
   glassOpacity,
   glassColor,
   compact = false,
+  idleMotion = false,
   dpr,
 }) {
   return (
@@ -166,6 +171,7 @@ export default function SlidingDoorScene({
           glassColor={glassColor}
           travel={compact ? 0.95 : TRAVEL}
           rigScale={compact ? 0.8 : 1}
+          idle={idleMotion}
         />
       </Room>
       {compact ? (

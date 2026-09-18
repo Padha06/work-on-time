@@ -1,6 +1,6 @@
 import Contact from "../components/Contact.jsx";
 import { Link } from "react-router-dom";
-import { waLink, ADDRESS } from "../data/content.js";
+import { waLink, ADDRESS, MAPS_URL } from "../data/content.js";
 
 const RESPONSE_TIMES = [
   { channel: "WhatsApp photos", time: "~1 hour", note: "Photos + rough size gets you a first estimate." },
@@ -91,11 +91,15 @@ export default function ContactPage() {
             <h2 className="font-display mt-2 text-4xl font-semibold tracking-tight text-charcoal md:text-5xl">
               Near Last Auto Stand, Bansdroni.
             </h2>
-            <p className="mt-3 max-w-md text-graphite">{ADDRESS}</p>
+            <p className="mt-3 max-w-md text-graphite">
+              <a href={MAPS_URL} target="_blank" rel="noreferrer" className="font-semibold text-charcoal hover:text-accent hover:underline">
+                {ADDRESS} ↗
+              </a>
+            </p>
             <p className="mt-2 text-sm text-graphite/70">Mon–Sat, 10am–7pm · Call or WhatsApp before visiting so someone's there.</p>
             <div className="mt-6 flex flex-wrap gap-3">
               <a
-                href="https://www.google.com/maps/search/?api=1&query=Last+Auto+Stand+Palpara+Pirpukhur+Road+Bansdroni+Kolkata+700070"
+                href={MAPS_URL}
                 target="_blank"
                 rel="noreferrer"
                 className="rounded-full bg-charcoal px-6 py-3 text-[15px] font-semibold text-white transition hover:bg-graphite"
