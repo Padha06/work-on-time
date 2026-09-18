@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Outlet, useLocation } from "react-router-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
@@ -33,10 +33,12 @@ import Footer from "./components/Footer.jsx";
 gsap.registerPlugin(ScrollTrigger);
 
 /** Shared layout wrapper — provides Lenis smooth scroll + GSAP reveals */
-function Layout({ children }) {
+function Layout() {
+  const location = useLocation();
+
   useEffect(() => {
-    window.gsap = gsap;
-    window.ScrollTrigger = ScrollTrigger;
+    // Scroll to top on route change
+    window.scrollTo(0, 0);
 
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     let lenis = null;
@@ -59,16 +61,19 @@ function Layout({ children }) {
     };
     document.addEventListener("click", onClick);
 
-    // Staggered reveal animations
+    // Staggered reveal animations (re-run on route change)
     const ctx = gsap.context(() => {
-      ScrollTrigger.refresh();
-      gsap.utils.toArray(".reveal").forEach((el) => {
-        gsap.set(el, { opacity: 0, y: 30 });
-        gsap.to(el, {
-          opacity: 1, y: 0, duration: 0.8, ease: "power3.out",
-          scrollTrigger: { trigger: el, start: "top 88%", once: true },
+      // Small timeout to let the DOM paint the new route
+      setTimeout(() => {
+        ScrollTrigger.refresh();
+        gsap.utils.toArray(".reveal").forEach((el) => {
+          gsap.set(el, { opacity: 0, y: 30 });
+          gsap.to(el, {
+            opacity: 1, y: 0, duration: 0.8, ease: "power3.out",
+            scrollTrigger: { trigger: el, start: "top 88%", once: true },
+          });
         });
-      });
+      }, 100);
     });
 
     return () => {
@@ -77,7 +82,7 @@ function Layout({ children }) {
       lenis?.destroy();
       ScrollTrigger.getAll().forEach((t) => t.kill());
     };
-  }, []);
+  }, [location.pathname]);
 
   return (
     <div className="min-h-screen bg-cream font-ui text-charcoal">
@@ -85,7 +90,7 @@ function Layout({ children }) {
         Skip to content
       </a>
       <Navbar />
-      <main id="main-content">{children}</main>
+      <main id="main-content"><Outlet /></main>
       <Footer />
     </div>
   );
