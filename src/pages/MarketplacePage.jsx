@@ -38,7 +38,7 @@ export default function MarketplacePage() {
         <div className="mx-auto grid max-w-content items-center gap-10 px-4 sm:px-6 lg:grid-cols-[1.1fr_0.9fr]">
           <div className="reveal max-w-2xl">
             <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-accent">Marketplace</p>
-            <h1 className="font-display mt-2 text-5xl font-semibold tracking-tight text-charcoal md:text-6xl">
+            <h1 className="font-display mt-2 text-4xl sm:text-5xl font-semibold tracking-tight text-charcoal md:text-6xl">
               Need a job done? Post it.<br />
               Can do the job? Claim it.
             </h1>

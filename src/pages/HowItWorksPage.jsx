@@ -50,7 +50,7 @@ export default function HowItWorksPage() {
         <div className="mx-auto max-w-content px-4 sm:px-6">
           <div className="reveal max-w-2xl">
             <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-accent">How It Works</p>
-            <h1 className="font-display mt-2 text-5xl font-semibold tracking-tight md:text-6xl">
+            <h1 className="font-display mt-2 text-4xl sm:text-5xl font-semibold tracking-tight md:text-6xl">
               Simple. WhatsApp-first.<br />
               <span className="text-aluminum">No account needed.</span>
             </h1>

@@ -125,9 +125,9 @@ export default function BeforeAfter() {
           <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
             <p className="text-[15px] font-medium text-cream/90">{item.title}</p>
             <div className="flex gap-2">
-              <button onClick={() => setI((i - 1 + BEFORE_AFTER.length) % BEFORE_AFTER.length)} className="rounded-full border border-white/20 px-4 py-2 text-sm font-semibold hover:bg-white/10" aria-label="Previous repair">← Prev</button>
+              <button onClick={() => setI((i - 1 + BEFORE_AFTER.length) % BEFORE_AFTER.length)} className="inline-flex min-h-[44px] items-center rounded-full border border-white/20 px-4 py-2 text-sm font-semibold hover:bg-white/10" aria-label="Previous repair">← Prev</button>
               <span className="px-2 py-2 text-sm text-cream/60">{i + 1} / {BEFORE_AFTER.length}</span>
-              <button onClick={() => setI((i + 1) % BEFORE_AFTER.length)} className="rounded-full border border-white/20 px-4 py-2 text-sm font-semibold hover:bg-white/10" aria-label="Next repair">Next →</button>
+              <button onClick={() => setI((i + 1) % BEFORE_AFTER.length)} className="inline-flex min-h-[44px] items-center rounded-full border border-white/20 px-4 py-2 text-sm font-semibold hover:bg-white/10" aria-label="Next repair">Next →</button>
             </div>
           </div>
           <div className="mt-4 flex gap-2 overflow-x-auto pb-1">

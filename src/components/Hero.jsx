@@ -109,7 +109,7 @@ export default function Hero({ splineReady, onSplineReady }) {
           <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-[12px] font-semibold uppercase tracking-[0.16em] text-aluminum">
             Furniture · Repair · Aluminum doors
           </p>
-          <h1 className="font-display text-[42px] font-semibold leading-[1.02] tracking-tight sm:text-6xl md:text-7xl">
+          <h1 className="font-display text-4xl font-semibold leading-[1.02] tracking-tight sm:text-6xl md:text-7xl">
             Built like furniture.
             <br />
             <span className="text-aluminum">Sealed like engineering.</span>
@@ -133,7 +133,7 @@ export default function Hero({ splineReady, onSplineReady }) {
           </div>
           {!reduced && !useSpline && (
             <p className="mt-6 inline-flex items-center gap-2 text-[12px] font-bold uppercase tracking-[0.22em] text-cream/60">
-              <span className="inline-block animate-bounce">↓</span> Scroll — the door opens as you go
+              <span className="inline-block animate-[drift_2.2s_ease-in-out_infinite]">↓</span> Scroll — the door opens as you go
             </p>
           )}
           {!SPLINE_URL && (

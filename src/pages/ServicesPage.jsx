@@ -24,7 +24,7 @@ export default function ServicesPage() {
         <div className="mx-auto grid max-w-content items-center gap-10 px-4 sm:px-6 lg:grid-cols-[1.05fr_0.95fr]">
           <div className="reveal max-w-2xl">
             <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-accent">Our Services</p>
-            <h1 className="font-display mt-2 text-5xl font-semibold tracking-tight md:text-6xl">
+            <h1 className="font-display mt-2 text-4xl sm:text-5xl font-semibold tracking-tight md:text-6xl">
               Four services.<br />
               <span className="text-aluminum">One phone number.</span>
             </h1>

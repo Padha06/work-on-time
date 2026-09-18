@@ -75,7 +75,7 @@ export default function Navbar() {
 
         {/* Mobile hamburger */}
         <button
-          className="grid h-10 w-10 place-items-center rounded-lg border border-white/15 lg:hidden"
+          className="grid h-11 w-11 place-items-center rounded-lg border border-white/15 lg:hidden"
           onClick={() => setOpen((v) => !v)}
           aria-expanded={open}
           aria-label="Toggle menu"

@@ -23,7 +23,7 @@ export default function AboutPage() {
         <div className="mx-auto max-w-content px-4 sm:px-6">
           <div className="reveal max-w-3xl">
             <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-accent">About Us</p>
-            <h1 className="font-display mt-2 text-5xl font-semibold tracking-tight text-charcoal md:text-6xl">
+            <h1 className="font-display mt-2 text-4xl sm:text-5xl font-semibold tracking-tight text-charcoal md:text-6xl">
               One team, from first measurement to final walkthrough.
             </h1>
             <p className="mt-4 max-w-xl text-graphite">

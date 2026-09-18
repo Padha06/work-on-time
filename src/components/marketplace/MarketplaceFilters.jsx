@@ -60,7 +60,7 @@ export default function MarketplaceFilters({ onResults, onLoading }) {
           <select
             value={serviceType}
             onChange={(e) => setServiceType(e.target.value)}
-            className="w-full rounded-xl border border-charcoal/15 bg-white px-4 py-2.5 text-[14px] outline-none focus:border-accent"
+            className="w-full rounded-xl border border-charcoal/15 bg-white px-4 py-3 text-[14px] outline-none focus:border-accent"
           >
             {SERVICE_TYPES.map((t) => <option key={t}>{t}</option>)}
           </select>
@@ -70,7 +70,7 @@ export default function MarketplaceFilters({ onResults, onLoading }) {
           <select
             value={urgency}
             onChange={(e) => setUrgency(e.target.value)}
-            className="w-full rounded-xl border border-charcoal/15 bg-white px-4 py-2.5 text-[14px] outline-none focus:border-accent capitalize"
+            className="w-full rounded-xl border border-charcoal/15 bg-white px-4 py-3 text-[14px] outline-none focus:border-accent capitalize"
           >
             {URGENCIES.map((u) => <option key={u} value={u} className="capitalize">{u === "All" ? "All" : u.charAt(0).toUpperCase() + u.slice(1)}</option>)}
           </select>
