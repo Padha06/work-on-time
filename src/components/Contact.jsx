@@ -7,7 +7,6 @@ export default function Contact() {
 
   const submit = (e) => {
     e.preventDefault();
-    console.log("[demo quote request]", form); // no backend for the demo per spec 5.10
     setSent(true);
   };
 

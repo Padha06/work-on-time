@@ -208,7 +208,7 @@ export default function PostRequestPage() {
               </div>
               <div className="grid gap-1.5">
                 <label className="text-[13px] font-bold text-charcoal">Phone / WhatsApp *</label>
-                <input value={form.whatsapp} onChange={set("whatsapp")} placeholder="+254 7XX XXX XXX" inputMode="tel"
+                <input value={form.whatsapp} onChange={set("whatsapp")} placeholder="+91 7XX XXX XXX" inputMode="tel"
                   className={inputClass("whatsapp")} />
                 {errors.whatsapp && <p className="text-sm text-red-600" role="alert">{errors.whatsapp}</p>}
               </div>

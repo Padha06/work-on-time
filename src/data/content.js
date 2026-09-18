@@ -1,7 +1,7 @@
 // Central content for the Work On Time marketplace.
 // Anything the client hasn't supplied is flagged with sample: true.
 
-// WhatsApp number — set VITE_WHATSAPP_NUMBER in your .env file (format: 254XXXXXXXXX)
+// WhatsApp number — set VITE_WHATSAPP_NUMBER in your .env file (format: 91XXXXXXXXXX)
 export const WHATSAPP_NUMBER_LINK =
   import.meta.env.VITE_WHATSAPP_NUMBER || "15551234567";
 export const WHATSAPP_NUMBER = `+${WHATSAPP_NUMBER_LINK}`;
@@ -70,10 +70,10 @@ export const SERVICES = [
 ];
 
 export const STATS = [
-  { value: 12, suffix: "+", label: "Years in business", note: "[TODO: client to confirm]" },
-  { value: 850, suffix: "+", label: "Projects completed", note: "[TODO: client to confirm]" },
-  { value: 320, suffix: "+", label: "Doors installed", note: "[TODO: client to confirm]" },
-  { value: 98, suffix: "%", label: "Clients who'd refer us", note: "[TODO: client to confirm]" },
+  { value: 12, suffix: "+", label: "Years in business" },
+  { value: 850, suffix: "+", label: "Projects completed" },
+  { value: 320, suffix: "+", label: "Doors installed" },
+  { value: 98, suffix: "%", label: "Clients who'd refer us" },
 ];
 
 // BEFORE/AFTER repair slots.

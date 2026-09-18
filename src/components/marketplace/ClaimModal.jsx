@@ -101,7 +101,7 @@ export default function ClaimModal({ request, onClose }) {
               </div>
               <div className="grid gap-1.5">
                 <label className="text-[13px] font-bold text-charcoal">WhatsApp Number *</label>
-                <input required value={form.whatsapp} onChange={set("whatsapp")} placeholder="+254 7XX XXX XXX" inputMode="tel"
+                <input required value={form.whatsapp} onChange={set("whatsapp")} placeholder="+91 7XX XXX XXX" inputMode="tel"
                   className="rounded-xl border border-charcoal/15 px-4 py-3 text-base outline-none focus:border-accent" />
               </div>
               <div className="grid gap-1.5">
