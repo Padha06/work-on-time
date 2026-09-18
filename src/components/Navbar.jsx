@@ -52,6 +52,12 @@ export default function Navbar() {
         {/* Desktop CTAs */}
         <div className="hidden items-center gap-2 lg:flex">
           <Link
+            to="/admin/login"
+            className="rounded-full px-4 py-2 text-[13px] font-semibold text-cream/50 transition hover:text-white"
+          >
+            Admin
+          </Link>
+          <Link
             to="/post-request"
             className="rounded-full bg-accent px-4 py-2 text-sm font-semibold text-white transition hover:brightness-110"
           >
@@ -112,6 +118,13 @@ export default function Navbar() {
             >
               WhatsApp us
             </a>
+            <Link
+              to="/admin/login"
+              onClick={close}
+              className="mt-2 rounded-lg px-3 py-2 text-center text-[13px] font-medium text-cream/40"
+            >
+              Admin Dashboard
+            </Link>
           </div>
         </nav>
       )}

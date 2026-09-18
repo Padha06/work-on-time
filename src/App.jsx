@@ -42,14 +42,19 @@ function Layout() {
 
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     let lenis = null;
+    let rafId = null;
+
     if (!reduced) {
       lenis = new Lenis({ lerp: 0.1, smoothWheel: true });
       lenis.on("scroll", ScrollTrigger.update);
-      const raf = (t) => { lenis.raf(t); requestAnimationFrame(raf); };
-      requestAnimationFrame(raf);
+      const raf = (t) => {
+        lenis.raf(t);
+        rafId = requestAnimationFrame(raf);
+      };
+      rafId = requestAnimationFrame(raf);
     }
 
-    // Smooth anchor scroll (hash links)
+    // Smooth anchor scroll
     const onClick = (e) => {
       const a = e.target.closest?.('a[href^="#"]');
       if (!a) return;
@@ -61,10 +66,10 @@ function Layout() {
     };
     document.addEventListener("click", onClick);
 
-    // Staggered reveal animations (re-run on route change)
-    const ctx = gsap.context(() => {
-      // Small timeout to let the DOM paint the new route
-      setTimeout(() => {
+    // Staggered reveal animations
+    let ctx;
+    const timeout = setTimeout(() => {
+      ctx = gsap.context(() => {
         ScrollTrigger.refresh();
         gsap.utils.toArray(".reveal").forEach((el) => {
           gsap.set(el, { opacity: 0, y: 30 });
@@ -73,13 +78,15 @@ function Layout() {
             scrollTrigger: { trigger: el, start: "top 88%", once: true },
           });
         });
-      }, 100);
-    });
+      });
+    }, 50);
 
     return () => {
+      clearTimeout(timeout);
       document.removeEventListener("click", onClick);
-      ctx.revert();
-      lenis?.destroy();
+      if (ctx) ctx.revert();
+      if (lenis) lenis.destroy();
+      if (rafId) cancelAnimationFrame(rafId);
       ScrollTrigger.getAll().forEach((t) => t.kill());
     };
   }, [location.pathname]);
