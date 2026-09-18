@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import Hero from "../components/Hero.jsx";
 import TrustStrip from "../components/TrustStrip.jsx";
-import { SERVICES, PORTFOLIO, waLink } from "../data/content.js";
+import Testimonials from "../components/Testimonials.jsx";
+import { SERVICES, PORTFOLIO, BEFORE_AFTER, waLink } from "../data/content.js";
 
 // Marketplace preview — static illustrative cards (real data on /marketplace)
 const PREVIEW_REQUESTS = [
@@ -52,6 +53,39 @@ export default function HomePage() {
               </Link>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ── Repair proof teaser (real before/after) ────────────────── */}
+      <section className="section-pad bg-white">
+        <div className="mx-auto max-w-content px-4 sm:px-6">
+          <div className="reveal flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <h2 className="font-display text-4xl font-semibold tracking-tight text-charcoal md:text-5xl">
+                See the comeback.
+              </h2>
+              <p className="mt-3 max-w-xl text-graphite">
+                Real repair transformations from our workshop — tired &amp; damaged on the left, handed back on the right.
+              </p>
+            </div>
+            <Link to="/services" className="text-sm font-semibold text-accent hover:underline">
+              Try the slider →
+            </Link>
+          </div>
+          <div className="reveal mt-8 grid grid-cols-2 gap-4">
+            {[
+              { src: BEFORE_AFTER[0].beforeImg, label: "Before", tone: "bg-black/60" },
+              { src: BEFORE_AFTER[0].img, label: "After", tone: "bg-accent" },
+            ].map((p) => (
+              <figure key={p.label} className="relative overflow-hidden rounded-2xl border border-charcoal/10 shadow-sm">
+                <img src={p.src} alt={`${BEFORE_AFTER[0].title} — ${p.label.toLowerCase()}`} loading="lazy" className="h-56 w-full object-cover sm:h-72" />
+                <span className={`absolute left-3 top-3 rounded-full px-3 py-1 text-[11px] font-bold uppercase tracking-widest text-white ${p.tone}`}>
+                  {p.label}
+                </span>
+              </figure>
+            ))}
+          </div>
+          <p className="reveal mt-4 text-sm font-medium text-graphite">{BEFORE_AFTER[0].title}</p>
         </div>
       </section>
 
@@ -158,6 +192,9 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ── Reviews ──────────────────────────────────────────────── */}
+      <Testimonials />
+
       {/* ── Final CTA ────────────────────────────────────────────── */}
       <section className="section-pad bg-charcoal text-cream">
         <div className="mx-auto max-w-content px-4 sm:px-6 text-center">
@@ -167,6 +204,9 @@ export default function HomePage() {
             </h2>
             <p className="mt-4 text-cream/70">
               Post a request and let skilled providers come to you — or get a direct quote from Work On Time.
+            </p>
+            <p className="mt-2 text-[13px] font-semibold text-cream/50">
+              Fixed quote before we start · Photo walkthrough on handover
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
               <Link to="/post-request" className="rounded-full bg-accent px-8 py-4 text-[15px] font-bold text-white shadow-lg transition hover:brightness-110">
