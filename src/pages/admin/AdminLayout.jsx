@@ -67,21 +67,21 @@ export default function AdminLayout() {
       </aside>
 
       {/* Mobile top bar */}
-      <div className="fixed inset-x-0 top-0 z-40 flex h-14 items-center justify-between border-b border-charcoal/10 bg-charcoal px-4 text-cream lg:hidden">
+      <div className="fixed inset-x-0 top-0 z-40 flex min-h-14 items-center justify-between border-b border-charcoal/10 bg-charcoal px-4 pt-[env(safe-area-inset-top)] text-cream lg:hidden">
         <span className="font-display text-[16px] font-semibold">WOT Admin</span>
-        <div className="flex items-center gap-2">
-          {NAV.slice(0, 4).map(({ to, icon, end }) => (
-            <NavLink key={to} to={to} end={end}
-              className={({ isActive }) => `rounded-lg p-2 text-lg ${isActive ? "bg-accent/20" : "hover:bg-white/10"}`}>
-              {icon}
+        <div className="flex items-center gap-1">
+          {NAV.slice(0, 4).map(({ to, label, icon, end }) => (
+            <NavLink key={to} to={to} end={end} aria-label={label}
+              className={({ isActive }) => `grid h-11 w-11 place-items-center rounded-lg text-lg ${isActive ? "bg-accent/20" : "hover:bg-white/10"}`}>
+              <span aria-hidden="true">{icon}</span>
             </NavLink>
           ))}
-          <button onClick={handleSignOut} className="rounded-lg p-2 text-lg hover:bg-white/10">🚪</button>
+          <button onClick={handleSignOut} aria-label="Sign out" className="grid h-11 w-11 place-items-center rounded-lg text-lg hover:bg-white/10"><span aria-hidden="true">🚪</span></button>
         </div>
       </div>
 
       {/* Main content */}
-      <main className="flex-1 overflow-auto pt-14 lg:pt-0">
+      <main className="flex-1 overflow-auto pt-[calc(3.5rem+env(safe-area-inset-top))] lg:pt-0">
         <div className="p-6 max-w-7xl">
           <Outlet />
         </div>

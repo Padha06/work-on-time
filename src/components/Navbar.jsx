@@ -18,7 +18,7 @@ export default function Navbar() {
   const close = () => setOpen(false);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-charcoal/90 text-cream backdrop-blur-md">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-charcoal/90 pt-[env(safe-area-inset-top)] text-cream backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-content items-center justify-between px-4 sm:px-6">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2.5" onClick={close}>
