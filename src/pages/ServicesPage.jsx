@@ -3,7 +3,7 @@ import Services from "../components/Services.jsx";
 import BeforeAfter from "../components/BeforeAfter.jsx";
 import FinishExplorer from "../components/FinishExplorer.jsx";
 import { Link } from "react-router-dom";
-import { waLink } from "../data/content.js";
+import { waLink, FINISHES, GLASS } from "../data/content.js";
 
 const DoorStage = lazy(() => import("../components/DoorStage.jsx"));
 
@@ -89,7 +89,7 @@ export default function ServicesPage() {
           </div>
           <div className="reveal rounded-3xl overflow-hidden border border-charcoal/10 shadow-xl h-[480px] bg-charcoal">
             <Suspense fallback={<div className="grid h-full place-items-center text-cream/60">Loading 3D…</div>}>
-              <DoorStage />
+              <DoorStage frame={FINISHES[0]} glass={GLASS[0]} openAmount={0.45} />
             </Suspense>
           </div>
           <div className="mt-8">

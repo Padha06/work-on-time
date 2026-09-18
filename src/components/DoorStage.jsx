@@ -111,7 +111,10 @@ function MiniDoor({ frameColor, glassColor, glassOpacity, glassRoughness, openAm
   );
 }
 
-export default function DoorStage({ frame, glass, openAmount = 0 }) {
+const FALLBACK_FRAME = { hex: "#1b1b1e" };
+const FALLBACK_GLASS = { color: "#cfe3e8", opacity: 0.22, roughness: 0.05 };
+
+export default function DoorStage({ frame = FALLBACK_FRAME, glass = FALLBACK_GLASS, openAmount = 0 }) {
   return (
     <Canvas shadows dpr={[1, 1.75]} camera={{ position: [0, 0.5, 5], fov: 36 }} gl={{ antialias: true }}>
       <ambientLight intensity={0.9} />
