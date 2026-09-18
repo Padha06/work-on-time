@@ -1,17 +1,13 @@
-import { Suspense, lazy } from "react";
 import Services from "../components/Services.jsx";
 import BeforeAfter from "../components/BeforeAfter.jsx";
 import FinishExplorer from "../components/FinishExplorer.jsx";
 import { Link } from "react-router-dom";
-import { waLink, FINISHES, GLASS, SERVICES } from "../data/content.js";
-
-const DoorStage = lazy(() => import("../components/DoorStage.jsx"));
+import { waLink, SERVICES } from "../data/content.js";
 
 const JUMPS = [
   { label: "Custom build", href: "#services" },
   { label: "Repair", href: "#repair" },
   { label: "Aluminum", href: "#finishes" },
-  { label: "Sliding doors", href: "#sliding-doors" },
 ];
 
 const PROMISES = [
@@ -119,34 +115,6 @@ export default function ServicesPage() {
 
       {/* Finish explorer — Aluminum Doors (self-contained section) */}
       <FinishExplorer />
-
-      {/* 3D Door Configurator — Sliding Doors */}
-      <section id="sliding-doors" className="section-pad bg-cream">
-        <div className="mx-auto max-w-content px-4 sm:px-6">
-          <div className="reveal max-w-2xl mb-8">
-            <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-accent">Sliding Aluminum Doors</p>
-            <h2 className="font-display mt-2 text-4xl font-semibold tracking-tight text-charcoal md:text-5xl">
-              The door that opens as you scroll.
-            </h2>
-            <p className="mt-3 text-graphite">Space-saving sliders for balconies, partitions &amp; wardrobes — glide-tested before handover.</p>
-          </div>
-          <div className="reveal rounded-3xl overflow-hidden border border-charcoal/10 shadow-xl h-[480px] bg-charcoal">
-            <Suspense fallback={<div className="grid h-full place-items-center text-cream/60">Loading 3D…</div>}>
-              <DoorStage frame={FINISHES[0]} glass={GLASS[0]} openAmount={0.45} />
-            </Suspense>
-          </div>
-          <div className="mt-8">
-            <a
-              href={waLink("sliding aluminum doors")}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-block rounded-full bg-accent px-6 py-3 text-[15px] font-semibold text-white transition hover:brightness-110"
-            >
-              Request Sliding Door Quote →
-            </a>
-          </div>
-        </div>
-      </section>
 
       {/* CTA */}
       <section className="section-pad bg-charcoal text-cream">
