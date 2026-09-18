@@ -9,7 +9,7 @@ const VALUES = [
 ];
 
 const FACTS = [
-  { label: "Base", value: "Nairobi, Kenya" },
+  { label: "Base", value: "Bansdroni, Kolkata" },
   { label: "Crew", value: "Workshop + site team" },
   { label: "Trades", value: "Wood · Repair · Aluminum" },
   { label: "First reply", value: "Within a day on WhatsApp" },
@@ -27,7 +27,7 @@ export default function AboutPage() {
               One team, from first measurement to final walkthrough.
             </h1>
             <p className="mt-4 max-w-xl text-graphite">
-              Work On Time is a Nairobi craftwork studio and marketplace. We build custom furniture, restore tired pieces
+              Work On Time is a Kolkata craftwork studio and marketplace. We build custom furniture, restore tired pieces
               and install aluminum and sliding doors — then we opened the same pipeline to independent providers.
             </p>
           </div>

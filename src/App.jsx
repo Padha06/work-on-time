@@ -1,4 +1,4 @@
-import { useEffect, Component } from "react";
+import { useEffect, Component, Suspense, lazy } from "react";
 import { BrowserRouter, Routes, Route, Outlet, useLocation } from "react-router-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -15,16 +15,25 @@ import WorkPage from "./pages/WorkPage.jsx";
 import AboutPage from "./pages/AboutPage.jsx";
 import ContactPage from "./pages/ContactPage.jsx";
 
-// Admin pages
-import AdminLogin from "./pages/admin/AdminLogin.jsx";
-import AdminLayout from "./pages/admin/AdminLayout.jsx";
-import AdminOverview from "./pages/admin/AdminOverview.jsx";
-import AdminRequests from "./pages/admin/AdminRequests.jsx";
-import AdminClaims from "./pages/admin/AdminClaims.jsx";
-import AdminPortfolio from "./pages/admin/AdminPortfolio.jsx";
-import AdminAnalytics from "./pages/admin/AdminAnalytics.jsx";
-import AdminSettings from "./pages/admin/AdminSettings.jsx";
+// Admin pages — lazy so charts/admin code never loads (or preloads) for
+// public visitors. Keeps the mobile first paint light.
+const AdminLogin = lazy(() => import("./pages/admin/AdminLogin.jsx"));
+const AdminLayout = lazy(() => import("./pages/admin/AdminLayout.jsx"));
+const AdminOverview = lazy(() => import("./pages/admin/AdminOverview.jsx"));
+const AdminRequests = lazy(() => import("./pages/admin/AdminRequests.jsx"));
+const AdminClaims = lazy(() => import("./pages/admin/AdminClaims.jsx"));
+const AdminPortfolio = lazy(() => import("./pages/admin/AdminPortfolio.jsx"));
+const AdminAnalytics = lazy(() => import("./pages/admin/AdminAnalytics.jsx"));
+const AdminSettings = lazy(() => import("./pages/admin/AdminSettings.jsx"));
 import AdminRoute from "./components/admin/AdminRoute.jsx";
+
+function AdminSplash() {
+  return (
+    <div className="min-h-screen bg-charcoal grid place-items-center">
+      <div className="text-cream/60 animate-pulse">Loading admin…</div>
+    </div>
+  );
+}
 
 // Shared layout
 import Navbar from "./components/Navbar.jsx";
@@ -206,8 +215,8 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         {/* Admin routes — separate layout, no public navbar */}
-        <Route path="/admin/login" element={<AdminLogin />} />
-        <Route path="/admin" element={<AdminRoute><AdminLayout /></AdminRoute>}>
+        <Route path="/admin/login" element={<Suspense fallback={<AdminSplash />}><AdminLogin /></Suspense>} />
+        <Route path="/admin" element={<AdminRoute><Suspense fallback={<AdminSplash />}><AdminLayout /></Suspense></AdminRoute>}>
           <Route index element={<AdminOverview />} />
           <Route path="requests" element={<AdminRequests />} />
           <Route path="claims" element={<AdminClaims />} />

@@ -6,9 +6,9 @@ import { SERVICES, PORTFOLIO, waLink } from "../data/content.js";
 
 // Marketplace preview — static illustrative cards (real data on /marketplace)
 const PREVIEW_REQUESTS = [
-  { id: "p1", title: "Dining Table Repair — Wobbling Legs", type: "Furniture Repair", location: "Lavington, Nairobi", urgency: "high", budget: "KSh 8,000 flexible", claims: 4 },
-  { id: "p2", title: "Custom Wardrobe — Master Bedroom", type: "Custom Furniture", location: "Kilimani, Nairobi", urgency: "medium", budget: "KSh 45,000", claims: 2 },
-  { id: "p3", title: "Balcony Sliding Door Install", type: "Sliding Doors", location: "Westlands, Nairobi", urgency: "low", budget: "KSh 22,000", claims: 6 },
+  { id: "p1", title: "Dining Table Repair — Wobbling Legs", type: "Furniture Repair", location: "Bansdroni, Kolkata", urgency: "high", budget: "₹8,000 flexible", claims: 4 },
+  { id: "p2", title: "Custom Wardrobe — Master Bedroom", type: "Custom Furniture", location: "Tollygunge, Kolkata", urgency: "medium", budget: "₹45,000", claims: 2 },
+  { id: "p3", title: "Balcony Sliding Door Install", type: "Sliding Doors", location: "Garia, Kolkata", urgency: "low", budget: "₹22,000", claims: 6 },
 ];
 
 const URGENCY_COLOR = { high: "bg-red-100 text-red-700", medium: "bg-amber-100 text-amber-700", low: "bg-green-100 text-green-700" };

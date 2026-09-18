@@ -78,7 +78,7 @@ export default function AdminLogin() {
                   <label className="text-[13px] font-bold text-charcoal">Email address</label>
                   <input
                     type="email" required value={email} onChange={(e) => setEmail(e.target.value)}
-                    placeholder="admin@workontime.co.ke"
+                    placeholder="admin@workontime.in"
                     className="rounded-xl border border-charcoal/15 px-4 py-3 text-[15px] outline-none focus:border-accent"
                   />
                 </div>
@@ -130,7 +130,7 @@ export default function AdminLogin() {
                       <label className="text-[13px] font-bold text-charcoal">Email address</label>
                       <input
                         type="email" required value={email} onChange={(e) => setEmail(e.target.value)}
-                        placeholder="admin@workontime.co.ke"
+                    placeholder="admin@workontime.in"
                         className="rounded-xl border border-charcoal/15 px-4 py-3 text-[15px] outline-none focus:border-accent"
                       />
                     </div>

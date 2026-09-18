@@ -12,7 +12,7 @@ export default function CaseStudy() {
               <div className="absolute left-4 top-4"><SampleTag /></div>
             </div>
             <div className="p-7 sm:p-10">
-              <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-accent">{CASE_STUDY.kicker} [TODO: real project photos]</p>
+              <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-accent">{CASE_STUDY.kicker}</p>
               <h2 className="font-display mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">{CASE_STUDY.title}</h2>
               {CASE_STUDY.body.map((p) => (
                 <p key={p.slice(0, 24)} className="mt-3 leading-relaxed text-cream/75">{p}</p>

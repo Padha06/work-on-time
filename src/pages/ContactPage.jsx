@@ -9,8 +9,8 @@ const RESPONSE_TIMES = [
 ];
 
 const AREAS = [
-  "CBD", "Westlands", "Kilimani", "Lavington", "Kileleshwa", "Upperhill",
-  "Karen", "Langata", "Embakasi", "Kasarani", "Ngong Rd", "Thika Rd",
+  "Bansdroni", "Tollygunge", "Garia", "Jadavpur", "Behala", "Naktala",
+  "Netaji Nagar", "Ranikuthi", "Lake Gardens", "Regent Park", "Golf Green", "Kasba",
 ];
 
 export default function ContactPage() {
@@ -69,9 +69,9 @@ export default function ContactPage() {
             <div className="max-w-2xl">
               <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-accent">Service area</p>
               <h2 className="font-display mt-2 text-4xl font-semibold tracking-tight text-charcoal md:text-5xl">
-                We come to you, anywhere in Nairobi.
+                We come to you, anywhere in South Kolkata.
               </h2>
-              <p className="mt-3 text-graphite">Measurements, installs and repairs across the city. Outside Nairobi? Ask on WhatsApp — bigger jobs travel.</p>
+              <p className="mt-3 text-graphite">Measurements, installs and repairs across the city. Outside Kolkata? Ask on WhatsApp — bigger jobs travel.</p>
             </div>
           </div>
           <div className="reveal mt-8 flex flex-wrap gap-2">

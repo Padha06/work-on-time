@@ -6,6 +6,10 @@ export const WHATSAPP_NUMBER_LINK =
   import.meta.env.VITE_WHATSAPP_NUMBER || "15551234567";
 export const WHATSAPP_NUMBER = `+${WHATSAPP_NUMBER_LINK}`;
 
+// Studio address — shown in footer + contact sections.
+export const ADDRESS =
+  "Last Auto Stand, Palpara, Pirpukhur Road, Bansdroni, Kolkata 700070";
+
 export const waLink = (service = "your services") =>
   `https://wa.me/${WHATSAPP_NUMBER_LINK}?text=${encodeURIComponent(
     `Hi, I saw the Work On Time website and I'm interested in ${service}. Please send me a quote.`

@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { ContactShadows, Environment } from "@react-three/drei";
+import { ContactShadows, Environment, Lightformer } from "@react-three/drei";
 
 /**
  * Sliding aluminum door model.
@@ -112,7 +112,7 @@ function DoorRig({ progress, frameColor = "#C9CDD2", glassOpacity = 0.3, glassCo
   );
 }
 
-function Room({ children }) {
+function Room({ children, softShadows = true }) {
   return (
     <group>
       {/* floor */}
@@ -131,7 +131,10 @@ function Room({ children }) {
         <meshBasicMaterial color="#c9622c" />
       </mesh>
       {children}
-      <ContactShadows position={[0, -1.33, 0]} opacity={0.55} scale={10} blur={2.4} far={3} color="#000" />
+      {/* ContactShadows re-renders the scene — desktop only. */}
+      {softShadows && (
+        <ContactShadows position={[0, -1.33, 0]} opacity={0.55} scale={10} blur={2.4} far={3} color="#000" />
+      )}
     </group>
   );
 }
@@ -147,25 +150,35 @@ export default function SlidingDoorScene({
   return (
     <Canvas
       shadows={!compact}
-      dpr={dpr ?? (compact ? [1, 1.25] : [1, 1.75])}
-      camera={{ position: compact ? [0, 0.55, 6.4] : [0, 0.6, 5.2], fov: compact ? 44 : 38 }}
+      dpr={dpr ?? (compact ? [1, 1] : [1, 1.75])}
+      camera={{ position: compact ? [0, 0.6, 7.4] : [0, 0.6, 5.2], fov: compact ? 48 : 38 }}
       gl={{ antialias: !compact, powerPreference: "high-performance" }}
     >
-      <ambientLight intensity={0.75} />
+      <ambientLight intensity={compact ? 1.1 : 0.75} />
       <directionalLight position={[3.5, 5, 4]} intensity={1.6} castShadow shadow-mapSize={[1024, 1024]} />
       <directionalLight position={[-4, 2.5, 3]} intensity={0.45} color="#cdd7ff" />
       <spotLight position={[0, 4, 2.5]} angle={0.6} penumbra={0.8} intensity={0.7} color="#ffd9b8" />
-      <Room>
+      <Room softShadows={!compact}>
         <DoorRig
           progress={progressRef}
           frameColor={frameColor}
           glassOpacity={glassOpacity}
           glassColor={glassColor}
           travel={compact ? 0.95 : TRAVEL}
-          rigScale={compact ? 0.85 : 1}
+          rigScale={compact ? 0.8 : 1}
         />
       </Room>
-      <Environment preset="city" />
+      {compact ? (
+        // Mobile: procedural studio env rendered once locally — no remote
+        // HDR download over mobile data, metals still read correctly.
+        <Environment resolution={64} frames={1}>
+          <Lightformer intensity={2} position={[0, 4, 0]} rotation-x={Math.PI / 2} scale={[8, 8, 1]} color="#ffffff" />
+          <Lightformer intensity={1} position={[-4, 1, 2]} scale={[6, 2, 1]} color="#dfe8ff" />
+          <Lightformer intensity={1.2} position={[4, 1, 2]} scale={[6, 2, 1]} color="#ffe3c4" />
+        </Environment>
+      ) : (
+        <Environment preset="city" />
+      )}
     </Canvas>
   );
 }

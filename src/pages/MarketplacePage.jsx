@@ -43,7 +43,7 @@ export default function MarketplacePage() {
               Can do the job? Claim it.
             </h1>
             <p className="mt-4 max-w-xl text-graphite">
-              An open board of real craftwork requests across Nairobi. Seekers post for free, providers claim the work that fits their skills.
+              An open board of real craftwork requests across Kolkata. Seekers post for free, providers claim the work that fits their skills.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <Link

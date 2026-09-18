@@ -154,7 +154,7 @@ export default function PostRequestPage() {
             {/* Location */}
             <div className="grid gap-1.5">
               <label className="text-[13px] font-bold text-charcoal">Location / Address *</label>
-              <input value={form.location} onChange={set("location")} placeholder="e.g. Lavington, Nairobi"
+              <input value={form.location} onChange={set("location")} placeholder="e.g. Bansdroni, Kolkata"
                 className={inputClass("location")} />
               {errors.location && <p className="text-sm text-red-600">{errors.location}</p>}
             </div>
@@ -234,7 +234,7 @@ export default function PostRequestPage() {
               <label className="text-[13px] font-bold text-charcoal">
                 Budget <span className="font-normal text-graphite/50">(optional)</span>
               </label>
-              <input value={form.budget} onChange={set("budget")} placeholder="e.g. KSh 8,000 flexible"
+              <input value={form.budget} onChange={set("budget")} placeholder="e.g. ₹8,000 flexible"
                 className="w-full rounded-xl border border-charcoal/15 bg-white px-4 py-3 text-[15px] outline-none focus:border-accent" />
             </div>
 

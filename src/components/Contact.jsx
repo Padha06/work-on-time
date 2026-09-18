@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { waLink, WHATSAPP_NUMBER } from "../data/content.js";
+import { waLink, WHATSAPP_NUMBER, ADDRESS } from "../data/content.js";
 
 export default function Contact() {
   const [form, setForm] = useState({ name: "", phone: "", service: "Custom Furniture Building", message: "" });
@@ -22,15 +22,16 @@ export default function Contact() {
             <a href={waLink(form.service)} target="_blank" rel="noreferrer" className="rounded-full bg-[#25D366] px-6 py-3 text-[15px] font-bold text-[#0b3d20] transition hover:brightness-110">
               WhatsApp click-to-chat
             </a>
-            <a href="tel:+15551234567" className="rounded-full border border-white/25 px-6 py-3 text-[15px] font-semibold hover:bg-white/10">
-              Call [TODO: number]
+            <a href={`tel:${WHATSAPP_NUMBER.replace(/\s/g, "")}`} className="rounded-full border border-white/25 px-6 py-3 text-[15px] font-semibold hover:bg-white/10">
+              Call {WHATSAPP_NUMBER}
             </a>
           </div>
           <p className="mt-3 text-[12px] text-cream/50">WhatsApp: {WHATSAPP_NUMBER} · Prefilled message: “Hi, I saw your new site and I’m interested in [service]”.</p>
           <ul className="mt-6 space-y-2 text-sm text-cream/70">
             <li>✓ Site visit for wardrobes, kitchens &amp; full-home jobs</li>
             <li>✓ Shade cards &amp; samples shown before you pay anything</li>
-            <li>✓ [TODO: address, hours, service area]</li>
+            <li>✓ Visit us: {ADDRESS}</li>
+            <li>✓ Hours: Mon–Sat, 10am–7pm</li>
           </ul>
         </div>
         <form onSubmit={submit} className="reveal rounded-3xl bg-white p-6 text-charcoal sm:p-8">
