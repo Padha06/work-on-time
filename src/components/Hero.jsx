@@ -35,6 +35,9 @@ export default function Hero({ splineReady, onSplineReady }) {
   const slowConnection =
     saveData === true || ["slow-2g", "2g", "3g"].includes(effectiveConnectionType);
   const useSpline = Boolean(SPLINE_URL) && !splineFailed && !slowConnection;
+  // Pin runs on desktop only: on phones the hero is a static section
+  // (no scroll-trap, no heavy scrub timeline).
+  const pinEnabled = !reduced && !useSpline && !slowConnection && !compact;
 
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -58,7 +61,7 @@ export default function Hero({ splineReady, onSplineReady }) {
   // and restores the section first. With useEffect the cleanup runs too late
   // and React crashes with "removeChild ... not a child of this node".
   useLayoutEffect(() => {
-    if (reduced || useSpline || slowConnection) return;
+    if (!pinEnabled) return;
     const pinEnd = compact ? "+=100%" : "+=130%";
     const ctx = gsap.context(() => {
       ScrollTrigger.create({
@@ -85,7 +88,7 @@ export default function Hero({ splineReady, onSplineReady }) {
       );
     });
     return () => ctx.revert();
-  }, [reduced, useSpline, slowConnection, compact]);
+  }, [pinEnabled, compact]);
 
   return (
     <section ref={sectionRef} id="top" className="hero-grain relative flex min-h-[100svh] items-stretch overflow-hidden bg-charcoal text-cream">
@@ -140,7 +143,7 @@ export default function Hero({ splineReady, onSplineReady }) {
               WhatsApp photos →
             </a>
           </div>
-          {!reduced && !useSpline && !slowConnection && (
+          {pinEnabled && (
             <p className="mt-6 inline-flex items-center gap-2 text-[12px] font-bold uppercase tracking-[0.22em] text-cream/60">
               <span className="inline-block animate-[drift_2.2s_ease-in-out_infinite]">↓</span> Scroll — the door opens as you go
             </p>

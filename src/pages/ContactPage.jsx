@@ -1,6 +1,6 @@
 import Contact from "../components/Contact.jsx";
 import { Link } from "react-router-dom";
-import { waLink } from "../data/content.js";
+import { waLink, ADDRESS } from "../data/content.js";
 
 const RESPONSE_TIMES = [
   { channel: "WhatsApp photos", time: "~1 hour", note: "Photos + rough size gets you a first estimate." },
@@ -79,6 +79,46 @@ export default function ContactPage() {
                 {a}
               </span>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Find us — map + directions */}
+      <section className="section-pad bg-white">
+        <div className="mx-auto grid max-w-content items-center gap-8 px-4 sm:px-6 lg:grid-cols-2">
+          <div className="reveal">
+            <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-accent">Visit the workshop</p>
+            <h2 className="font-display mt-2 text-4xl font-semibold tracking-tight text-charcoal md:text-5xl">
+              Near Last Auto Stand, Bansdroni.
+            </h2>
+            <p className="mt-3 max-w-md text-graphite">{ADDRESS}</p>
+            <p className="mt-2 text-sm text-graphite/70">Mon–Sat, 10am–7pm · Call or WhatsApp before visiting so someone's there.</p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=Last+Auto+Stand+Palpara+Pirpukhur+Road+Bansdroni+Kolkata+700070"
+                target="_blank"
+                rel="noreferrer"
+                className="rounded-full bg-charcoal px-6 py-3 text-[15px] font-semibold text-white transition hover:bg-graphite"
+              >
+                Get Directions →
+              </a>
+              <a
+                href={waLink("a visit to your workshop")}
+                target="_blank"
+                rel="noreferrer"
+                className="rounded-full border border-charcoal/15 px-6 py-3 text-[15px] font-semibold text-charcoal transition hover:bg-charcoal hover:text-white"
+              >
+                WhatsApp us
+              </a>
+            </div>
+          </div>
+          <div className="reveal overflow-hidden rounded-3xl border border-charcoal/10 shadow-sm">
+            <iframe
+              title="Map — Work On Time workshop, Bansdroni Kolkata"
+              src="https://www.openstreetmap.org/export/embed.html?bbox=88.345%2C22.462%2C88.378%2C22.483&layer=mapnik&marker=22.4725%2C88.3613"
+              className="h-72 w-full sm:h-96"
+              loading="lazy"
+            />
           </div>
         </div>
       </section>

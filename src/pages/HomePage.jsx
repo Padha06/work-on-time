@@ -74,18 +74,18 @@ export default function HomePage() {
           </div>
           <div className="reveal mt-8 grid grid-cols-2 gap-4">
             {[
-              { src: BEFORE_AFTER[0].beforeImg, label: "Before", tone: "bg-black/60" },
-              { src: BEFORE_AFTER[0].img, label: "After", tone: "bg-accent" },
+              { src: BEFORE_AFTER[1].beforeImg, label: "Before", tone: "bg-black/60" },
+              { src: BEFORE_AFTER[1].img, label: "After", tone: "bg-accent" },
             ].map((p) => (
               <figure key={p.label} className="relative overflow-hidden rounded-2xl border border-charcoal/10 shadow-sm">
-                <img src={p.src} alt={`${BEFORE_AFTER[0].title} — ${p.label.toLowerCase()}`} loading="lazy" className="h-56 w-full object-cover sm:h-72" />
+                <img src={p.src} alt={`${BEFORE_AFTER[1].title} — ${p.label.toLowerCase()}`} loading="lazy" className="h-56 w-full object-cover sm:h-72" />
                 <span className={`absolute left-3 top-3 rounded-full px-3 py-1 text-[11px] font-bold uppercase tracking-widest text-white ${p.tone}`}>
                   {p.label}
                 </span>
               </figure>
             ))}
           </div>
-          <p className="reveal mt-4 text-sm font-medium text-graphite">{BEFORE_AFTER[0].title}</p>
+          <p className="reveal mt-4 text-sm font-medium text-graphite">{BEFORE_AFTER[1].title}</p>
         </div>
       </section>
 
@@ -106,8 +106,8 @@ export default function HomePage() {
             </p>
           </div>
           <div className="reveal mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {PREVIEW_REQUESTS.map((r) => (
-              <div key={r.id} className="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur">
+            {PREVIEW_REQUESTS.map((r, idx) => (
+              <div key={r.id} className={`rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur ${idx > 1 ? "hidden md:block" : ""}`}>
                 <div className="flex items-start justify-between gap-2">
                   <h3 className="font-semibold leading-snug text-cream">{r.title}</h3>
                   <span className={`shrink-0 rounded-full px-2.5 py-0.5 text-[11px] font-bold uppercase ${URGENCY_COLOR[r.urgency]}`}>
@@ -179,8 +179,8 @@ export default function HomePage() {
             </Link>
           </div>
           <div className="reveal mt-8 grid grid-cols-2 gap-4 md:grid-cols-3">
-            {PORTFOLIO.slice(0, 3).map((p) => (
-              <Link key={p.id} to="/work" className="group overflow-hidden rounded-2xl border border-charcoal/10 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl">
+            {PORTFOLIO.slice(0, 3).map((p, idx) => (
+              <Link key={p.id} to="/work" className={`group overflow-hidden rounded-2xl border border-charcoal/10 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl ${idx > 1 ? "hidden md:block" : ""}`}>
                 <div className="relative overflow-hidden">
                   <img src={p.img} alt={p.title} loading="lazy" className="w-full object-cover h-48 transition duration-500 group-hover:scale-105" />
                   <span className="absolute left-3 top-3 rounded-full bg-black/55 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-white">{p.cat}</span>

@@ -1,4 +1,4 @@
-import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import { NavLink, Link, Outlet, useNavigate } from "react-router-dom";
 import { supabase } from "../../lib/supabase.js";
 
 const NAV = [
@@ -59,6 +59,11 @@ export default function AdminLayout() {
 
         {/* Sign out */}
         <div className="border-t border-white/10 p-4">
+          <Link to="/"
+            className="mb-1 flex items-center gap-3 rounded-xl px-3 py-2.5 text-[14px] font-medium text-cream/70 transition hover:bg-white/10 hover:text-cream">
+            <span aria-hidden="true">🌐</span>
+            View Website
+          </Link>
           <button onClick={handleSignOut}
             className="w-full rounded-xl px-3 py-2.5 text-left text-[14px] font-medium text-cream/60 hover:bg-white/10 hover:text-cream transition">
             🚪 Sign Out
@@ -68,8 +73,12 @@ export default function AdminLayout() {
 
       {/* Mobile top bar */}
       <div className="fixed inset-x-0 top-0 z-40 flex min-h-14 items-center justify-between border-b border-charcoal/10 bg-charcoal px-4 pt-[env(safe-area-inset-top)] text-cream lg:hidden">
-        <span className="font-display text-[16px] font-semibold">WOT Admin</span>
+        <span className="font-display text-[16px] font-semibold">WOT<span className="hidden min-[380px]:inline"> Admin</span></span>
         <div className="flex items-center gap-1">
+          <Link to="/" aria-label="View website"
+            className="grid h-11 w-11 place-items-center rounded-lg text-lg hover:bg-white/10">
+            <span aria-hidden="true">🌐</span>
+          </Link>
           {NAV.slice(0, 4).map(({ to, label, icon, end }) => (
             <NavLink key={to} to={to} end={end} aria-label={label}
               className={({ isActive }) => `grid h-11 w-11 place-items-center rounded-lg text-lg ${isActive ? "bg-accent/20" : "hover:bg-white/10"}`}>

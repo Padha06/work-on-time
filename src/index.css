@@ -41,8 +41,8 @@ section {
 }
 
 .section-pad {
-  padding-top: 56px;
-  padding-bottom: 56px;
+  padding-top: 44px;
+  padding-bottom: 44px;
 }
 @media (min-width: 768px) {
   .section-pad {
