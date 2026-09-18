@@ -92,7 +92,7 @@ export default function ClaimModal({ request, onClose }) {
             {/* Form */}
             <form onSubmit={handleSubmit} className="p-6 grid gap-4">
               {error && (
-                <div className="rounded-xl bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-700">{error}</div>
+                <div className="rounded-xl bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-700" role="alert">{error}</div>
               )}
               <div className="grid gap-1.5">
                 <label className="text-[13px] font-bold text-charcoal">Your Name *</label>

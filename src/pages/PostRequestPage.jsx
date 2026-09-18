@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { submitRequest } from "../lib/marketplace.js";
 
@@ -38,6 +38,15 @@ export default function PostRequestPage() {
   const [errors, setErrors] = useState({});
   const [submitError, setSubmitError] = useState("");
 
+  // Revoke blob preview URLs on unmount (avoids leaking object URLs).
+  const previewsRef = useRef([]);
+  previewsRef.current = imagePreviews;
+  useEffect(() => () => {
+    previewsRef.current.forEach((u) => { try { URL.revokeObjectURL(u); } catch { /* noop */ } });
+  }, []);
+
+  const revokeAt = (i) => { try { URL.revokeObjectURL(imagePreviews[i]); } catch { /* noop */ } };
+
   const set = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }));
 
   const handleImages = (e) => {
@@ -48,14 +57,15 @@ export default function PostRequestPage() {
       return true;
     });
     const combined = [...images, ...valid].slice(0, MAX_FILES);
+    const adding = combined.slice(images.length);
     setImages(combined);
-    setImagePreviews(combined.map((f) => URL.createObjectURL(f)));
+    setImagePreviews([...imagePreviews, ...adding.map((f) => URL.createObjectURL(f))]);
   };
 
   const removeImage = (i) => {
-    const next = images.filter((_, idx) => idx !== i);
-    setImages(next);
-    setImagePreviews(next.map((f) => URL.createObjectURL(f)));
+    revokeAt(i);
+    setImages(images.filter((_, idx) => idx !== i));
+    setImagePreviews(imagePreviews.filter((_, idx) => idx !== i));
   };
 
   const validate = () => {
@@ -77,6 +87,9 @@ export default function PostRequestPage() {
     setSubmitError("");
     try {
       await submitRequest(form, images);
+      imagePreviews.forEach((u) => { try { URL.revokeObjectURL(u); } catch { /* noop */ } });
+      setImages([]);
+      setImagePreviews([]);
       setDone(true);
       window.scrollTo({ top: 0, behavior: "smooth" });
     } catch (err) {
@@ -139,7 +152,7 @@ export default function PostRequestPage() {
         <div className="mx-auto max-w-2xl px-4 sm:px-6">
           <form onSubmit={handleSubmit} className="rounded-3xl bg-white border border-charcoal/8 p-8 shadow-sm space-y-6" noValidate>
             {submitError && (
-              <div className="rounded-xl bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-700">{submitError}</div>
+              <div className="rounded-xl bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-700" role="alert">{submitError}</div>
             )}
 
             {/* Service Type */}
@@ -156,7 +169,7 @@ export default function PostRequestPage() {
               <label className="text-[13px] font-bold text-charcoal">Location / Address *</label>
               <input value={form.location} onChange={set("location")} placeholder="e.g. Bansdroni, Kolkata"
                 className={inputClass("location")} />
-              {errors.location && <p className="text-sm text-red-600">{errors.location}</p>}
+                {errors.location && <p className="text-sm text-red-600" role="alert">{errors.location}</p>}
             </div>
 
             {/* Description */}
@@ -165,7 +178,7 @@ export default function PostRequestPage() {
               <textarea rows={5} value={form.description} onChange={set("description")}
                 placeholder="What needs to be done? Include size, materials, condition, timeline…"
                 className={`${inputClass("description")} resize-none`} />
-              {errors.description && <p className="text-sm text-red-600">{errors.description}</p>}
+                {errors.description && <p className="text-sm text-red-600" role="alert">{errors.description}</p>}
             </div>
 
             {/* Urgency */}
@@ -191,13 +204,13 @@ export default function PostRequestPage() {
                 <label className="text-[13px] font-bold text-charcoal">Full Name *</label>
                 <input value={form.name} onChange={set("name")} placeholder="Your name"
                   className={inputClass("name")} />
-                {errors.name && <p className="text-sm text-red-600">{errors.name}</p>}
+                {errors.name && <p className="text-sm text-red-600" role="alert">{errors.name}</p>}
               </div>
               <div className="grid gap-1.5">
                 <label className="text-[13px] font-bold text-charcoal">Phone / WhatsApp *</label>
                 <input value={form.whatsapp} onChange={set("whatsapp")} placeholder="+254 7XX XXX XXX" inputMode="tel"
                   className={inputClass("whatsapp")} />
-                {errors.whatsapp && <p className="text-sm text-red-600">{errors.whatsapp}</p>}
+                {errors.whatsapp && <p className="text-sm text-red-600" role="alert">{errors.whatsapp}</p>}
               </div>
             </div>
 

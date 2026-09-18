@@ -14,7 +14,11 @@ export async function getOpenRequests({ serviceType, urgency, search } = {}) {
 
   if (serviceType && serviceType !== "All") q = q.eq("service_type", serviceType);
   if (urgency && urgency !== "All") q = q.eq("urgency", urgency);
-  if (search) q = q.ilike("title", `%${search}%`);
+  if (search) {
+    // Escape LIKE wildcards so user input can't widen the match.
+    const escaped = search.replace(/[\\%_]/g, (m) => `\\${m}`);
+    q = q.ilike("title", `%${escaped}%`);
+  }
 
   const { data, error } = await q;
   if (error) throw error;

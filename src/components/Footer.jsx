@@ -1,6 +1,9 @@
+import { Link } from "react-router-dom";
 import { ADDRESS } from "../data/content.js";
 
 export default function Footer() {
+  const toTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
+
   return (
     <footer className="border-t border-white/10 bg-[#141416] py-10 text-cream/60">
       <div className="mx-auto flex max-w-content flex-col items-start justify-between gap-5 px-4 sm:px-6 md:flex-row md:items-center">
@@ -13,12 +16,12 @@ export default function Footer() {
           <p className="mt-2 max-w-md text-[12px] leading-relaxed text-cream/40">{ADDRESS}</p>
         </div>
         <nav className="flex flex-wrap gap-x-5 gap-y-2 text-sm" aria-label="Footer">
-          <a href="#services" className="inline-block py-2 hover:text-cream">Services</a>
-          <a href="#before-after" className="inline-block py-2 hover:text-cream">Repairs</a>
-          <a href="#finishes" className="inline-block py-2 hover:text-cream">Finishes</a>
-          <a href="#work" className="inline-block py-2 hover:text-cream">Work</a>
-          <a href="#contact" className="inline-block py-2 hover:text-cream">Contact</a>
-          <a href="#top" className="inline-block py-2 hover:text-cream">Back to top ↑</a>
+          <Link to="/services" className="inline-block py-2 hover:text-cream">Services</Link>
+          <Link to="/services" className="inline-block py-2 hover:text-cream">Repairs</Link>
+          <Link to="/services" className="inline-block py-2 hover:text-cream">Finishes</Link>
+          <Link to="/work" className="inline-block py-2 hover:text-cream">Work</Link>
+          <Link to="/contact" className="inline-block py-2 hover:text-cream">Contact</Link>
+          <button onClick={toTop} className="inline-block py-2 hover:text-cream">Back to top ↑</button>
         </nav>
       </div>
     </footer>

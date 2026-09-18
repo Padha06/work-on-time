@@ -1,4 +1,5 @@
 import { Suspense, lazy, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useNetworkStatus } from "react-adaptive-hooks/network";
@@ -127,9 +128,9 @@ export default function Hero({ splineReady, onSplineReady }) {
             finger — measured, built and installed by one team.
           </p>
           <div className="pointer-events-auto mt-6 flex flex-wrap items-center gap-3">
-            <a href="#contact" className="rounded-full bg-accent px-6 py-3 text-[15px] font-semibold text-white shadow-lg transition hover:brightness-110">
+            <Link to="/contact" className="rounded-full bg-accent px-6 py-3 text-[15px] font-semibold text-white shadow-lg transition hover:brightness-110">
               Get a free quote
-            </a>
+            </Link>
             <a
               href={waLink("sliding aluminum doors")}
               target="_blank"
@@ -144,7 +145,7 @@ export default function Hero({ splineReady, onSplineReady }) {
               <span className="inline-block animate-[drift_2.2s_ease-in-out_infinite]">↓</span> Scroll — the door opens as you go
             </p>
           )}
-          {!SPLINE_URL && (
+          {!SPLINE_URL && import.meta.env.DEV && (
             <p className="pointer-events-auto mt-4 max-w-xl text-[12px] leading-relaxed text-cream/50">
               <SampleTag label="3D placeholder — Spline remix slot" /> Set{" "}
               <code className="rounded bg-white/10 px-1">VITE_SPLINE_SCENE_URL</code> to your remixed

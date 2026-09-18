@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { Suspense, lazy } from "react";
 import Hero from "../components/Hero.jsx";
 import TrustStrip from "../components/TrustStrip.jsx";
 import { SERVICES, PORTFOLIO, waLink } from "../data/content.js";
@@ -49,6 +48,7 @@ export default function HomePage() {
                 <div className="p-5">
                   <h3 className="font-display text-xl font-semibold text-charcoal">{s.title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-graphite">{s.blurb}</p>
+                  <p className="mt-2 text-[13px] font-semibold text-accent">✓ {s.points[0]}</p>
                 </div>
               </Link>
             ))}
@@ -69,6 +69,9 @@ export default function HomePage() {
               Work On Time is also a marketplace — connecting people who need craftwork done with skilled providers.
               No account required. Post a request, providers find you.
             </p>
+            <p className="mt-2 text-sm text-cream/50">
+              Want Work On Time directly? Get a quote. Open to any skilled provider? Post it — free, 2 minutes, no account.
+            </p>
           </div>
           <div className="reveal mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {PREVIEW_REQUESTS.map((r) => (
@@ -85,7 +88,7 @@ export default function HomePage() {
                   <span className="text-[12px] text-cream/50">{r.claims} claimed</span>
                 </div>
                 <div className="mt-3 flex items-center gap-2">
-                  <span className="rounded-full bg-green-500/15 px-2.5 py-0.5 text-[11px] font-bold uppercase text-green-400">OPEN</span>
+                  <span className="text-[12px] text-cream/50">{r.claims} claimed</span>
                 </div>
               </div>
             ))}

@@ -48,7 +48,6 @@ export default function TrustStrip() {
               <Counter value={s.value} suffix={s.suffix} />
             </div>
             <div className="mt-1 text-sm font-semibold text-graphite">{s.label}</div>
-            <div className="mt-1 text-[11px] text-graphite/60">{s.note}</div>
           </div>
         ))}
       </div>
