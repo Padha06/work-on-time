@@ -37,56 +37,103 @@ function Layout() {
   const location = useLocation();
 
   useEffect(() => {
-    // Scroll to top on route change
+    // Always start new routes at the top (both native + Lenis scroll).
     window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
 
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    let lenis = null;
-    let rafId = null;
+    document.documentElement.classList.toggle("reduced-motion", reduced);
 
-    if (!reduced) {
-      lenis = new Lenis({ lerp: 0.1, smoothWheel: true });
-      lenis.on("scroll", ScrollTrigger.update);
-      const raf = (t) => {
-        lenis.raf(t);
-        rafId = requestAnimationFrame(raf);
-      };
-      rafId = requestAnimationFrame(raf);
+    // Reduced motion: never hide content, clear any stale hidden state.
+    if (reduced) {
+      gsap.set(".reveal", { opacity: 1, y: 0, clearProps: "transform" });
+      ScrollTrigger.getAll().forEach((t) => t.kill());
+      ScrollTrigger.refresh();
+      return;
     }
+
+    // Canonical Lenis + ScrollTrigger wiring (ticker-driven, no runaway raf).
+    const lenis = new Lenis({ lerp: 0.1, smoothWheel: true });
+    lenis.on("scroll", ScrollTrigger.update);
+    const tickerFn = (time) => lenis.raf(time * 1000);
+    gsap.ticker.add(tickerFn);
+    gsap.ticker.lagSmoothing(0);
+    lenis.scrollTo(0, { immediate: true });
 
     // Smooth anchor scroll
     const onClick = (e) => {
       const a = e.target.closest?.('a[href^="#"]');
       if (!a) return;
-      const el = document.querySelector(a.getAttribute("href"));
+      const href = a.getAttribute("href");
+      if (!href || href === "#") return;
+      const el = document.querySelector(href);
       if (!el) return;
       e.preventDefault();
-      if (lenis) lenis.scrollTo(el, { offset: -64 });
-      else el.scrollIntoView({ behavior: reduced ? "auto" : "smooth" });
+      lenis.scrollTo(el, { offset: -64 });
     };
     document.addEventListener("click", onClick);
 
-    // Staggered reveal animations
+    // Reveal animations — fail-open: elements stay visible unless GSAP
+    // explicitly hides them right before attaching a trigger. Above-fold
+    // elements animate immediately; a safety pass rescues any in-view
+    // element still hidden (stale trigger positions, late images, etc.).
     let ctx;
-    const timeout = setTimeout(() => {
+    const setupTimer = setTimeout(() => {
       ctx = gsap.context(() => {
         ScrollTrigger.refresh();
         gsap.utils.toArray(".reveal").forEach((el) => {
-          gsap.set(el, { opacity: 0, y: 30 });
-          gsap.to(el, {
-            opacity: 1, y: 0, duration: 0.8, ease: "power3.out",
-            scrollTrigger: { trigger: el, start: "top 88%", once: true },
-          });
+          if (el.dataset.revealed) return;
+          const r = el.getBoundingClientRect();
+          const inView = r.top < window.innerHeight * 0.9 && r.bottom > 0;
+          if (inView) {
+            el.dataset.revealed = "true";
+            gsap.fromTo(
+              el,
+              { opacity: 0, y: 30 },
+              { opacity: 1, y: 0, duration: 0.6, ease: "power3.out", overwrite: true, clearProps: "transform" }
+            );
+          } else {
+            gsap.set(el, { opacity: 0, y: 30 });
+            gsap.to(el, {
+              opacity: 1, y: 0, duration: 0.8, ease: "power3.out", overwrite: true, clearProps: "transform",
+              scrollTrigger: {
+                trigger: el, start: "top 88%", once: true,
+                onEnter: () => { el.dataset.revealed = "true"; },
+                onEnterBack: () => { el.dataset.revealed = "true"; },
+              },
+            });
+          }
         });
       });
-    }, 50);
+    }, 60);
+
+    // Late layout shifts (images, lazy 3D) move trigger positions.
+    const refreshTimer = setTimeout(() => ScrollTrigger.refresh(), 600);
+
+    // Safety net: never leave in-view content invisible.
+    const safetyTimer = setTimeout(() => {
+      document.querySelectorAll(".reveal").forEach((el) => {
+        const r = el.getBoundingClientRect();
+        const inView = r.top < window.innerHeight && r.bottom > 0;
+        if (!inView) return;
+        const opacity = parseFloat(window.getComputedStyle(el).opacity);
+        if (opacity < 0.05) {
+          el.dataset.revealed = "true";
+          gsap.to(el, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out", overwrite: true, clearProps: "transform" });
+        }
+      });
+      ScrollTrigger.refresh();
+    }, 2000);
 
     return () => {
-      clearTimeout(timeout);
+      clearTimeout(setupTimer);
+      clearTimeout(refreshTimer);
+      clearTimeout(safetyTimer);
       document.removeEventListener("click", onClick);
+      gsap.ticker.remove(tickerFn);
       if (ctx) ctx.revert();
       if (lenis) lenis.destroy();
-      if (rafId) cancelAnimationFrame(rafId);
       ScrollTrigger.getAll().forEach((t) => t.kill());
     };
   }, [location.pathname]);

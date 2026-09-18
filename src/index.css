@@ -66,13 +66,16 @@ section {
   padding: 3px 9px;
 }
 
+/* Reveal animations are JS-driven (GSAP) and fail-open:
+   content is visible by default so a missed trigger can never
+   leave a blank page after client-side navigation. */
 .reveal {
-  opacity: 0;
-  transform: translateY(28px);
-}
-.no-js .reveal, .reduced-motion .reveal {
   opacity: 1;
   transform: none;
+}
+.no-js .reveal, .reduced-motion .reveal {
+  opacity: 1 !important;
+  transform: none !important;
 }
 
 .ba-clip-after {
