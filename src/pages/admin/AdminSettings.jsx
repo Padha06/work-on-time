@@ -54,6 +54,43 @@ export default function AdminSettings() {
         <p className="mt-3 text-[12px] text-graphite/60">Run this in Supabase Dashboard → SQL Editor after signing in with the new admin email.</p>
       </div>
 
+      {/* Security */}
+      <div className="rounded-2xl bg-white border border-charcoal/8 p-6 shadow-sm mb-5">
+        <h2 className="font-display text-lg font-semibold text-charcoal mb-1">Security</h2>
+        <p className="text-sm text-graphite mb-4">Update your admin account password.</p>
+        
+        <form onSubmit={async (e) => {
+          e.preventDefault();
+          const btn = e.target.querySelector('button');
+          const pass = e.target.password.value;
+          if (pass.length < 6) return alert('Password must be at least 6 characters.');
+          
+          btn.disabled = true;
+          btn.textContent = 'Updating...';
+          const { error } = await supabase.auth.updateUser({ password: pass });
+          if (error) {
+            alert(error.message);
+          } else {
+            alert('Password updated successfully!');
+            e.target.reset();
+          }
+          btn.disabled = false;
+          btn.textContent = 'Update Password';
+        }} className="flex items-center gap-3">
+          <input 
+            type="password" 
+            name="password"
+            placeholder="New password" 
+            required
+            minLength={6}
+            className="flex-1 rounded-xl border border-charcoal/15 px-4 py-2.5 text-[15px] outline-none focus:border-accent"
+          />
+          <button type="submit" className="rounded-full bg-charcoal px-6 py-2.5 text-[14px] font-bold text-white transition hover:bg-black disabled:opacity-50">
+            Update Password
+          </button>
+        </form>
+      </div>
+
       {/* Database info */}
       <div className="rounded-2xl bg-white border border-charcoal/8 p-6 shadow-sm">
         <h2 className="font-display text-lg font-semibold text-charcoal mb-3">Platform Information</h2>
@@ -68,7 +105,7 @@ export default function AdminSettings() {
           </div>
           <div className="flex justify-between">
             <dt className="text-graphite">Storage bucket</dt>
-            <dd className="font-mono text-[12px] text-charcoal">request-images</dd>
+            <dd className="font-mono text-[12px] text-charcoal">request-images, portfolio</dd>
           </div>
         </dl>
       </div>
