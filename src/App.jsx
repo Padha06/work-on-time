@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, Component } from "react";
 import { BrowserRouter, Routes, Route, Outlet, useLocation } from "react-router-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -31,6 +31,53 @@ import Navbar from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
 
 gsap.registerPlugin(ScrollTrigger);
+
+/**
+ * Route-level error boundary — a crashing page must NEVER blank the whole
+ * app (navbar included). Shows the actual error + a reload action instead,
+ * and auto-resets on the next navigation.
+ */
+class RouteErrorBoundary extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { error: null };
+  }
+  static getDerivedStateFromError(error) {
+    return { error };
+  }
+  componentDidCatch(error, info) {
+    console.error("Route render error:", error, info);
+  }
+  componentDidUpdate(prevProps) {
+    if (prevProps.resetKey !== this.props.resetKey && this.state.error) {
+      this.setState({ error: null });
+    }
+  }
+  render() {
+    if (this.state.error) {
+      return (
+        <div className="min-h-[60vh] bg-cream px-4 pt-16">
+          <div className="mx-auto max-w-md py-20 text-center">
+            <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-accent">Something went wrong</p>
+            <h2 className="font-display mt-2 text-3xl font-semibold tracking-tight text-charcoal">
+              This page failed to load.
+            </h2>
+            <p className="mt-3 break-words text-sm leading-relaxed text-graphite">
+              {String(this.state.error?.message || this.state.error)}
+            </p>
+            <button
+              onClick={() => window.location.reload()}
+              className="mt-6 rounded-full bg-charcoal px-6 py-3 text-[15px] font-semibold text-white transition hover:bg-graphite"
+            >
+              Reload page
+            </button>
+          </div>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
 
 /** Shared layout wrapper — provides Lenis smooth scroll + GSAP reveals */
 function Layout() {
@@ -144,7 +191,11 @@ function Layout() {
         Skip to content
       </a>
       <Navbar />
-      <main id="main-content"><Outlet /></main>
+      <main id="main-content">
+        <RouteErrorBoundary resetKey={location.pathname}>
+          <Outlet />
+        </RouteErrorBoundary>
+      </main>
       <Footer />
     </div>
   );
