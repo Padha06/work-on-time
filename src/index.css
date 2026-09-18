@@ -59,9 +59,9 @@ section {
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  background: rgba(201, 98, 44, 0.12);
+  background: rgba(180, 86, 37, 0.12);
   color: #9a4a1f;
-  border: 1px dashed rgba(201, 98, 44, 0.55);
+  border: 1px dashed rgba(180, 86, 37, 0.55);
   border-radius: 999px;
   padding: 3px 9px;
 }

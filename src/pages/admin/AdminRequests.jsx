@@ -220,7 +220,7 @@ export default function AdminRequests() {
                         </div>
                         <p className="text-[12px] text-graphite mt-1">{c.years_experience ? `${c.years_experience} yrs exp` : ""} · {c.background?.slice(0, 60)}…</p>
                         <a href={`https://wa.me/${c.whatsapp_number?.replace(/\D/g,"")}`} target="_blank" rel="noreferrer"
-                          className="mt-2 inline-block rounded-full bg-[#25D366] px-3 py-1 text-[11px] font-bold text-[#0b3d20] hover:brightness-110">
+                          className="mt-2 inline-block rounded-full bg-wa px-3 py-1 text-[11px] font-bold text-wadeep hover:brightness-110">
                           WhatsApp
                         </a>
                       </div>

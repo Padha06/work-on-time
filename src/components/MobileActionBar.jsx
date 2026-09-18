@@ -15,7 +15,7 @@ export default function MobileActionBar({ href, label, note }) {
           href={href}
           target="_blank"
           rel="noreferrer"
-          className="flex min-h-[48px] items-center justify-center gap-2 rounded-full bg-[#25D366] text-[15px] font-bold text-[#0b3d20] transition hover:brightness-110"
+          className="flex min-h-[48px] items-center justify-center gap-2 rounded-full bg-wa text-[15px] font-bold text-wadeep transition hover:brightness-110"
         >
           {label}
         </a>

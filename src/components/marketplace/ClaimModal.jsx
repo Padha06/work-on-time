@@ -67,7 +67,7 @@ export default function ClaimModal({ request, onClose }) {
                 );
                 window.open(`https://wa.me/${WHATSAPP_NUMBER_LINK}?text=${encodeURIComponent(msg)}`, "_blank", "noreferrer");
               }}
-              className="mt-4 rounded-full bg-[#25D366] px-6 py-3 font-bold text-[#0b3d20] transition hover:brightness-110"
+              className="mt-4 rounded-full bg-wa px-6 py-3 font-bold text-wadeep transition hover:brightness-110"
             >
               Open WhatsApp →
             </button>

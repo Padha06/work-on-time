@@ -95,7 +95,7 @@ export default function AdminClaims() {
                         <a
                           href={`https://wa.me/${c.whatsapp_number?.replace(/\D/g, "")}`}
                           target="_blank" rel="noreferrer"
-                          className="rounded-full bg-[#25D366] px-3 py-1 text-[11px] font-bold text-[#0b3d20] hover:brightness-110 text-center"
+                          className="rounded-full bg-wa px-3 py-1 text-[11px] font-bold text-wadeep hover:brightness-110 text-center"
                         >
                           WhatsApp
                         </a>

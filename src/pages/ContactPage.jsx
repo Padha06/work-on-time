@@ -34,7 +34,7 @@ export default function ContactPage() {
                 href={waLink("your services")}
                 target="_blank"
                 rel="noreferrer"
-                className="rounded-full bg-[#25D366] px-6 py-3 text-[15px] font-bold text-[#0b3d20] transition hover:brightness-110"
+                className="rounded-full bg-wa px-6 py-3 text-[15px] font-bold text-wadeep transition hover:brightness-110"
               >
                 WhatsApp click-to-chat
               </a>

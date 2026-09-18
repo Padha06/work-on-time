@@ -19,7 +19,7 @@ export default function Contact() {
           <h2 className="font-display mt-2 text-4xl font-semibold tracking-tight md:text-5xl">Send photos. Get a fixed price.</h2>
           <p className="mt-3 max-w-md text-cream/70">Fastest route is WhatsApp — photos + rough size is enough for a first estimate. Or leave the form and we’ll call back.</p>
           <div className="mt-6 flex flex-wrap gap-3">
-            <a href={waLink(form.service)} target="_blank" rel="noreferrer" className="rounded-full bg-[#25D366] px-6 py-3 text-[15px] font-bold text-[#0b3d20] transition hover:brightness-110">
+            <a href={waLink(form.service)} target="_blank" rel="noreferrer" className="rounded-full bg-wa px-6 py-3 text-[15px] font-bold text-wadeep transition hover:brightness-110">
               WhatsApp click-to-chat
             </a>
             <a href={`tel:${WHATSAPP_NUMBER.replace(/\s/g, "")}`} className="rounded-full border border-white/25 px-6 py-3 text-[15px] font-semibold hover:bg-white/10">

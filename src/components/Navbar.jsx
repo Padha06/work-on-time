@@ -25,7 +25,7 @@ export default function Navbar() {
           <span className="grid h-9 w-9 place-items-center rounded-lg bg-aluminum/15">
             <svg width="22" height="22" viewBox="0 0 32 32" aria-hidden="true">
               <rect x="6" y="4" width="8" height="24" rx="1.5" fill="#C7CBCF" />
-              <rect x="18" y="4" width="8" height="24" rx="1.5" fill="#A9764E" />
+              <rect x="18" y="4" width="8" height="24" rx="1.5" fill="#8F5A30" />
             </svg>
           </span>
           <span className="leading-tight min-w-0">

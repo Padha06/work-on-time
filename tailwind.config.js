@@ -12,6 +12,9 @@ export default {
         accent: "#B45625",
         // Lighter accent for small text on dark surfaces (4.5:1 verified).
         accentsoft: "#E08A4E",
+        // WhatsApp brand pair, reused across CTAs (tokenized, not hex).
+        wa: "#25D366",
+        wadeep: "#0B3D20",
       },
       fontFamily: {
         ui: ["Inter", "system-ui", "sans-serif"],

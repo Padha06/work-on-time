@@ -5,7 +5,7 @@ import {
   XAxis, YAxis, Tooltip, ResponsiveContainer, Legend,
 } from "recharts";
 
-const COLORS = ["#C9622C", "#C7CBCF", "#A9764E", "#1C1C1E", "#6b7280"];
+const COLORS = ["#B45625", "#C7CBCF", "#8F5A30", "#1C1C1E", "#6b7280"];
 
 function KPICard({ label, value, sub }) {
   return (
@@ -97,7 +97,7 @@ export default function AdminAnalytics() {
               <XAxis dataKey="name" tick={{ fontSize: 11 }} />
               <YAxis allowDecimals={false} tick={{ fontSize: 11 }} />
               <Tooltip />
-              <Bar dataKey="value" fill="#C9622C" radius={[6, 6, 0, 0]} />
+              <Bar dataKey="value" fill="#B45625" radius={[6, 6, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>
@@ -111,8 +111,8 @@ export default function AdminAnalytics() {
               <YAxis allowDecimals={false} tick={{ fontSize: 11 }} />
               <Tooltip labelFormatter={(d) => d} />
               <Legend />
-              <Line type="monotone" dataKey="requests" stroke="#C9622C" strokeWidth={2} dot={false} name="Requests" />
-              <Line type="monotone" dataKey="claims" stroke="#A9764E" strokeWidth={2} dot={false} name="Claims" />
+              <Line type="monotone" dataKey="requests" stroke="#B45625" strokeWidth={2} dot={false} name="Requests" />
+              <Line type="monotone" dataKey="claims" stroke="#8F5A30" strokeWidth={2} dot={false} name="Claims" />
             </LineChart>
           </ResponsiveContainer>
         </div>
