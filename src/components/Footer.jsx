@@ -13,12 +13,12 @@ export default function Footer() {
           <p className="mt-2 max-w-md text-[12px] leading-relaxed text-cream/40">{ADDRESS}</p>
         </div>
         <nav className="flex flex-wrap gap-x-5 gap-y-2 text-sm" aria-label="Footer">
-          <a href="#services" className="hover:text-cream">Services</a>
-          <a href="#before-after" className="hover:text-cream">Repairs</a>
-          <a href="#finishes" className="hover:text-cream">Finishes</a>
-          <a href="#work" className="hover:text-cream">Work</a>
-          <a href="#contact" className="hover:text-cream">Contact</a>
-          <a href="#top" className="hover:text-cream">Back to top ↑</a>
+          <a href="#services" className="inline-block py-2 hover:text-cream">Services</a>
+          <a href="#before-after" className="inline-block py-2 hover:text-cream">Repairs</a>
+          <a href="#finishes" className="inline-block py-2 hover:text-cream">Finishes</a>
+          <a href="#work" className="inline-block py-2 hover:text-cream">Work</a>
+          <a href="#contact" className="inline-block py-2 hover:text-cream">Contact</a>
+          <a href="#top" className="inline-block py-2 hover:text-cream">Back to top ↑</a>
         </nav>
       </div>
     </footer>

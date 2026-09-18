@@ -53,13 +53,13 @@ export default function Navbar() {
         <div className="hidden items-center gap-2 lg:flex">
           <Link
             to="/admin/login"
-            className="rounded-full px-4 py-2 text-[13px] font-semibold text-cream/50 transition hover:text-white"
+            className="inline-flex min-h-[44px] items-center rounded-full px-4 py-2 text-[13px] font-semibold text-cream/50 transition hover:text-white"
           >
             Admin
           </Link>
           <Link
             to="/post-request"
-            className="rounded-full bg-accent px-4 py-2 text-sm font-semibold text-white transition hover:brightness-110"
+            className="inline-flex min-h-[44px] items-center rounded-full bg-accent px-4 py-2 text-sm font-semibold text-white transition hover:brightness-110"
           >
             Post a Request
           </Link>
@@ -67,7 +67,7 @@ export default function Navbar() {
             href={waLink("your services")}
             target="_blank"
             rel="noreferrer"
-            className="rounded-full border border-white/25 bg-white/5 px-4 py-2 text-sm font-semibold transition hover:bg-white/15"
+            className="inline-flex min-h-[44px] items-center rounded-full border border-white/25 bg-white/5 px-4 py-2 text-sm font-semibold transition hover:bg-white/15"
           >
             WhatsApp us
           </a>
@@ -94,7 +94,7 @@ export default function Navbar() {
                 to={to}
                 onClick={close}
                 className={({ isActive }) =>
-                  `rounded-lg px-3 py-2.5 text-[15px] font-medium transition hover:bg-white/10 ${
+                  `flex min-h-[44px] items-center rounded-lg px-3 py-2.5 text-[15px] font-medium transition hover:bg-white/10 ${
                     isActive ? "text-white bg-white/10" : "text-cream/90"
                   }`
                 }
@@ -105,7 +105,7 @@ export default function Navbar() {
             <Link
               to="/post-request"
               onClick={close}
-              className="mt-1 rounded-lg bg-accent px-3 py-2.5 text-center text-[15px] font-semibold text-white"
+              className="mt-1 flex min-h-[44px] items-center justify-center rounded-lg bg-accent px-3 py-2.5 text-center text-[15px] font-semibold text-white"
             >
               Post a Request
             </Link>
@@ -114,14 +114,14 @@ export default function Navbar() {
               target="_blank"
               rel="noreferrer"
               onClick={close}
-              className="mt-1 rounded-lg border border-white/25 px-3 py-2.5 text-center text-[15px] font-semibold"
+              className="mt-1 flex min-h-[44px] items-center justify-center rounded-lg border border-white/25 px-3 py-2.5 text-center text-[15px] font-semibold"
             >
               WhatsApp us
             </a>
             <Link
               to="/admin/login"
               onClick={close}
-              className="mt-2 rounded-lg px-3 py-2 text-center text-[13px] font-medium text-cream/40"
+              className="mt-2 flex min-h-[44px] items-center justify-center rounded-lg px-3 py-2 text-center text-[13px] font-medium text-cream/40"
             >
               Admin Dashboard
             </Link>

@@ -41,7 +41,7 @@ export default function Contact() {
                 <div className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-green-100 text-2xl">✓</div>
                 <h3 className="font-display mt-4 text-2xl font-semibold">Request noted (demo).</h3>
                 <p className="mt-2 text-sm text-graphite">No backend in this pitch build — in production this lands in email/WhatsApp/CRM. We logged it to the console.</p>
-                <button type="button" onClick={() => setSent(false)} className="mt-4 rounded-full border border-charcoal/15 px-5 py-2 text-sm font-semibold">Send another</button>
+                <button type="button" onClick={() => setSent(false)} className="mt-4 inline-flex min-h-[44px] items-center rounded-full border border-charcoal/15 px-5 py-2 text-sm font-semibold">Send another</button>
               </div>
             </div>
           ) : (

@@ -36,7 +36,7 @@ export default function ServicesPage() {
                 <a
                   key={j.href}
                   href={j.href}
-                  className="rounded-full border border-white/20 bg-white/5 px-4 py-2 text-[13px] font-semibold text-cream transition hover:bg-white/15"
+                  className="inline-flex min-h-[44px] items-center rounded-full border border-white/20 bg-white/5 px-4 py-2 text-[13px] font-semibold text-cream transition hover:bg-white/15"
                 >
                   {j.label} ↓
                 </a>

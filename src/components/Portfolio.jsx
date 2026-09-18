@@ -38,7 +38,17 @@ export default function Portfolio() {
         </div>
         
         {loading ? (
-          <div className="mt-12 py-12 text-center text-graphite animate-pulse">Loading portfolio...</div>
+          <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3" aria-label="Loading portfolio">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <div key={i} className="animate-pulse overflow-hidden rounded-2xl border border-charcoal/10 bg-white">
+                <div className="h-48 bg-charcoal/10" />
+                <div className="space-y-2 p-4">
+                  <div className="h-4 w-3/4 rounded bg-charcoal/10" />
+                  <div className="h-3 w-1/2 rounded bg-charcoal/8" />
+                </div>
+              </div>
+            ))}
+          </div>
         ) : dbItems.length === 0 ? (
           <div className="mt-12 py-12 text-center rounded-2xl bg-charcoal/5">
             <span className="text-3xl block mb-2">🖼️</span>
@@ -54,7 +64,7 @@ export default function Portfolio() {
                   role="tab"
                   aria-selected={tab === t}
                   onClick={() => setTab(t)}
-                  className={`rounded-full px-5 py-2.5 text-sm font-semibold transition ${tab === t ? "bg-charcoal text-white" : "bg-charcoal/5 text-graphite hover:bg-charcoal/10"}`}
+                  className={`inline-flex min-h-[44px] items-center rounded-full px-5 py-2.5 text-sm font-semibold transition ${tab === t ? "bg-charcoal text-white" : "bg-charcoal/5 text-graphite hover:bg-charcoal/10"}`}
                 >
                   {t}
                 </button>
@@ -87,7 +97,7 @@ export default function Portfolio() {
           <div className="relative w-full max-w-4xl" onClick={(e) => e.stopPropagation()}>
             <div className="mb-4 flex items-center justify-between text-white">
               <h3 className="font-display text-2xl font-semibold">{light.title}</h3>
-              <button onClick={() => setLight(null)} className="grid h-10 w-10 place-items-center rounded-full bg-white/10 hover:bg-white/20 transition" aria-label="Close">✕</button>
+              <button onClick={() => setLight(null)} className="grid h-11 w-11 place-items-center rounded-full bg-white/10 hover:bg-white/20 transition" aria-label="Close">✕</button>
             </div>
             {light.media_type === 'video' ? (
               <video src={light.media_url} controls autoPlay className="h-auto w-full max-h-[80vh] rounded-2xl shadow-2xl" />

@@ -52,14 +52,14 @@ export default function FinishExplorer() {
                   aria-checked={frame.id === f.id}
                   onClick={() => setFrame(f)}
                   title={f.name}
-                  className={`h-10 w-10 rounded-full border-2 transition ${frame.id === f.id ? "scale-110 border-accent" : "border-charcoal/15 hover:scale-105"}`}
+                  className={`h-11 w-11 rounded-full border-2 transition ${frame.id === f.id ? "scale-110 border-accent" : "border-charcoal/15 hover:scale-105"}`}
                   style={{ background: f.hex }}
                 />
               ))}
             </div>
             <div className="mt-2 flex flex-wrap gap-2">
               {FINISHES.map((f) => (
-                <button key={f.id} onClick={() => setFrame(f)} className={`rounded-full px-3 py-1 text-[12px] font-semibold ${frame.id === f.id ? "bg-charcoal text-white" : "bg-charcoal/5 text-graphite hover:bg-charcoal/10"}`}>
+                <button key={f.id} onClick={() => setFrame(f)} className={`inline-flex min-h-[44px] items-center rounded-full px-3 py-1 text-[12px] font-semibold ${frame.id === f.id ? "bg-charcoal text-white" : "bg-charcoal/5 text-graphite hover:bg-charcoal/10"}`}>
                   {f.name}
                 </button>
               ))}
@@ -74,7 +74,7 @@ export default function FinishExplorer() {
                   aria-checked={glass.id === g.id}
                   onClick={() => setGlass(g)}
                   title={g.name}
-                  className={`h-10 w-10 rounded-full border-2 transition ${glass.id === g.id ? "scale-110 border-accent" : "border-charcoal/15 hover:scale-105"}`}
+                  className={`h-11 w-11 rounded-full border-2 transition ${glass.id === g.id ? "scale-110 border-accent" : "border-charcoal/15 hover:scale-105"}`}
                   style={{ background: g.css }}
                 />
               ))}
@@ -84,7 +84,7 @@ export default function FinishExplorer() {
             <div className="mt-2 flex items-center gap-3">
               <button
                 onClick={() => setOpening(0)}
-                className={`rounded-full px-4 py-2 text-[13px] font-bold transition ${opening === 0 ? "bg-charcoal text-white" : "bg-charcoal/5 text-graphite hover:bg-charcoal/10"}`}
+                className={`inline-flex min-h-[44px] items-center rounded-full px-4 py-2 text-[13px] font-bold transition ${opening === 0 ? "bg-charcoal text-white" : "bg-charcoal/5 text-graphite hover:bg-charcoal/10"}`}
               >
                 Shut
               </button>
@@ -94,12 +94,12 @@ export default function FinishExplorer() {
                 max={100}
                 value={Math.round(opening * 100)}
                 onChange={(e) => setOpening(Number(e.target.value) / 100)}
-                className="door-range w-full"
+                className="door-range h-11 w-full"
                 aria-label="Door opening amount"
               />
               <button
                 onClick={() => setOpening(1)}
-                className={`rounded-full px-4 py-2 text-[13px] font-bold transition ${opening === 1 ? "bg-charcoal text-white" : "bg-charcoal/5 text-graphite hover:bg-charcoal/10"}`}
+                className={`inline-flex min-h-[44px] items-center rounded-full px-4 py-2 text-[13px] font-bold transition ${opening === 1 ? "bg-charcoal text-white" : "bg-charcoal/5 text-graphite hover:bg-charcoal/10"}`}
               >
                 Open
               </button>

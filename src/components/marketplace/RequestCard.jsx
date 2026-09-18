@@ -9,7 +9,7 @@ const URGENCY_COLOR = {
 
 function formatDate(iso) {
   if (!iso) return "";
-  return new Date(iso).toLocaleDateString("en-KE", { day: "numeric", month: "short", year: "numeric" });
+  return new Date(iso).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" });
 }
 
 export default function RequestCard({ request }) {
@@ -61,7 +61,7 @@ export default function RequestCard({ request }) {
       <div className="border-t border-charcoal/8 px-5 py-3">
         <Link
           to={`/marketplace/request/${request.id}`}
-          className="block w-full rounded-full bg-charcoal py-2.5 text-center text-[13px] font-semibold text-white transition hover:bg-accent"
+          className="flex min-h-[44px] w-full items-center justify-center rounded-full bg-charcoal py-2.5 text-center text-[13px] font-semibold text-white transition hover:bg-accent"
         >
           Claim This Work →
         </Link>

@@ -39,7 +39,7 @@ export default function Services() {
                   href={waLink(s.title.toLowerCase())}
                   target="_blank"
                   rel="noreferrer"
-                  className="mt-4 inline-block rounded-full border border-charcoal/15 px-4 py-2 text-[13px] font-semibold text-charcoal transition hover:bg-charcoal hover:text-white"
+                  className="mt-4 inline-flex min-h-[44px] items-center rounded-full border border-charcoal/15 px-4 py-2 text-[13px] font-semibold text-charcoal transition hover:bg-charcoal hover:text-white"
                 >
                   Ask about this →
                 </a>
