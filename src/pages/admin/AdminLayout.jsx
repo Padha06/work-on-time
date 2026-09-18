@@ -5,6 +5,7 @@ const NAV = [
   { to: "/admin",           label: "Overview",   icon: "🏠", end: true },
   { to: "/admin/requests",  label: "Requests",   icon: "📋" },
   { to: "/admin/claims",    label: "Claims",     icon: "🤝" },
+  { to: "/admin/callbacks", label: "Callbacks",  icon: "📞" },
   { to: "/admin/portfolio", label: "Portfolio",  icon: "🖼️" },
   { to: "/admin/analytics", label: "Analytics",  icon: "📊" },
   { to: "/admin/settings",  label: "Settings",   icon: "⚙️" },
@@ -74,18 +75,18 @@ export default function AdminLayout() {
       {/* Mobile top bar */}
       <div className="fixed inset-x-0 top-0 z-40 flex min-h-14 items-center justify-between border-b border-charcoal/10 bg-charcoal px-4 pt-[env(safe-area-inset-top)] text-cream lg:hidden">
         <span className="font-display text-[16px] font-semibold">WOT<span className="hidden min-[380px]:inline"> Admin</span></span>
-        <div className="flex items-center gap-1">
+        <div className="flex flex-1 items-center justify-end gap-1 overflow-x-auto">
           <Link to="/" aria-label="View website"
-            className="grid h-11 w-11 place-items-center rounded-lg text-lg hover:bg-white/10">
+            className="grid h-11 w-11 shrink-0 place-items-center rounded-lg text-lg hover:bg-white/10">
             <span aria-hidden="true">🌐</span>
           </Link>
-          {NAV.slice(0, 4).map(({ to, label, icon, end }) => (
+          {NAV.map(({ to, label, icon, end }) => (
             <NavLink key={to} to={to} end={end} aria-label={label}
-              className={({ isActive }) => `grid h-11 w-11 place-items-center rounded-lg text-lg ${isActive ? "bg-accent/20" : "hover:bg-white/10"}`}>
+              className={({ isActive }) => `grid h-11 w-11 shrink-0 place-items-center rounded-lg text-lg ${isActive ? "bg-accent/20" : "hover:bg-white/10"}`}>
               <span aria-hidden="true">{icon}</span>
             </NavLink>
           ))}
-          <button onClick={handleSignOut} aria-label="Sign out" className="grid h-11 w-11 place-items-center rounded-lg text-lg hover:bg-white/10"><span aria-hidden="true">🚪</span></button>
+          <button onClick={handleSignOut} aria-label="Sign out" className="grid h-11 w-11 shrink-0 place-items-center rounded-lg text-lg hover:bg-white/10"><span aria-hidden="true">🚪</span></button>
         </div>
       </div>
 

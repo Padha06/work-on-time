@@ -123,6 +123,42 @@ export function buildQuoteWhatsAppLink(service = "your services") {
   return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
 }
 
+// ─── Callback requests (contact form → admin inbox) ────────────────────
+
+/** Submit a callback request (public, anonymous). Fire-and-forget. */
+export async function submitCallback({ name, phone, service, message }) {
+  // Client-side id, plain insert (no RETURNING): anonymous users have no
+  // SELECT permission on this table, same RLS reasoning as requests/claims.
+  const { error } = await supabase.from("callback_requests").insert({
+    id: crypto.randomUUID(),
+    name,
+    phone,
+    service,
+    message: message || null,
+    status: "new",
+  });
+  if (error) throw error;
+}
+
+/** Get all callback requests for admin, newest first */
+export async function adminGetCallbacks() {
+  const { data, error } = await supabase
+    .from("callback_requests")
+    .select("*")
+    .order("created_at", { ascending: false });
+  if (error) throw error;
+  return data || [];
+}
+
+/** Update a callback request status */
+export async function updateCallbackStatus(id, status) {
+  const { error } = await supabase
+    .from("callback_requests")
+    .update({ status })
+    .eq("id", id);
+  if (error) throw error;
+}
+
 // ─── Admin ─────────────────────────────────────────────────────────────────
 
 /** Get all requests for admin (all statuses) */

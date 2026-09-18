@@ -241,3 +241,29 @@ create policy "admin_delete_portfolio" on storage.objects
     bucket_id = 'portfolio'
     and auth.uid() in (select id from admin_users)
   );
+
+-- ============================================================
+-- CALLBACK REQUESTS (contact "Request callback" form → admin inbox)
+-- Idempotent: safe to re-run.
+-- ============================================================
+
+create table if not exists callback_requests (
+  id         uuid primary key default gen_random_uuid(),
+  name       text not null,
+  phone      text not null,
+  service    text not null,
+  message    text,
+  status     text not null default 'new'
+             check (status in ('new','contacted','done')),
+  created_at timestamptz not null default now()
+);
+
+alter table callback_requests enable row level security;
+
+drop policy if exists "public_insert_callback" on callback_requests;
+create policy "public_insert_callback" on callback_requests
+  for insert with check (true);
+
+drop policy if exists "admin_all_callbacks" on callback_requests;
+create policy "admin_all_callbacks" on callback_requests
+  for all using (auth.uid() in (select id from admin_users));

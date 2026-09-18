@@ -1,13 +1,25 @@
 import { useState } from "react";
 import { waLink, WHATSAPP_NUMBER, ADDRESS } from "../data/content.js";
+import { submitCallback } from "../lib/marketplace.js";
 
 export default function Contact() {
   const [form, setForm] = useState({ name: "", phone: "", service: "Custom Furniture Building", message: "" });
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [formError, setFormError] = useState("");
 
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault();
-    setSent(true);
+    setFormError("");
+    setSending(true);
+    try {
+      await submitCallback({ name: form.name, phone: form.phone, service: form.service, message: form.message });
+      setSent(true);
+    } catch (err) {
+      setFormError(err.message || "Couldn't send your request. Please WhatsApp us directly.");
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -37,13 +49,16 @@ export default function Contact() {
             <div className="grid min-h-[320px] place-items-center text-center">
               <div>
                 <div className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-green-100 text-2xl">✓</div>
-                <h3 className="font-display mt-4 text-2xl font-semibold">Request noted (demo).</h3>
-                <p className="mt-2 text-sm text-graphite">No backend in this pitch build — in production this lands in email/WhatsApp/CRM. We logged it to the console.</p>
+                <h3 className="font-display mt-4 text-2xl font-semibold">Request received.</h3>
+                <p className="mt-2 text-sm text-graphite">Thanks {form.name.split(" ")[0] || "there"} — we'll call you back on {form.phone} within one working day.</p>
                 <button type="button" onClick={() => setSent(false)} className="mt-4 inline-flex min-h-[44px] items-center rounded-full border border-charcoal/15 px-5 py-2 text-sm font-semibold">Send another</button>
               </div>
             </div>
           ) : (
             <div className="grid gap-4">
+              {formError && (
+                <div className="rounded-xl bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-700" role="alert">{formError}</div>
+              )}
               <div className="grid gap-1.5">
                 <label htmlFor="q-name" className="text-[13px] font-bold">Name</label>
                 <input id="q-name" required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Your name" className="rounded-xl border border-charcoal/15 px-4 py-3 text-base outline-none focus:border-accent" />
@@ -65,8 +80,8 @@ export default function Contact() {
                 <label htmlFor="q-msg" className="text-[13px] font-bold">Message</label>
                 <textarea id="q-msg" rows={4} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} placeholder="Room size, photos you can share on WhatsApp, timeline…" className="rounded-xl border border-charcoal/15 px-4 py-3 text-base outline-none focus:border-accent" />
               </div>
-              <button type="submit" className="rounded-full bg-accent px-6 py-3.5 text-[15px] font-bold text-white transition hover:brightness-110">Request callback →</button>
-              <p className="text-center text-[12px] text-graphite/60">Demo form — no data leaves your browser.</p>
+              <button type="submit" disabled={sending} className="rounded-full bg-accent px-6 py-3.5 text-[15px] font-bold text-white transition hover:brightness-110 disabled:opacity-60">{sending ? "Sending…" : "Request callback →"}</button>
+              <p className="text-center text-[12px] text-graphite/60">We usually call back the same working day.</p>
             </div>
           )}
         </form>

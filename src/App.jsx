@@ -22,6 +22,7 @@ const AdminLayout = lazy(() => import("./pages/admin/AdminLayout.jsx"));
 const AdminOverview = lazy(() => import("./pages/admin/AdminOverview.jsx"));
 const AdminRequests = lazy(() => import("./pages/admin/AdminRequests.jsx"));
 const AdminClaims = lazy(() => import("./pages/admin/AdminClaims.jsx"));
+const AdminCallbacks = lazy(() => import("./pages/admin/AdminCallbacks.jsx"));
 const AdminPortfolio = lazy(() => import("./pages/admin/AdminPortfolio.jsx"));
 const AdminAnalytics = lazy(() => import("./pages/admin/AdminAnalytics.jsx"));
 const AdminSettings = lazy(() => import("./pages/admin/AdminSettings.jsx"));
@@ -220,6 +221,7 @@ export default function App() {
           <Route index element={<AdminOverview />} />
           <Route path="requests" element={<AdminRequests />} />
           <Route path="claims" element={<AdminClaims />} />
+          <Route path="callbacks" element={<AdminCallbacks />} />
           <Route path="portfolio" element={<AdminPortfolio />} />
           <Route path="analytics" element={<AdminAnalytics />} />
           <Route path="settings" element={<AdminSettings />} />
