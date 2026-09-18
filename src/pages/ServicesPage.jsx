@@ -117,29 +117,8 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Finish explorer — Aluminum Doors */}
-      <section id="finishes" className="section-pad bg-charcoal text-cream">
-        <div className="mx-auto max-w-content px-4 sm:px-6">
-          <div className="reveal max-w-2xl mb-8">
-            <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-accent">Aluminum Doors</p>
-            <h2 className="font-display mt-2 text-4xl font-semibold tracking-tight md:text-5xl">
-              Pick your finish.
-            </h2>
-            <p className="mt-3 text-cream/70">Powder-coated frames, tempered or frosted glass — see the options before you commit.</p>
-          </div>
-        </div>
-        <FinishExplorer />
-        <div className="mx-auto max-w-content px-4 sm:px-6 mt-8">
-          <a
-            href={waLink("aluminum doors")}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-block rounded-full bg-accent px-6 py-3 text-[15px] font-semibold text-white transition hover:brightness-110"
-          >
-            Request Aluminum Door Quote →
-          </a>
-        </div>
-      </section>
+      {/* Finish explorer — Aluminum Doors (self-contained section) */}
+      <FinishExplorer />
 
       {/* 3D Door Configurator — Sliding Doors */}
       <section id="sliding-doors" className="section-pad bg-cream">

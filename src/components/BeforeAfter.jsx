@@ -26,7 +26,7 @@ function Compare({ item }) {
   return (
     <div
       ref={box}
-      className="relative h-[320px] select-none overflow-hidden rounded-2xl bg-charcoal sm:h-[440px]"
+      className="relative h-[420px] select-none overflow-hidden rounded-2xl bg-charcoal sm:h-[520px] lg:h-[560px]"
       style={{ touchAction: "pan-y" }}
       onPointerDown={(e) => {
         dragging.current = true;
@@ -48,7 +48,8 @@ function Compare({ item }) {
           </div>
         </div>
       )}
-      {/* AFTER (full) */}
+      {/* AFTER (full) — contain (not cover) so the whole subject stays
+          visible on wide desktop frames instead of a center-crop slice. */}
       <img
         src={item.img}
         alt={`${item.title} — after`}
@@ -57,7 +58,7 @@ function Compare({ item }) {
         decoding="async"
         draggable={false}
         onLoad={onLoad}
-        className={`absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-300 ${ready ? "opacity-100" : "opacity-0"}`}
+        className={`absolute inset-0 h-full w-full object-contain transition-opacity duration-300 ${ready ? "opacity-100" : "opacity-0"}`}
       />
       {/* BEFORE (clipped left side) */}
       <div className="absolute inset-0" style={{ clipPath: `inset(0 ${100 - pos}% 0 0)` }}>
@@ -69,7 +70,7 @@ function Compare({ item }) {
           decoding="async"
           draggable={false}
           onLoad={onLoad}
-          className={`h-full w-full object-cover object-center transition-opacity duration-300 ${ready ? "opacity-100" : "opacity-0"}`}
+          className={`h-full w-full object-contain transition-opacity duration-300 ${ready ? "opacity-100" : "opacity-0"}`}
           style={beforeStyle}
         />
         {!item.beforeImg && <div className="absolute inset-0 bg-charcoal/20" />}
