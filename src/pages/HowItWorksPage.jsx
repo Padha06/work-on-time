@@ -60,12 +60,10 @@ export default function HowItWorksPage() {
           </div>
           <div className="reveal mt-8 grid gap-4 sm:grid-cols-2">
             <a href="#seekers" className="group rounded-2xl border border-white/10 bg-white/5 p-6 transition hover:bg-white/10">
-              <p className="text-[12px] font-bold uppercase tracking-widest text-accent">I need work done</p>
               <p className="font-display mt-2 text-2xl font-semibold">Post a request, compare providers ↓</p>
               <p className="mt-2 text-sm text-cream/60 transition group-hover:text-cream/80">6 steps · about 2 minutes to start</p>
             </a>
             <a href="#providers" className="group rounded-2xl border border-white/10 bg-white/5 p-6 transition hover:bg-white/10">
-              <p className="text-[12px] font-bold uppercase tracking-widest text-aluminum">I'm a provider</p>
               <p className="font-display mt-2 text-2xl font-semibold">Browse work, claim it, earn ↓</p>
               <p className="mt-2 text-sm text-cream/60 transition group-hover:text-cream/80">6 steps · about 1 minute to claim</p>
             </a>
@@ -78,14 +76,11 @@ export default function HowItWorksPage() {
           <div className="reveal grid gap-12 lg:grid-cols-2">
             {/* Seekers */}
             <div id="seekers" className="rounded-3xl bg-white border border-charcoal/8 p-8 shadow-sm scroll-mt-24">
-              <div className="mb-6">
-                <span className="rounded-full bg-accent/10 px-3 py-1 text-[12px] font-bold uppercase tracking-widest text-accent">
-                  For People Who Need Work Done
-                </span>
-                <h2 className="font-display mt-4 text-3xl font-semibold tracking-tight text-charcoal">
-                  Post a request. Get connected.
-                </h2>
-              </div>
+            <div className="mb-6">
+              <h2 className="font-display text-3xl font-semibold tracking-tight text-charcoal">
+                Post a request. Get connected.
+              </h2>
+            </div>
               <StepList steps={SEEKER_STEPS} color="text-accent" />
               <div className="mt-8">
                 <Link
@@ -99,14 +94,11 @@ export default function HowItWorksPage() {
 
             {/* Providers */}
             <div id="providers" className="rounded-3xl bg-charcoal text-cream p-8 shadow-sm scroll-mt-24">
-              <div className="mb-6">
-                <span className="rounded-full bg-white/10 px-3 py-1 text-[12px] font-bold uppercase tracking-widest text-aluminum">
-                  For Service Providers
-                </span>
-                <h2 className="font-display mt-4 text-3xl font-semibold tracking-tight">
-                  Find work. Build your next job.
-                </h2>
-              </div>
+            <div className="mb-6">
+              <h2 className="font-display text-3xl font-semibold tracking-tight">
+                Find work. Build your next job.
+              </h2>
+            </div>
               <div className="space-y-4">
                 {PROVIDER_STEPS.map((s) => (
                   <div key={s.n} className="flex gap-4">
@@ -135,8 +127,7 @@ export default function HowItWorksPage() {
       <section className="section-pad bg-white">
         <div className="mx-auto max-w-content px-4 sm:px-6">
           <div className="reveal max-w-2xl">
-            <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-accent">Request Lifecycle</p>
-            <h2 className="font-display mt-2 text-3xl font-semibold tracking-tight text-charcoal">
+            <h2 className="font-display text-3xl font-semibold tracking-tight text-charcoal">
               Every request has a clear status.
             </h2>
           </div>
@@ -169,8 +160,7 @@ export default function HowItWorksPage() {
       <section className="section-pad bg-cream">
         <div className="mx-auto max-w-3xl px-4 sm:px-6">
           <div className="reveal max-w-2xl">
-            <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-accent">Questions</p>
-            <h2 className="font-display mt-2 text-4xl font-semibold tracking-tight text-charcoal md:text-5xl">
+            <h2 className="font-display text-4xl font-semibold tracking-tight text-charcoal md:text-5xl">
               Asked all the time.
             </h2>
           </div>

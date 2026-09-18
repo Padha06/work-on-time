@@ -106,8 +106,7 @@ export default function ServicesPage() {
       <section id="repair" className="section-pad bg-white">
         <div className="mx-auto max-w-content px-4 sm:px-6">
           <div className="reveal max-w-2xl mb-8">
-            <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-accent">Furniture Repair &amp; Restoration</p>
-            <h2 className="font-display mt-2 text-4xl font-semibold tracking-tight text-charcoal md:text-5xl">
+            <h2 className="font-display text-4xl font-semibold tracking-tight text-charcoal md:text-5xl">
               Drag the line. See the comeback.
             </h2>
             <p className="mt-3 text-graphite">Real repair transformations. Left is tired &amp; damaged, right is handed back.</p>

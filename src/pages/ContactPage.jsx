@@ -67,8 +67,7 @@ export default function ContactPage() {
         <div className="mx-auto max-w-content px-4 sm:px-6">
           <div className="reveal flex flex-wrap items-end justify-between gap-4">
             <div className="max-w-2xl">
-              <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-accent">Service area</p>
-              <h2 className="font-display mt-2 text-4xl font-semibold tracking-tight text-charcoal md:text-5xl">
+              <h2 className="font-display text-4xl font-semibold tracking-tight text-charcoal md:text-5xl">
                 We come to you, anywhere in South Kolkata.
               </h2>
               <p className="mt-3 text-graphite">Measurements, installs and repairs across the city. Outside Kolkata? Ask on WhatsApp — bigger jobs travel.</p>

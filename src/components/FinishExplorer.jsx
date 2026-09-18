@@ -22,8 +22,7 @@ export default function FinishExplorer() {
     <section id="finishes" className="section-pad bg-cream">
       <div className="mx-auto max-w-content px-4 sm:px-6">
         <div className="reveal max-w-2xl">
-          <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-accent">Finish explorer</p>
-          <h2 className="font-display mt-2 text-4xl font-semibold tracking-tight text-charcoal md:text-5xl">
+          <h2 className="font-display text-4xl font-semibold tracking-tight text-charcoal md:text-5xl">
             Tap a swatch. Watch the door change.
           </h2>
           <p className="mt-3 text-graphite">Live 3D — the same interaction pattern as the Spline “Lamm Genya” configurator, rebuilt in React Three Fiber so it works offline on a mid-range phone.</p>

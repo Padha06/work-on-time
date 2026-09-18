@@ -6,8 +6,7 @@ export default function Services() {
     <section id="services" className="section-pad bg-cream">
       <div className="mx-auto max-w-content px-4 sm:px-6">
         <div className="reveal max-w-2xl">
-          <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-accent">What we do</p>
-          <h2 className="font-display mt-2 text-4xl font-semibold tracking-tight text-charcoal md:text-5xl">
+          <h2 className="font-display text-4xl font-semibold tracking-tight text-charcoal md:text-5xl">
             One team for wood, repair &amp; aluminum.
           </h2>
           <p className="mt-3 text-graphite">Four services, one phone number. Hover a card — every job ends with a photo walkthrough.</p>

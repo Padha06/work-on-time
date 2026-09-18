@@ -26,8 +26,7 @@ export default function HomePage() {
         <div className="mx-auto max-w-content px-4 sm:px-6">
           <div className="reveal flex flex-wrap items-end justify-between gap-4">
             <div>
-              <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-accent">What we do</p>
-              <h2 className="font-display mt-2 text-4xl font-semibold tracking-tight text-charcoal md:text-5xl">
+              <h2 className="font-display text-4xl font-semibold tracking-tight text-charcoal md:text-5xl">
                 One team for wood, repair &amp; aluminum.
               </h2>
             </div>
@@ -60,8 +59,7 @@ export default function HomePage() {
       <section className="section-pad bg-charcoal text-cream">
         <div className="mx-auto max-w-content px-4 sm:px-6">
           <div className="reveal max-w-2xl">
-            <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-accent">Marketplace</p>
-            <h2 className="font-display mt-2 text-4xl font-semibold tracking-tight md:text-5xl">
+            <h2 className="font-display text-4xl font-semibold tracking-tight md:text-5xl">
               Need a job done? Post it.<br />
               <span className="text-aluminum">Can you do the job? Claim it.</span>
             </h2>
@@ -108,8 +106,7 @@ export default function HomePage() {
       <section className="section-pad bg-cream">
         <div className="mx-auto max-w-content px-4 sm:px-6">
           <div className="reveal max-w-2xl">
-            <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-accent">How it works</p>
-            <h2 className="font-display mt-2 text-4xl font-semibold tracking-tight text-charcoal md:text-5xl">
+            <h2 className="font-display text-4xl font-semibold tracking-tight text-charcoal md:text-5xl">
               Three steps to get work done.
             </h2>
           </div>
@@ -139,8 +136,7 @@ export default function HomePage() {
         <div className="mx-auto max-w-content px-4 sm:px-6">
           <div className="reveal flex flex-wrap items-end justify-between gap-4">
             <div>
-              <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-accent">Recent work</p>
-              <h2 className="font-display mt-2 text-4xl font-semibold tracking-tight text-charcoal md:text-5xl">
+              <h2 className="font-display text-4xl font-semibold tracking-tight text-charcoal md:text-5xl">
                 A wall of finished jobs.
               </h2>
             </div>

@@ -43,8 +43,7 @@ export default function Portfolio() {
       <div className="mx-auto max-w-content px-4 sm:px-6">
         <div className="reveal flex flex-wrap items-end justify-between gap-4">
           <div>
-            <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-accent">Recent work</p>
-            <h2 className="font-display mt-2 text-4xl font-semibold tracking-tight text-charcoal md:text-5xl">A wall of finished jobs.</h2>
+            <h2 className="font-display text-4xl font-semibold tracking-tight text-charcoal md:text-5xl">A wall of finished jobs.</h2>
           </div>
           <SampleTag />
         </div>

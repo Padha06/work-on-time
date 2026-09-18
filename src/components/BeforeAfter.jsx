@@ -119,14 +119,7 @@ export default function BeforeAfter() {
   return (
     <section id="before-after" className="section-pad bg-charcoal text-cream">
       <div className="mx-auto max-w-content px-4 sm:px-6">
-        <div className="reveal flex flex-wrap items-end justify-between gap-4">
-          <div className="max-w-2xl">
-            <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-accentsoft">Repair proof</p>
-            <h2 className="font-display mt-2 text-4xl font-semibold tracking-tight md:text-5xl">Drag the line. See the comeback.</h2>
-            <p className="mt-3 text-cream/70">Real repair transformations. Left is tired &amp; damaged, right is handed back.</p>
-          </div>
-        </div>
-        <div className="reveal mt-8">
+        <div className="reveal">
           <Compare key={item.id} item={item} />
           <div className="mt-4 flex flex-wrap items-center justify-between gap-3" {...swipe}>
             <p className="text-[15px] font-medium text-cream/90">{item.title}</p>

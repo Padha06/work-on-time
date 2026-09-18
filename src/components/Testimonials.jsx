@@ -12,8 +12,7 @@ export default function Testimonials() {
     <section id="reviews" className="section-pad bg-cream">
       <div className="mx-auto max-w-content px-4 sm:px-6">
         <div className="reveal mx-auto max-w-2xl text-center">
-          <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-accent">Reviews</p>
-          <h2 className="font-display mt-2 text-4xl font-semibold tracking-tight text-charcoal">Quiet proof, not hype.</h2>
+          <h2 className="font-display text-4xl font-semibold tracking-tight text-charcoal">Quiet proof, not hype.</h2>
         </div>
         <blockquote className="reveal mx-auto mt-8 max-w-2xl rounded-3xl border border-charcoal/10 bg-white p-8 text-center shadow-sm" {...swipe}>
           <p className="font-display text-xl leading-relaxed text-charcoal sm:text-2xl">“{t.text}”</p>

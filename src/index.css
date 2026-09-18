@@ -92,8 +92,14 @@ section {
   background-size: 3px 3px;
 }
 
+input::placeholder,
+textarea::placeholder {
+  color: rgb(58 58 60 / 0.65);
+  opacity: 1;
+}
+
 input[type="range"].door-range {
-  accent-color: #c9622c;
+  accent-color: #b45625;
 }
 
 /* Soft scroll-hint drift (exponential-feel ease, no bounce). */

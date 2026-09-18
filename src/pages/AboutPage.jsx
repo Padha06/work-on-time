@@ -56,8 +56,7 @@ export default function AboutPage() {
       <section className="section-pad bg-white">
         <div className="mx-auto grid max-w-content gap-10 px-4 sm:px-6 lg:grid-cols-2">
           <div className="reveal">
-            <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-accent">Our story</p>
-            <h2 className="font-display mt-2 text-4xl font-semibold tracking-tight text-charcoal md:text-5xl">
+            <h2 className="font-display text-4xl font-semibold tracking-tight text-charcoal md:text-5xl">
               Started with a wobbling table.
             </h2>
           </div>
@@ -85,8 +84,7 @@ export default function AboutPage() {
       <section className="section-pad bg-charcoal text-cream">
         <div className="mx-auto max-w-content px-4 sm:px-6">
           <div className="reveal max-w-2xl">
-            <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-accentsoft">What we stand by</p>
-            <h2 className="font-display mt-2 text-4xl font-semibold tracking-tight md:text-5xl">
+            <h2 className="font-display text-4xl font-semibold tracking-tight md:text-5xl">
               Four promises, kept on every job.
             </h2>
           </div>
