@@ -112,15 +112,17 @@ export default function App() {
         </Route>
 
         {/* Public routes — shared layout */}
-        <Route path="/" element={<Layout><HomePage /></Layout>} />
-        <Route path="/services" element={<Layout><ServicesPage /></Layout>} />
-        <Route path="/marketplace" element={<Layout><MarketplacePage /></Layout>} />
-        <Route path="/marketplace/request/:id" element={<Layout><RequestDetailPage /></Layout>} />
-        <Route path="/post-request" element={<Layout><PostRequestPage /></Layout>} />
-        <Route path="/how-it-works" element={<Layout><HowItWorksPage /></Layout>} />
-        <Route path="/work" element={<Layout><WorkPage /></Layout>} />
-        <Route path="/about" element={<Layout><AboutPage /></Layout>} />
-        <Route path="/contact" element={<Layout><ContactPage /></Layout>} />
+        <Route element={<Layout />}>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/services" element={<ServicesPage />} />
+          <Route path="/marketplace" element={<MarketplacePage />} />
+          <Route path="/marketplace/request/:id" element={<RequestDetailPage />} />
+          <Route path="/post-request" element={<PostRequestPage />} />
+          <Route path="/how-it-works" element={<HowItWorksPage />} />
+          <Route path="/work" element={<WorkPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
