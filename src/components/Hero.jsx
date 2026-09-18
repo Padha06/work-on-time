@@ -1,4 +1,4 @@
-import { Suspense, lazy, useEffect, useRef, useState } from "react";
+import { Suspense, lazy, useEffect, useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SampleTag from "./SampleTag.jsx";
@@ -43,7 +43,12 @@ export default function Hero({ splineReady, onSplineReady }) {
     return () => mq.removeEventListener?.("change", onCompact);
   }, []);
 
-  useEffect(() => {
+  // Pin effect uses useLayoutEffect (not useEffect) on purpose: ScrollTrigger's
+  // pin physically moves this section into a pin-spacer div. Layout-effect
+  // cleanup runs BEFORE React detaches unmounted DOM, so ctx.revert() un-pins
+  // and restores the section first. With useEffect the cleanup runs too late
+  // and React crashes with "removeChild ... not a child of this node".
+  useLayoutEffect(() => {
     if (reduced || useSpline) return;
     const pinEnd = compact ? "+=100%" : "+=130%";
     const ctx = gsap.context(() => {
