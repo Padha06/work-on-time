@@ -7,9 +7,11 @@ export default {
         charcoal: "#1C1C1E",
         graphite: "#3A3A3C",
         aluminum: "#C7CBCF",
-        wood: "#A9764E",
+        wood: "#8F5A30",
         cream: "#FAFAF8",
-        accent: "#C9622C",
+        accent: "#B45625",
+        // Lighter accent for small text on dark surfaces (4.5:1 verified).
+        accentsoft: "#E08A4E",
       },
       fontFamily: {
         ui: ["Inter", "system-ui", "sans-serif"],

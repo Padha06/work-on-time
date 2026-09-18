@@ -1,4 +1,5 @@
 import SampleTag from "./SampleTag.jsx";
+import { Link } from "react-router-dom";
 import { CASE_STUDY } from "../data/content.js";
 
 export default function CaseStudy() {
@@ -12,7 +13,7 @@ export default function CaseStudy() {
               <div className="absolute left-4 top-4"><SampleTag /></div>
             </div>
             <div className="p-7 sm:p-10">
-              <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-accent">{CASE_STUDY.kicker}</p>
+              <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-accentsoft">{CASE_STUDY.kicker}</p>
               <h2 className="font-display mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">{CASE_STUDY.title}</h2>
               {CASE_STUDY.body.map((p) => (
                 <p key={p.slice(0, 24)} className="mt-3 leading-relaxed text-cream/75">{p}</p>
@@ -22,9 +23,9 @@ export default function CaseStudy() {
                   <span key={m} className="rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-[13px] font-medium">{m}</span>
                 ))}
               </div>
-              <a href="#contact" className="mt-6 inline-block rounded-full bg-accent px-6 py-3 text-[15px] font-semibold text-white hover:brightness-110">
+              <Link to="/contact" className="mt-6 inline-block rounded-full bg-accent px-6 py-3 text-[15px] font-semibold text-white hover:brightness-110">
                 I want something like this
-              </a>
+              </Link>
             </div>
           </div>
         </div>

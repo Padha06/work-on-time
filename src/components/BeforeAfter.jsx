@@ -121,7 +121,7 @@ export default function BeforeAfter() {
       <div className="mx-auto max-w-content px-4 sm:px-6">
         <div className="reveal flex flex-wrap items-end justify-between gap-4">
           <div className="max-w-2xl">
-            <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-accent">Repair proof</p>
+            <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-accentsoft">Repair proof</p>
             <h2 className="font-display mt-2 text-4xl font-semibold tracking-tight md:text-5xl">Drag the line. See the comeback.</h2>
             <p className="mt-3 text-cream/70">Real repair transformations. Left is tired &amp; damaged, right is handed back.</p>
           </div>

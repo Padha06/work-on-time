@@ -3,7 +3,7 @@ import StatusBadge from "./StatusBadge.jsx";
 
 const URGENCY_COLOR = {
   high:   "text-red-600",
-  medium: "text-amber-600",
+  medium: "text-amber-700",
   low:    "text-green-700",
 };
 

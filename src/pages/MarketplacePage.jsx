@@ -115,7 +115,7 @@ export default function MarketplacePage() {
         <div className="mx-auto max-w-content px-4 sm:px-6">
           <div className="reveal flex flex-wrap items-end justify-between gap-4">
             <div className="max-w-2xl">
-              <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-accent">For providers</p>
+              <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-accentsoft">For providers</p>
               <h2 className="font-display mt-2 text-4xl font-semibold tracking-tight md:text-5xl">
                 Three steps to your next job.
               </h2>

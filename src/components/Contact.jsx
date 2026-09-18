@@ -15,7 +15,7 @@ export default function Contact() {
     <section id="contact" className="section-pad bg-charcoal text-cream">
       <div className="mx-auto grid max-w-content gap-8 px-4 sm:px-6 lg:grid-cols-2">
         <div className="reveal">
-          <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-accent">Get a quote</p>
+          <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-accentsoft">Get a quote</p>
           <h2 className="font-display mt-2 text-4xl font-semibold tracking-tight md:text-5xl">Send photos. Get a fixed price.</h2>
           <p className="mt-3 max-w-md text-cream/70">Fastest route is WhatsApp — photos + rough size is enough for a first estimate. Or leave the form and we’ll call back.</p>
           <div className="mt-6 flex flex-wrap gap-3">

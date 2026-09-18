@@ -20,7 +20,7 @@ export default function ContactPage() {
       <section className="bg-charcoal py-20 text-cream">
         <div className="mx-auto grid max-w-content items-center gap-10 px-4 sm:px-6 lg:grid-cols-[1.05fr_0.95fr]">
           <div className="reveal max-w-2xl">
-            <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-accent">Contact</p>
+            <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-accentsoft">Contact</p>
             <h1 className="font-display mt-2 font-semibold tracking-tight text-[clamp(2rem,7vw,3.75rem)]">
               Talk to a human,<br />
               <span className="text-aluminum">not a ticket queue.</span>

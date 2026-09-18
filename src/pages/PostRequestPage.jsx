@@ -137,7 +137,7 @@ export default function PostRequestPage() {
       <section className="bg-charcoal py-16 text-cream">
         <div className="mx-auto max-w-content px-4 sm:px-6">
           <div className="reveal max-w-xl">
-            <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-accent">Post a Request</p>
+            <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-accentsoft">Post a Request</p>
             <h1 className="font-display mt-2 text-4xl font-semibold tracking-tight md:text-5xl">
               Describe your job.<br />
               <span className="text-aluminum">Providers will find you.</span>

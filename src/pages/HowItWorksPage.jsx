@@ -49,7 +49,7 @@ export default function HowItWorksPage() {
       <section className="bg-charcoal py-20 text-cream">
         <div className="mx-auto max-w-content px-4 sm:px-6">
           <div className="reveal max-w-2xl">
-            <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-accent">How It Works</p>
+            <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-accentsoft">How It Works</p>
             <h1 className="font-display mt-2 font-semibold tracking-tight text-[clamp(2rem,7vw,3.75rem)]">
               Simple. WhatsApp-first.<br />
               <span className="text-aluminum">No account needed.</span>
