@@ -6,6 +6,14 @@ export default defineConfig({
   plugins: [react()],
   build: {
     chunkSizeWarningLimit: 1200,
+    // Don't preload chunks no public first paint needs: spline (disabled
+    // feature) and supabase (loads on demand at marketplace/work/admin).
+    // three/motion/router stay preloaded (hero + shell).
+    modulePreload: {
+      polyfill: true,
+      resolveDependencies: (filename, deps) =>
+        deps.filter((d) => !/spline|supabase/.test(d)),
+    },
     rollupOptions: {
       output: {
         manualChunks: {

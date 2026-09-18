@@ -85,7 +85,7 @@ export default function Portfolio() {
             
             <div className="mt-8 columns-2 gap-4 md:columns-3 lg:columns-4 [&>*]:mb-4">
               {items.map((p) => (
-                <button key={p.id} onClick={() => setLight(p)} className="reveal group block w-full overflow-hidden rounded-2xl border border-charcoal/10 text-left bg-charcoal/5">
+                <button key={p.id} onClick={() => setLight(p)} className="reveal group block w-full overflow-hidden rounded-2xl border border-charcoal/10 text-left bg-charcoal/5 [content-visibility:auto] [contain-intrinsic-size:320px]">
                   <div className="relative overflow-hidden">
                     {p.media_type === 'video' ? (
                       <video src={p.media_url} className="w-full object-cover transition duration-500 group-hover:scale-105" muted loop playsInline onMouseEnter={e => e.target.play()} onMouseLeave={e => e.target.pause()} />
